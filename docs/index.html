@@ -29,13 +29,6 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
-<div class="toc"><ul class="toc-item"><li><span><a href="#Install" data-toc-modified-id="Install-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Install</a></span></li><li><span><a href="#How-to-use" data-toc-modified-id="How-to-use-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>How to use</a></span></li></ul></div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2>
 </div>
 </div>
@@ -55,7 +48,8 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Configure the pytorch xla library</p>
+<h3 id="Configure-the-Pytorch-XLA-package">Configure the Pytorch XLA package<a class="anchor-link" href="#Configure-the-Pytorch-XLA-package"> </a></h3><p>The Pytorch xla package requires an environment supporting TPUs (Kaggle kernels, GCP or Colab environments required)</p>
+<p>If running on Colab, make sure the Runtime Type is set to TPU.</p>
 
 </div>
 </div>
@@ -67,28 +61,12 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">VERSION</span> <span class="o">=</span> <span class="s2">&quot;20200325&quot;</span>  <span class="c1">#@param [&quot;1.5&quot; , &quot;20200325&quot;, &quot;nightly&quot;]</span>
-<span class="o">!</span>curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py
-<span class="o">!</span>python pytorch-xla-env-setup.py --version <span class="nv">$VERSION</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;COLAB_TPU_ADDR&#39;</span><span class="p">],</span> <span class="s1">&#39;Make sure to select TPU from Edit &gt; Notebook settings &gt; Hardware accelerator&#39;</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>2</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -102,7 +80,77 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch_xla.core.xla_model</span> <span class="k">as</span> <span class="nn">xm</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="n">VERSION</span> <span class="o">=</span> <span class="s2">&quot;20200325&quot;</span>  <span class="c1">#@param [&quot;1.5&quot; , &quot;20200325&quot;, &quot;nightly&quot;]</span>
+<span class="o">!</span>curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py
+<span class="o">!</span>python pytorch-xla-env-setup.py --version <span class="nv">$VERSION</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Install fastai2 and the fastai_xla_extensions packages</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install fastai2
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="o">!</span>pip install git+https://github.com/butchland/fastai_xla_extensions
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-the-libraries">Import the libraries<a class="anchor-link" href="#Import-the-libraries"> </a></h3><p>Import the pytorch xla, fastai2 and fastai_xla_extensions libraries</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="kn">import</span> <span class="nn">torch_xla.core.xla_model</span> <span class="k">as</span> <span class="nn">xm</span>
 </pre></div>
 
     </div>
@@ -136,7 +184,8 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai_xla_extensions.core</span> <span class="k">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="kn">from</span> <span class="nn">fastai_xla_extensions.core</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
     </div>
@@ -146,6 +195,13 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example">Example<a class="anchor-link" href="#Example"> </a></h3><p>Build a Pets classifier -- adapted from fastai course <a href="https://github.com/fastai/course-v4/blob/master/nbs/05_pet_breeds.ipynb">Lesson 5 notebook</a></p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -153,7 +209,7 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">PETS</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">MNIST_SAMPLE</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -221,6 +277,13 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Get a TPU device</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -228,7 +291,8 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tpu</span> <span class="o">=</span> <span class="n">xm</span><span class="o">.</span><span class="n">xla_device</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="n">tpu</span> <span class="o">=</span> <span class="n">xm</span><span class="o">.</span><span class="n">xla_device</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -238,6 +302,13 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Set the dataloaders to use the TPU instead of a CPU</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -255,6 +326,13 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Wrap the optimizer function with the XLA Optimizer</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -262,7 +340,8 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">opt_func</span> <span class="o">=</span> <span class="n">XLAOptFuncWrapper</span><span class="p">(</span><span class="n">Adam</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="n">opt_func</span> <span class="o">=</span> <span class="n">XLAOptFuncWrapper</span><span class="p">(</span><span class="n">Adam</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -297,7 +376,8 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learner</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="n">learner</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -307,6 +387,16 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Status">Status<a class="anchor-link" href="#Status"> </a></h2><p>The fastai XLA extensions library is still in very early development phase (not even alpha) which means there's still a lot of things not working.</p>
+<p>Use it at your own risk.</p>
+<p>If you wish to contribute to the project, fork it and make pull request.</p>
+<p>This project uses <a href="https://nbdev.fast.ai/">nbdev</a> -- a jupyter notebook first development environment and is being developed on <a href="https://colab.research.google.com">Colab</a>.</p>
+
+</div>
+</div>
+</div>
 </div>
  
 
