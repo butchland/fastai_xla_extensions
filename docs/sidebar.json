@@ -1,6 +1,6 @@
 {
   "fastai_xla_extensions": {
     "Overview": "/",
-    "module name here": "/core"
+    "Core XLA extensions": "/core"
   }
 }

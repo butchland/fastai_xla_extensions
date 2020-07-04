@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: Core XLA extensions
       url: /core
     output: web
     title: fastai_xla_extensions
