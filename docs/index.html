@@ -62,31 +62,112 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;COLAB_TPU_ADDR&#39;</span><span class="p">],</span> <span class="s1">&#39;Make sure to select TPU from Edit &gt; Notebook settings &gt; Hardware accelerator&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
 <span class="n">VERSION</span> <span class="o">=</span> <span class="s2">&quot;20200325&quot;</span>  <span class="c1">#@param [&quot;1.5&quot; , &quot;20200325&quot;, &quot;nightly&quot;]</span>
 <span class="o">!</span>curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py
 <span class="o">!</span>python pytorch-xla-env-setup.py --version <span class="nv">$VERSION</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  4139  100  4139    0     0  21557      0 --:--:-- --:--:-- --:--:-- 21557
+Updating TPU and VM. This may take around 2 minutes.
+Updating TPU runtime to pytorch-dev20200325 ...
+Collecting cloud-tpu-client
+  Downloading https://files.pythonhosted.org/packages/56/9f/7b1958c2886db06feb5de5b2c191096f9e619914b6c31fdf93999fdbbd8b/cloud_tpu_client-0.10-py3-none-any.whl
+Requirement already satisfied: oauth2client in /usr/local/lib/python3.6/dist-packages (from cloud-tpu-client) (4.1.3)
+Collecting google-api-python-client==1.8.0
+  Downloading https://files.pythonhosted.org/packages/9a/b4/a955f393b838bc47cbb6ae4643b9d0f90333d3b4db4dc1e819f36aad18cc/google_api_python_client-1.8.0-py3-none-any.whl (57kB)
+     |████████████████████████████████| 61kB 2.6MB/s 
+Requirement already satisfied: rsa&gt;=3.1.4 in /usr/local/lib/python3.6/dist-packages (from oauth2client-&gt;cloud-tpu-client) (4.6)
+Requirement already satisfied: pyasn1-modules&gt;=0.0.5 in /usr/local/lib/python3.6/dist-packages (from oauth2client-&gt;cloud-tpu-client) (0.2.8)
+Requirement already satisfied: pyasn1&gt;=0.1.7 in /usr/local/lib/python3.6/dist-packages (from oauth2client-&gt;cloud-tpu-client) (0.4.8)
+Requirement already satisfied: six&gt;=1.6.1 in /usr/local/lib/python3.6/dist-packages (from oauth2client-&gt;cloud-tpu-client) (1.12.0)
+Requirement already satisfied: httplib2&gt;=0.9.1 in /usr/local/lib/python3.6/dist-packages (from oauth2client-&gt;cloud-tpu-client) (0.17.4)
+Requirement already satisfied: google-auth-httplib2&gt;=0.0.3 in /usr/local/lib/python3.6/dist-packages (from google-api-python-client==1.8.0-&gt;cloud-tpu-client) (0.0.3)
+Requirement already satisfied: google-auth&gt;=1.4.1 in /usr/local/lib/python3.6/dist-packages (from google-api-python-client==1.8.0-&gt;cloud-tpu-client) (1.17.2)
+Requirement already satisfied: google-api-core&lt;2dev,&gt;=1.13.0 in /usr/local/lib/python3.6/dist-packages (from google-api-python-client==1.8.0-&gt;cloud-tpu-client) (1.16.0)
+Requirement already satisfied: uritemplate&lt;4dev,&gt;=3.0.0 in /usr/local/lib/python3.6/dist-packages (from google-api-python-client==1.8.0-&gt;cloud-tpu-client) (3.0.1)
+Requirement already satisfied: setuptools&gt;=40.3.0 in /usr/local/lib/python3.6/dist-packages (from google-auth&gt;=1.4.1-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (47.3.1)
+Requirement already satisfied: cachetools&lt;5.0,&gt;=2.0.0 in /usr/local/lib/python3.6/dist-packages (from google-auth&gt;=1.4.1-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (4.1.0)
+Requirement already satisfied: googleapis-common-protos&lt;2.0dev,&gt;=1.6.0 in /usr/local/lib/python3.6/dist-packages (from google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (1.52.0)
+Requirement already satisfied: protobuf&gt;=3.4.0 in /usr/local/lib/python3.6/dist-packages (from google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (3.10.0)
+Requirement already satisfied: requests&lt;3.0.0dev,&gt;=2.18.0 in /usr/local/lib/python3.6/dist-packages (from google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (2.23.0)
+Requirement already satisfied: pytz in /usr/local/lib/python3.6/dist-packages (from google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (2018.9)
+Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (3.0.4)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (1.24.3)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (2020.6.20)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core&lt;2dev,&gt;=1.13.0-&gt;google-api-python-client==1.8.0-&gt;cloud-tpu-client) (2.9)
+Uninstalling torch-1.5.1+cu101:
+Installing collected packages: google-api-python-client, cloud-tpu-client
+  Found existing installation: google-api-python-client 1.7.12
+    Uninstalling google-api-python-client-1.7.12:
+      Successfully uninstalled google-api-python-client-1.7.12
+Successfully installed cloud-tpu-client-0.10 google-api-python-client-1.8.0
+Done updating TPU runtime
+  Successfully uninstalled torch-1.5.1+cu101
+Uninstalling torchvision-0.6.1+cu101:
+  Successfully uninstalled torchvision-0.6.1+cu101
+Copying gs://tpu-pytorch/wheels/torch-nightly+20200325-cp36-cp36m-linux_x86_64.whl...
+- [1 files][ 83.4 MiB/ 83.4 MiB]                                                
+Operation completed over 1 objects/83.4 MiB.                                     
+Copying gs://tpu-pytorch/wheels/torch_xla-nightly+20200325-cp36-cp36m-linux_x86_64.whl...
+\ [1 files][114.5 MiB/114.5 MiB]                                                
+Operation completed over 1 objects/114.5 MiB.                                    
+Copying gs://tpu-pytorch/wheels/torchvision-nightly+20200325-cp36-cp36m-linux_x86_64.whl...
+/ [1 files][  2.5 MiB/  2.5 MiB]                                                
+Operation completed over 1 objects/2.5 MiB.                                      
+Processing ./torch-nightly+20200325-cp36-cp36m-linux_x86_64.whl
+Requirement already satisfied: future in /usr/local/lib/python3.6/dist-packages (from torch==nightly+20200325) (0.16.0)
+Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (from torch==nightly+20200325) (1.18.5)
+<span class="ansi-red-fg">ERROR: fastai 1.0.61 requires torchvision, which is not installed.</span>
+Installing collected packages: torch
+Successfully installed torch-1.5.0a0+d6149a7
+Processing ./torch_xla-nightly+20200325-cp36-cp36m-linux_x86_64.whl
+Installing collected packages: torch-xla
+Successfully installed torch-xla-1.6+e788e5b
+Processing ./torchvision-nightly+20200325-cp36-cp36m-linux_x86_64.whl
+Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from torchvision==nightly+20200325) (1.12.0)
+Requirement already satisfied: torch in /usr/local/lib/python3.6/dist-packages (from torchvision==nightly+20200325) (1.5.0a0+d6149a7)
+Requirement already satisfied: pillow&gt;=4.1.1 in /usr/local/lib/python3.6/dist-packages (from torchvision==nightly+20200325) (7.0.0)
+Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (from torchvision==nightly+20200325) (1.18.5)
+Requirement already satisfied: future in /usr/local/lib/python3.6/dist-packages (from torch-&gt;torchvision==nightly+20200325) (0.16.0)
+Installing collected packages: torchvision
+Successfully installed torchvision-0.6.0a0+3c254fb
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  libnvidia-common-440
+Use &#39;apt autoremove&#39; to remove it.
+The following NEW packages will be installed:
+  libomp5
+0 upgraded, 1 newly installed, 0 to remove and 33 not upgraded.
+Need to get 234 kB of archives.
+After this operation, 774 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu bionic/universe amd64 libomp5 amd64 5.0.1-1 [234 kB]
+Fetched 234 kB in 1s (359 kB/s)
+Selecting previously unselected package libomp5:amd64.
+(Reading database ... 144379 files and directories currently installed.)
+Preparing to unpack .../libomp5_5.0.1-1_amd64.deb ...
+Unpacking libomp5:amd64 (5.0.1-1) ...
+Setting up libomp5:amd64 (5.0.1-1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+/sbin/ldconfig.real: /usr/local/lib/python3.6/dist-packages/ideep4py/lib/libmkldnn.so.0 is not a symbolic link
+
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -107,7 +188,7 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install fastai2
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install fastai2 &gt; /dev/null
 </pre></div>
 
     </div>
@@ -124,11 +205,24 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
-<span class="o">!</span>pip install git+https://github.com/butchland/fastai_xla_extensions
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install git+https://github.com/butchland/fastai_xla_extensions &gt; /dev/null
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  Running command git clone -q https://github.com/butchland/fastai_xla_extensions /tmp/pip-req-build-0ytj2cpq
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -209,7 +303,7 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">MNIST_SAMPLE</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">PETS</span><span class="p">)</span><span class="o">/</span><span class="s1">&#39;images&#39;</span>
 </pre></div>
 
     </div>
@@ -366,6 +460,28 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet34-333f7ec4.pth&#34; to /root/.cache/torch/checkpoints/resnet34-333f7ec4.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -377,10 +493,72 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
-<span class="n">learner</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">learner</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>accuracy</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.865359</td>
+      <td>0.295098</td>
+      <td>0.907984</td>
+      <td>15:03</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>accuracy</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1.659670</td>
+      <td>2.236336</td>
+      <td>0.488498</td>
+      <td>14:13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -399,4 +577,8 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 </div>
 </div>
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"cf2743354fae4609a571b7476380770c": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_6956e163608e4467b9cb8d0de90b98c8", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_b77913978c8046f1bbc8c5306add6b00", "IPY_MODEL_08f52ac21cbb4f47bc4e3c3a5cf113cd"]}}, "6956e163608e4467b9cb8d0de90b98c8": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "b77913978c8046f1bbc8c5306add6b00": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_d8bde304c5784d309d305abbc4f26732", "_dom_classes": [], "description": "100%", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 87306240, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 87306240, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_747014b2aba64b91aef634cc45d5dbf7"}}, "08f52ac21cbb4f47bc4e3c3a5cf113cd": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_6a63839ebe384e42a8211cbb5260b86c", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 83.3M/83.3M [00:00&lt;00:00, 158MB/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_3c8bd94ac15b435aa6ce253b7137a117"}}, "d8bde304c5784d309d305abbc4f26732": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "747014b2aba64b91aef634cc45d5dbf7": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "6a63839ebe384e42a8211cbb5260b86c": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "3c8bd94ac15b435aa6ce253b7137a117": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
+</script>
 
