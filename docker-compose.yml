@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  butch-jekyll-run:
+    working_dir: /data
+    image: fastpages-jekyll-butch-run
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./docs:/data/
+    command: >
+     bash -c "jekyll serve --trace --strict_front_matter"
+
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,9 @@ fastai_xla_extensions: $(SRC)
 docs_serve: docs
 	cd docs && bundle exec jekyll serve
 
+butch-run: .FORCE
+	docker-compose down --remove-orphans || true;
+	docker-compose up butch-jekyll-run	
 docs: $(SRC)
 	nbdev_build_docs
 	touch docs
@@ -27,3 +30,5 @@ dist: clean
 
 clean:
 	rm -rf dist
+
+.FORCE:
