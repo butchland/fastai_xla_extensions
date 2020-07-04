@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ ! -e /content/models ]; then
+        mkdir -p /root/.torch/models
+        mkdir -p /root/.fastai/data
+        ln -s /root/.torch/models /content
+        ln -s /root/.fastai/data /content
+        rm -rf /content/sample_data/
+fi
+
+echo Updating fastai2...
+pip install fastai2 --upgrade
+pip install nbdev --upgrade
+echo Updating pytorch-xla...
+curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py
+python pytorch-xla-env-setup.py --version $VERSION
+echo Done.
