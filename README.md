@@ -26,7 +26,7 @@ assert os.environ['COLAB_TPU_ADDR'], 'Make sure to select TPU from Edit > Notebo
 #hide_output
 #colab
 VERSION = "20200325"  #@param ["1.5" , "20200325", "nightly"]
-#!curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py
+!curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py
 !python pytorch-xla-env-setup.py --version $VERSION
 ```
 
@@ -120,16 +120,15 @@ Install fastai2 and the fastai_xla_extensions packages
 
 ```
 #hide_output
-!pip install fastai2 > /dev/null
+#ci
+!pip install fastai2 --upgrade > /dev/null
 ```
 
 ```
 #hide_output
+#ci
 !pip install git+https://github.com/butchland/fastai_xla_extensions > /dev/null
 ```
-
-      Running command git clone -q https://github.com/butchland/fastai_xla_extensions /tmp/pip-req-build-0zeexp61
-
 
 ### Import the libraries
 Import the pytorch xla, fastai2 and fastai_xla_extensions libraries
@@ -244,6 +243,7 @@ Fine tune model
 
 
 ```
+#colab
 learner.fine_tune(1, base_lr=1e-2)
 ```
 

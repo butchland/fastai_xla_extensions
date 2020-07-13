@@ -71,7 +71,7 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#hide_output</span>
 <span class="c1">#colab</span>
 <span class="n">VERSION</span> <span class="o">=</span> <span class="s2">&quot;20200325&quot;</span>  <span class="c1">#@param [&quot;1.5&quot; , &quot;20200325&quot;, &quot;nightly&quot;]</span>
-<span class="c1">#!curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py</span>
+<span class="o">!</span>curl https://raw.githubusercontent.com/pytorch/xla/master/contrib/scripts/env-setup.py -o pytorch-xla-env-setup.py
 <span class="o">!</span>python pytorch-xla-env-setup.py --version <span class="nv">$VERSION</span>
 </pre></div>
 
@@ -97,7 +97,8 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#hide_output</span>
-<span class="o">!</span>pip install fastai2 &gt; /dev/null
+<span class="c1">#ci</span>
+<span class="o">!</span>pip install fastai2 --upgrade &gt; /dev/null
 </pre></div>
 
     </div>
@@ -115,6 +116,7 @@ description: "The FastAI XLA Extensions library package allows your fastai/Pytor
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#hide_output</span>
+<span class="c1">#ci</span>
 <span class="o">!</span>pip install git+https://github.com/butchland/fastai_xla_extensions &gt; /dev/null
 </pre></div>
 
@@ -510,7 +512,8 @@ on the TPU (for investigation).</em></p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learner</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_lr</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
+<span class="n">learner</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_lr</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
 </pre></div>
 
     </div>
