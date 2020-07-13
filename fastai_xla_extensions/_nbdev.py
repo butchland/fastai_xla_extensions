@@ -2,7 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"XLAOptFuncWrapper": "00_core.ipynb"}
+index = {"XLA_AVAILABLE": "00_core.ipynb",
+         "XLAOptimProxy": "00_core.ipynb",
+         "XLAOptFuncWrapper": "00_core.ipynb"}
 
 modules = ["core.py"]
 
