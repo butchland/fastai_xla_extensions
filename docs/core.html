@@ -92,6 +92,13 @@ sidebar: home_sidebar
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Fake-XLA-functionality-if-XLA-not-available">Fake XLA functionality if XLA not available<a class="anchor-link" href="#Fake-XLA-functionality-if-XLA-not-available"> </a></h2><p>if TPU not available, fake xm to call opt.step anyway, 
@@ -102,6 +109,13 @@ normal fastai behavior if TPU not available</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="XLA-Optim-Proxy">XLA Optim Proxy<a class="anchor-link" href="#XLA-Optim-Proxy"> </a></h2><p><a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a> is a class which has overridden the <code>step</code> method to call the Pytorch-XLA function <code>xm.optimizer_step</code> which synchronizes the XLA graph. All other calls to <a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a> just forward it to the internal <code>self.opt</code> instance.</p>
@@ -109,6 +123,38 @@ normal fastai behavior if TPU not available</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="XLAOptimProxy" class="doc_header"><code>class</code> <code>XLAOptimProxy</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L32" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptimProxy</code>(<strong><code>opt</code></strong>)</p>
+</blockquote>
+<p>Proxy optimizer to override <code>opt.step</code> with Pytorch XLA sync method <code>xm.optimizer_step</code></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="XLA-OptFunc-Wrapper">XLA OptFunc Wrapper<a class="anchor-link" href="#XLA-OptFunc-Wrapper"> </a></h2><p>Wraps the <code>opt_func</code> (which is a fastai function that creates an <code>Optimizer</code>) with an object that when called returns an <code>Optimizer</code> object wrapped around an <a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a>.</p>
@@ -116,12 +162,51 @@ normal fastai behavior if TPU not available</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="XLAOptFuncWrapper" class="doc_header"><code>class</code> <code>XLAOptFuncWrapper</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L47" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptFuncWrapper</code>(<strong><code>f</code></strong>)</p>
+</blockquote>
+<p>Wrap opt_func to create an optimizer proxied by <a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Add-TPU-info-to-defaults-if-XLA-available">Add TPU info to defaults if XLA available<a class="anchor-link" href="#Add-TPU-info-to-defaults-if-XLA-available"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Monkey-patch-default_device-and-to_device-to-use-TPU-if-tpu-is-available">Monkey patch <code>default_device</code> and <code>to_device</code> to use TPU if tpu is available<a class="anchor-link" href="#Monkey-patch-default_device-and-to_device-to-use-TPU-if-tpu-is-available"> </a></h2><p>Replace <code>fastai2.torch_core.default_device</code> and <code>fastai2.torch_core.to_device</code>
@@ -131,6 +216,13 @@ with ones that will return the TPU device assuming a TPU is available
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Monkey-patch-Learner.create_opt-if-tpu-is-available">Monkey patch <code>Learner.create_opt</code> if tpu is available<a class="anchor-link" href="#Monkey-patch-Learner.create_opt-if-tpu-is-available"> </a></h2><p>We do this so that <code>self.opt_func</code> is wrapped with <a href="/fastai_xla_extensions/core#XLAOptFuncWrapper"><code>XLAOptFuncWrapper</code></a> before the <code>self.opt_func</code> is invoked to create the <code>self.opt</code> inside <code>create_opt</code> method.</p>
@@ -138,6 +230,13 @@ with ones that will return the TPU device assuming a TPU is available
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Example:-Create-an-MNIST-classifier">Example: Create an MNIST classifier<a class="anchor-link" href="#Example:-Create-an-MNIST-classifier"> </a></h2><p>This is an example of the fastai_xla_extensions library
