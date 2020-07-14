@@ -24,21 +24,6 @@ sidebar: home_sidebar
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/butch/Google Drive/fastai_xla_extensions/fastai_xla_extensions/core.py:14: RuntimeWarning: fastai_xla_extensions requires Pytorch-XLA, will revert to default
-  RuntimeWarning)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -51,7 +36,7 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Setup-torch-XLA">Setup torch XLA<a class="anchor-link" href="#Setup-torch-XLA"> </a></h3>
+<h2 id="Setup-torch-XLA">Setup torch XLA<a class="anchor-link" href="#Setup-torch-XLA"> </a></h2>
 </div>
 </div>
 </div>
@@ -78,8 +63,7 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Install fastai2</p>
-
+<h2 id="Install-fastai2">Install fastai2<a class="anchor-link" href="#Install-fastai2"> </a></h2>
 </div>
 </div>
 </div>
@@ -110,7 +94,7 @@ sidebar: home_sidebar
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Fake-XLA-functionality-if-XLA-not-available">Fake XLA functionality if XLA not available<a class="anchor-link" href="#Fake-XLA-functionality-if-XLA-not-available"> </a></h3><p>if TPU not available, fake xm to call opt.step anyway, 
+<h2 id="Fake-XLA-functionality-if-XLA-not-available">Fake XLA functionality if XLA not available<a class="anchor-link" href="#Fake-XLA-functionality-if-XLA-not-available"> </a></h2><p>if TPU not available, fake xm to call opt.step anyway, 
 and fake xla_device to return gpu if available, else return cpu
 to ensure compatible behavior in using fastai_xla_extensions as 
 normal fastai behavior if TPU not available</p>
@@ -156,7 +140,7 @@ with ones that will return the TPU device assuming a TPU is available
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Example:-Create-an-MNIST-classifier">Example: Create an MNIST classifier<a class="anchor-link" href="#Example:-Create-an-MNIST-classifier"> </a></h3><p>This is an example of the fastai_xla_extensions library
+<h2 id="Example:-Create-an-MNIST-classifier">Example: Create an MNIST classifier<a class="anchor-link" href="#Example:-Create-an-MNIST-classifier"> </a></h2><p>This is an example of the fastai_xla_extensions library
 in action.</p>
 <p>First, we import fastai libraries.</p>
 

@@ -10,8 +10,8 @@ try:
 except ImportError as e:
     XLA_AVAILABLE = False
     import warnings
-    warnings.warn('fastai_xla_extensions requires Pytorch-XLA, will revert to default',
-                  RuntimeWarning)
+    # warnings.warn('fastai_xla_extensions requires Pytorch-XLA, will revert to default',
+    #              RuntimeWarning)
 
 # Internal Cell
 if not XLA_AVAILABLE:
