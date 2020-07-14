@@ -3,7 +3,7 @@
 __all__ = []
 
 # Internal Cell
-#exporti
+#colab
 XLA_AVAILABLE = True
 try:
     import torch_xla.core.xla_model as xm
