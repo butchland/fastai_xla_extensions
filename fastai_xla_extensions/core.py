@@ -110,10 +110,10 @@ class ChromeTrace(Callback):
         tname = threading.current_thread().name
         if event_name.startswith('begin'):
             evt = event_name.replace('begin_', '')
-            self.d[evt] = time.clock_gettime_ns(time.CLOCK_PROCESS_CPUTIME_ID)/1000
+            self.d[evt] = time.process_time()*1000_000
         elif event_name.startswith('after'):
             evt = event_name.replace('after_', '')
-            end = time.clock_gettime_ns(time.CLOCK_PROCESS_CPUTIME_ID)/1000
+            end = time.process_time()*1000_000
             if evt in self.d:
                 start = self.d[evt]
                 fe = FunctionEvent(tname, tid, evt, tid, start, end)
