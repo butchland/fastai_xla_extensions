@@ -1,3 +1,5 @@
+import torch_xla.debug.metrics as met
+
 import fastai_xla_extensions.core
 from fastai2.vision.all import *
 from my_timesaver_utils.profiling import *
@@ -38,3 +40,5 @@ for i in range(10):
     new_b768_img = mtest(b768_img)
 print("--- ")
 print_prof_data()
+
+print(met.metrics_report())
