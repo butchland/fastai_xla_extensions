@@ -4,7 +4,8 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"XLA_AVAILABLE": "00_core.ipynb",
          "XLAOptimProxy": "00_core.ipynb",
-         "XLAOptCallback": "00_core.ipynb"}
+         "XLAOptCallback": "00_core.ipynb",
+         "ChromeTrace": "01_utils.ipynb"}
 
 modules = ["core.py"]
 
