@@ -99,6 +99,7 @@ import threading
 import time
 from torch.autograd.profiler import FunctionEvent, EventList
 from fastai2.callback.core import Callback
+import json
 
 class ChromeTrace(Callback):
     def __init__(self, ll):
