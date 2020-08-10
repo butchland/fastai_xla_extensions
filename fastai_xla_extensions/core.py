@@ -56,35 +56,50 @@ if XLA_AVAILABLE and defaults.tpu_available:
 # Cell
 class XLAOptimProxy:
     "Proxy optimizer to override `opt.step` with Pytorch XLA sync method `xm.optimizer_step` "
-    def __init__(self,opt):
+    def __init__(self,opt, barrier=True):
         self.opt = opt
+        self._barrier = barrier
 
     def xla_step(self):
-        xm.optimizer_step(self.opt,barrier=True) # sync on gradient update
+        xm.optimizer_step(self.opt,barrier=self._barrier) # sync on gradient update
 
     def __getattr__(self,name):
-        if name == 'step': # override proxying for step method
-                return getattr(self,'xla_step')
+        if name == 'step': # override proxying for step
+            return getattr(self,'xla_step')
+        if name in ('barrier','_barrier'):
+            return getattr(self,name)
+
         # proxy everything else
         return getattr(self.opt,name)
+    @property
+    def barrier(self): return self._barrier
+    @barrier.setter
+    def barrier(self,v): self._barrier = v
 
 # Cell
 from fastai2.callback.core import Callback
 
 class XLAOptCallback(Callback):
+    'Callback to replace `opt.step` with `xm.optimizer_step(opt)` as required to run on TPU'
+    def __init__(self, barrier=True):
+        self._barrier = barrier
+
     def begin_fit(self):
         'replace opt with proxy which calls `xm.optimizer_step` instead of `opt.step`'
         if self.learn.opt is not None:
             if not isinstance(self.learn.opt,XLAOptimProxy):
                 opt = self.learn.opt
-                self.learn.opt = XLAOptimProxy(opt)
+                self.learn.opt = XLAOptimProxy(opt, barrier=self._barrier)
 
     def after_fit(self):
         'restore original opt '
         if isinstance(self.learn.opt, XLAOptimProxy):
             opt = self.learn.opt.opt
             self.learn.opt = opt
-
+    @property
+    def barrier(self): return self._barrier
+    @barrier.setter
+    def barrier(self,v): self._barrier = v
 
 # Cell
 if XLA_AVAILABLE and defaults.tpu_available:
