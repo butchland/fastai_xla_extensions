@@ -62,6 +62,10 @@ Load MNIST dataset
 path = untar_data(URLs.MNIST_TINY)
 ```
 
+
+
+
+
 Create Fastai DataBlock
 
 
@@ -86,7 +90,7 @@ datablock.summary(path)
 ```
 
     Setting-up type transforms pipelines
-    Collecting items from /Users/butch/.fastai/data/mnist_tiny
+    Collecting items from /root/.fastai/data/mnist_tiny
     Found 1428 items
     2 datasets of sizes 709,699
     Setting up Pipeline: PILBase.create
@@ -95,12 +99,12 @@ datablock.summary(path)
     Building one sample
       Pipeline: PILBase.create
         starting from
-          /Users/butch/.fastai/data/mnist_tiny/train/7/9243.png
+          /root/.fastai/data/mnist_tiny/train/7/703.png
         applying PILBase.create gives
           PILImage mode=RGB size=28x28
       Pipeline: parent_label -> Categorize -- {'vocab': (#2) ['3','7'], 'add_na': False}
         starting from
-          /Users/butch/.fastai/data/mnist_tiny/train/7/9243.png
+          /root/.fastai/data/mnist_tiny/train/7/703.png
         applying parent_label gives
           7
         applying Categorize -- {'vocab': (#2) ['3','7'], 'add_na': False} gives
@@ -132,9 +136,9 @@ datablock.summary(path)
     Applying batch_tfms to the batch built
       Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1}
         starting from
-          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
+          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1], device='xla:1'))
         applying IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} gives
-          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
+          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1], device='xla:1'))
 
 
 Create the dataloader
@@ -151,7 +155,7 @@ dls.device
 
 
 
-    device(type='cpu')
+    device(type='xla', index=1)
 
 
 
@@ -171,6 +175,12 @@ Create a Fastai CNN Learner
 learner = cnn_learner(dls, resnet18, metrics=accuracy)
                       
 ```
+
+    Downloading: "https://download.pytorch.org/models/resnet18-5c106cde.pth" to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
+
+
+    
+
 
 ```
 #colab
@@ -309,16 +319,16 @@ learner.summary()
     Total trainable params: 537,984
     Total non-trainable params: 11,166,912
     
-    Optimizer used: <function Adam at 0x13937b4d0>
+    Optimizer used: <function Adam at 0x7ff1f355eae8>
     Loss function: FlattenedLoss of CrossEntropyLoss()
     
     Model frozen up to parameter group number 2
     
     Callbacks:
       - TrainEvalCallback
+      - XLAOptCallback
       - Recorder
       - ProgressCallback
-      - XLAOptCallback
 
 
 
@@ -336,7 +346,7 @@ learner.lr_find()
 
 
 
-    SuggestedLRs(lr_min=0.03019951581954956, lr_steep=0.0030199517495930195)
+    SuggestedLRs(lr_min=0.03630780577659607, lr_steep=1.9054607491852948e-06)
 
 
 
@@ -366,10 +376,10 @@ learner.fine_tune(1, base_lr=1e-2)
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.708790</td>
-      <td>0.326555</td>
-      <td>0.876967</td>
-      <td>00:02</td>
+      <td>0.745400</td>
+      <td>0.949072</td>
+      <td>0.706724</td>
+      <td>00:15</td>
     </tr>
   </tbody>
 </table>
@@ -389,10 +399,10 @@ learner.fine_tune(1, base_lr=1e-2)
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.247014</td>
-      <td>0.165803</td>
-      <td>0.942775</td>
-      <td>00:02</td>
+      <td>0.330027</td>
+      <td>0.192076</td>
+      <td>0.932761</td>
+      <td>00:09</td>
     </tr>
   </tbody>
 </table>
@@ -419,7 +429,7 @@ learner.lr_find()
 
 
 
-    SuggestedLRs(lr_min=5.754399462603033e-05, lr_steep=9.12010818865383e-07)
+    SuggestedLRs(lr_min=0.00020892962347716094, lr_steep=9.12010818865383e-07)
 
 
 
@@ -448,10 +458,10 @@ learner.fit_one_cycle(1,slice(7e-4),pct_start=0.99)
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.171358</td>
-      <td>0.097837</td>
-      <td>0.965665</td>
-      <td>00:02</td>
+      <td>0.155878</td>
+      <td>0.152143</td>
+      <td>0.959943</td>
+      <td>00:11</td>
     </tr>
   </tbody>
 </table>
@@ -495,30 +505,30 @@ learner.fit_one_cycle(4,lr_max=slice(1e-6,1e-4))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.116033</td>
-      <td>0.096761</td>
-      <td>0.972818</td>
-      <td>00:02</td>
+      <td>0.097287</td>
+      <td>0.154531</td>
+      <td>0.955651</td>
+      <td>00:06</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.073788</td>
-      <td>0.108734</td>
+      <td>0.074006</td>
+      <td>0.140767</td>
       <td>0.965665</td>
       <td>00:02</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.051391</td>
-      <td>0.103474</td>
+      <td>0.064490</td>
+      <td>0.134700</td>
       <td>0.971388</td>
       <td>00:02</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.044378</td>
-      <td>0.100450</td>
-      <td>0.975680</td>
+      <td>0.055005</td>
+      <td>0.129603</td>
+      <td>0.971388</td>
       <td>00:02</td>
     </tr>
   </tbody>
@@ -544,30 +554,30 @@ learner.fit_one_cycle(4,lr_max=slice(4e-6,5e-4))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.029393</td>
-      <td>0.109663</td>
-      <td>0.977110</td>
+      <td>0.031957</td>
+      <td>0.118141</td>
+      <td>0.974249</td>
       <td>00:02</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.031327</td>
-      <td>0.080128</td>
-      <td>0.981402</td>
+      <td>0.022216</td>
+      <td>0.110391</td>
+      <td>0.972818</td>
       <td>00:02</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.027084</td>
-      <td>0.072100</td>
-      <td>0.982833</td>
+      <td>0.023388</td>
+      <td>0.116325</td>
+      <td>0.971388</td>
       <td>00:02</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.019011</td>
-      <td>0.068235</td>
-      <td>0.981402</td>
+      <td>0.019499</td>
+      <td>0.114521</td>
+      <td>0.975680</td>
       <td>00:02</td>
     </tr>
   </tbody>
