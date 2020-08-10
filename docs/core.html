@@ -27,41 +27,6 @@ sidebar: home_sidebar
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-2-051f79b9c076&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-red-fg">#colab</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">import</span> os
-<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">assert</span> os<span class="ansi-blue-fg">.</span>environ<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;COLAB_TPU_ADDR&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;Make sure to select TPU from Edit &gt; Notebook settings &gt; Hardware accelerator&#39;</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/fastai2/lib/python3.7/os.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, key)</span>
-<span class="ansi-green-intense-fg ansi-bold">    679</span>         <span class="ansi-green-fg">except</span> KeyError<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    680</span>             <span class="ansi-red-fg"># raise KeyError with the original key value</span>
-<span class="ansi-green-fg">--&gt; 681</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> KeyError<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">from</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-intense-fg ansi-bold">    682</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>decodevalue<span class="ansi-blue-fg">(</span>value<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    683</span> 
-
-<span class="ansi-red-fg">KeyError</span>: &#39;COLAB_TPU_ADDR&#39;</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Install-fastai2">Install fastai2<a class="anchor-link" href="#Install-fastai2"> </a></h2>
@@ -1276,7 +1241,7 @@ Callbacks:
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-7-61b56ff2053c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">&lt;ipython-input-6-61b56ff2053c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> fastai2<span class="ansi-blue-fg">.</span>callback<span class="ansi-blue-fg">.</span>training <span class="ansi-green-fg">import</span> <span class="ansi-blue-fg">*</span>
 <span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>learner<span class="ansi-blue-fg">.</span>fit_one_cycle<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">,</span>cbs<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>GradientAccumulation<span class="ansi-blue-fg">(</span>n_acc<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
 

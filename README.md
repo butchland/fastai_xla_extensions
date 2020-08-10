@@ -165,7 +165,7 @@ dls.show_batch()
 ```
 
 
-![png](docs/images/output_23_0.png)
+![png](docs/images/output_22_0.png)
 
 
 Create a Fastai CNN Learner
@@ -351,7 +351,7 @@ learner.lr_find()
 
 
 
-![png](docs/images/output_28_2.png)
+![png](docs/images/output_27_2.png)
 
 
 Fine tune model
@@ -434,7 +434,7 @@ learner.lr_find()
 
 
 
-![png](docs/images/output_34_2.png)
+![png](docs/images/output_33_2.png)
 
 
 Further fine-tuning
@@ -592,7 +592,7 @@ learner.recorder.plot_loss()
 ```
 
 
-![png](docs/images/output_43_0.png)
+![png](docs/images/output_42_0.png)
 
 
 ## Status
