@@ -84,7 +84,7 @@ class XLAOptCallback(Callback):
     def __init__(self, barrier=True):
         self._barrier = barrier
 
-    def begin_fit(self):
+    def before_fit(self):
         'replace opt with proxy which calls `xm.optimizer_step` instead of `opt.step`'
         if self.learn.opt is not None:
             if not isinstance(self.learn.opt,XLAOptimProxy):
