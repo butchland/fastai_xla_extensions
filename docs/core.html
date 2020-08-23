@@ -7,6 +7,7 @@ sidebar: home_sidebar
 
 
 
+nb_path: "nbs/00_core.ipynb"
 ---
 <!--
 
@@ -29,7 +30,7 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-fastai2">Install fastai2<a class="anchor-link" href="#Install-fastai2"> </a></h2>
+<h2 id="Install-fastai">Install fastai<a class="anchor-link" href="#Install-fastai"> </a></h2>
 </div>
 </div>
 </div>
@@ -41,7 +42,7 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
-<span class="o">!</span>pip install fastai2 &gt; /dev/null
+<span class="o">!</span>pip install fastai &gt; /dev/null
 </pre></div>
 
     </div>
@@ -122,7 +123,7 @@ normal fastai behavior if TPU not available</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Monkey-patch-default_device-and-to_device-to-use-TPU-if-tpu-is-available">Monkey patch <code>default_device</code> and <code>to_device</code> to use TPU if tpu is available<a class="anchor-link" href="#Monkey-patch-default_device-and-to_device-to-use-TPU-if-tpu-is-available"> </a></h2><p>Replace <code>fastai2.torch_core.default_device</code> and <code>fastai2.torch_core.to_device</code>
+<h2 id="Monkey-patch-default_device-and-to_device-to-use-TPU-if-tpu-is-available">Monkey patch <code>default_device</code> and <code>to_device</code> to use TPU if tpu is available<a class="anchor-link" href="#Monkey-patch-default_device-and-to_device-to-use-TPU-if-tpu-is-available"> </a></h2><p>Replace <code>fastai.torch_core.default_device</code> and <code>fastai.torch_core.to_device</code>
 with ones that will return the TPU device assuming a TPU is available 
 (and CPU is not explicitly requested)</p>
 
@@ -243,8 +244,8 @@ in action.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai2.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">fastai2.callback.training</span> <span class="kn">import</span> <span class="n">GradientAccumulation</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fastai.callback.training</span> <span class="kn">import</span> <span class="n">GradientAccumulation</span>
 </pre></div>
 
     </div>
@@ -490,7 +491,7 @@ in action.</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;fastai2.optimizer.Optimizer at 0x7fe974b0ee80&gt;</pre>
+<pre>&lt;fastai.optimizer.Optimizer at 0x7fe974b0ee80&gt;</pre>
 </div>
 
 </div>
@@ -968,8 +969,8 @@ Callbacks:
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Gradient Accum callback (which calls CancelBatchException) should still work.</p>
-<p>An alternative design for the XLA Opt Callback which raises the CancelBatchException in the <code>after_backward</code> method (after executing <code>xm.optimizer_step</code> and <code>opt.zero_grad</code>) would interfere with the Gradient Accum callback (which raises <code>CancelBatchException</code> in the <code>after_backward</code> method to <a href="https://github.com/fastai/fastai2/blob/master/fastai2/callback/training.py#L22">skip the gradient updates</a> in order to accumulate the gradients).</p>
-<p>The current design (add/remove <a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a> during <code>begin_fit</code> and <code>after_fit</code> callback lifecycle methods) is less disruptive and more compatible with other callbacks.</p>
+<p>An alternative design for the XLA Opt Callback which raises the CancelBatchException in the <code>after_backward</code> method (after executing <code>xm.optimizer_step</code> and <code>opt.zero_grad</code>) would interfere with the Gradient Accum callback (which raises <code>CancelBatchException</code> in the <code>after_backward</code> method to <a href="https://github.com/fastai/fastai/blob/master/fastai/callback/training.py#L22">skip the gradient updates</a> in order to accumulate the gradients).</p>
+<p>The current design (add/remove <a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a> during <code>before_fit</code> and <code>after_fit</code> callback lifecycle methods) is less disruptive and more compatible with other callbacks.</p>
 
 </div>
 </div>
