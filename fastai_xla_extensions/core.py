@@ -36,8 +36,8 @@ if XLA_AVAILABLE:
 
 # Cell
 if XLA_AVAILABLE and defaults.tpu_available:
-    import fastai2.torch_core
-    from fastai2.torch_core import apply
+    import fastai.torch_core
+    from fastai.torch_core import apply
     from torch import Tensor
     def default_device(use_cuda=-1):
         "Return `TPU` as default device"
@@ -49,8 +49,8 @@ if XLA_AVAILABLE and defaults.tpu_available:
         def _inner(o): return o.to(device, non_blocking=True) if isinstance(o,Tensor) else o.to_device(device) if hasattr(o, "to_device") else o
         return apply(_inner, b)
 
-    fastai2.torch_core.default_device = default_device
-    fastai2.torch_core.to_device = to_device
+    fastai.torch_core.default_device = default_device
+    fastai.torch_core.to_device = to_device
 
 
 # Cell
@@ -77,7 +77,7 @@ class XLAOptimProxy:
     def barrier(self,v): self._barrier = v
 
 # Cell
-from fastai2.callback.core import Callback
+from fastai.callback.core import Callback
 
 class XLAOptCallback(Callback):
     'Callback to replace `opt.step` with `xm.optimizer_step(opt)` as required to run on TPU'

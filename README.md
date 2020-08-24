@@ -15,12 +15,12 @@ The Pytorch xla package requires an environment supporting TPUs (Kaggle kernels,
 If running on Colab, make sure the Runtime Type is set to TPU.
 
 
-Install fastai2 and the fastai_xla_extensions packages
+Install fastai and the fastai_xla_extensions packages
 
 ```
 #hide_output
 #colab
-!pip install fastai2  > /dev/null
+!pip install fastai  > /dev/null
 ```
 
 ```
@@ -38,19 +38,19 @@ VERSION = "20200707"  #@param ["1.5" , "20200325","20200707", "nightly"]
 ```
 
 ### Import the libraries
-Import the fastai2 and fastai_xla_extensions libraries
+Import the fastai and fastai_xla_extensions libraries
 
 ```
 #colab
 import fastai_xla_extensions.core
 ```
 
-**IMPORTANT: Make sure to import fastai_xla_extensions.core BEFORE importing fastai2 libraries** 
+**IMPORTANT: Make sure to import fastai_xla_extensions.core BEFORE importing fastai libraries** 
 
-If you don't, fastai2 will not default to use tpu device but will instead use the cpu.
+If you don't, fastai will not default to use tpu device but will instead use the cpu.
 
 ```
-from fastai2.vision.all import *
+from fastai.vision.all import *
 ```
 
 ### Example
