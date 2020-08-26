@@ -14,24 +14,8 @@ except ImportError as e:
     #              RuntimeWarning)
 
 # Cell
-if not XLA_AVAILABLE:
-    from types import SimpleNamespace
-    import torch.cuda
-    def fake_opt_step(opt,barrier=False):
-        opt.step()
-    def fake_device(n=None, devkind=None):
-        gpu_available = torch.cuda.is_available()
-        return torch.device(torch.cuda.current_device()) if gpu_available else torch.device('cpu')
-    xm = SimpleNamespace(
-        optimizer_step = fake_opt_step,
-        xla_device = fake_device
-    )
-
-
-# Cell
 if XLA_AVAILABLE:
     from fastcore.foundation import defaults
-    defaults.tpu_device = xm.xla_device(devkind='TPU')
     defaults.tpu_available = defaults.tpu_device != None
 
 # Cell
