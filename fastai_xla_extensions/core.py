@@ -65,7 +65,7 @@ class XLAOptCallback(Callback):
 
 try:
     from fastcore.foundation import defaults
-    if XLA_AVAILABLE:
+    if globals().get("XLA_AVAILABLE"):
         if hasattr(defaults,'callbacks'):
             if XLAOptCallback not in defaults.callbacks:
                 defaults.callbacks.append(XLAOptCallback)
