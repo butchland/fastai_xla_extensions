@@ -15,7 +15,7 @@ except ImportError as e:
                  RuntimeWarning)
 
 # Internal Cell
-if not XLA_AVAILABLE:
+if not globals().get('XLA_AVAILABLE'):
     from types import SimpleNamespace
     import torch.cuda
     def fake_opt_step(opt,barrier=False):
@@ -77,7 +77,7 @@ class XLAOptCallback(Callback):
     def barrier(self,v): self._barrier = v
 
 # Cell
-if XLA_AVAILABLE:
+if globals().get('XLA_AVAILABLE'):
     import fastai.torch_core
     from fastai.torch_core import apply
     from torch import Tensor
@@ -93,7 +93,7 @@ if XLA_AVAILABLE:
     fastai.torch_core.to_device = to_device
 
 # Cell
-if XLA_AVAILABLE:
+if globals().get('XLA_AVAILABLE'):
     from fastcore.foundation import defaults
     from fastai.torch_core import default_device, to_device
     if hasattr(defaults,'callbacks'):
