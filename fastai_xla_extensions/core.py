@@ -10,48 +10,8 @@ try:
 except ImportError as e:
     XLA_AVAILABLE = False
     import warnings
-    # warnings.warn('fastai_xla_extensions requires Pytorch-XLA, will revert to default',
-    #              RuntimeWarning)
-
-# Cell
-if not XLA_AVAILABLE:
-    from types import SimpleNamespace
-    import torch.cuda
-    def fake_opt_step(opt,barrier=False):
-        opt.step()
-    def fake_device(n=None, devkind=None):
-        gpu_available = torch.cuda.is_available()
-        return torch.device(torch.cuda.current_device()) if gpu_available else torch.device('cpu')
-    xm = SimpleNamespace(
-        optimizer_step = fake_opt_step,
-        xla_device = fake_device
-    )
-
-
-# Cell
-if XLA_AVAILABLE:
-    from fastcore.foundation import defaults
-    defaults.tpu_device = xm.xla_device(devkind='TPU')
-    defaults.tpu_available = defaults.tpu_device != None
-
-# Cell
-if XLA_AVAILABLE and defaults.tpu_available:
-    import fastai.torch_core
-    from fastai.torch_core import apply
-    from torch import Tensor
-    def default_device(use_cuda=-1):
-        "Return `TPU` as default device"
-        return defaults.tpu_device
-    def to_device(b, device=None):
-        "Recursively put `b` on `device`."
-        if device is None: device=default_device()
-        # print(f'setting device to {device}')
-        def _inner(o): return o.to(device, non_blocking=True) if isinstance(o,Tensor) else o.to_device(device) if hasattr(o, "to_device") else o
-        return apply(_inner, b)
-
-    fastai.torch_core.default_device = default_device
-    fastai.torch_core.to_device = to_device
-
+    warnings.warn('fastai_xla_extensions requires Pytorch-XLA, will not add XLAOptCallback to learner',
+                 RuntimeWarning)
 
 # Cell
 class XLAOptimProxy:
@@ -102,9 +62,16 @@ class XLAOptCallback(Callback):
     def barrier(self,v): self._barrier = v
 
 # Cell
-if XLA_AVAILABLE and defaults.tpu_available:
-    if hasattr(defaults,'callbacks'):
-        if XLAOptCallback not in defaults.callbacks:
-            defaults.callbacks.append(XLAOptCallback)
-    else:
-        defaults.callbacks = [XLAOptCallback]
+
+try:
+    from fastcore.foundation import defaults
+    if globals().get("XLA_AVAILABLE"):
+        if hasattr(defaults,'callbacks'):
+            if XLAOptCallback not in defaults.callbacks:
+                defaults.callbacks.append(XLAOptCallback)
+        else:
+            defaults.callbacks = [XLAOptCallback]
+except ImportError as e:
+    import warnings
+    warnings.warn('fastai_xla_extensions didnt add default XLAOptCallback to learner. You should add it manually to your callbacks',
+                 RuntimeWarning)
