@@ -20,7 +20,7 @@ Install fastai and the fastai_xla_extensions packages
 ```
 #hide_output
 #colab
-!pip install fastai  > /dev/null
+!pip install -Uqq fastai  --upgrade
 ```
 
 ```
@@ -42,6 +42,7 @@ Import the fastai and fastai_xla_extensions libraries
 
 ```
 #colab
+#hide_output
 import fastai_xla_extensions.core
 ```
 
@@ -61,10 +62,6 @@ Load MNIST dataset
 ```
 path = untar_data(URLs.MNIST_TINY)
 ```
-
-
-
-
 
 Create Fastai DataBlock
 

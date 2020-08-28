@@ -31,7 +31,7 @@ nb_path: "nbs/00_core.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/butch/Google Drive/fastai_xla_extensions/fastai_xla_extensions/core.py:14: RuntimeWarning: fastai_xla_extensions requires Pytorch-XLA, will not add XLAOptCallback to learner
+<pre>/Users/butch/Google Drive/fastai_xla_extensions/fastai_xla_extensions/core.py:15: RuntimeWarning: fastai_xla_extensions requires Pytorch-XLA, will not add XLAOptCallback to learner
   RuntimeWarning)
 </pre>
 </div>
@@ -57,7 +57,7 @@ nb_path: "nbs/00_core.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
-<span class="o">!</span>pip install fastai &gt; /dev/null
+<span class="o">!</span>pip install -Uqq fastai --upgrade
 </pre></div>
 
     </div>
@@ -108,6 +108,13 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>This next code routine handles the possibility of running the package when the environment does not provide a TPU (e.g. CI env, local, etc) by providing mock implementations</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="XLA-Optim-Proxy">XLA Optim Proxy<a class="anchor-link" href="#XLA-Optim-Proxy"> </a></h2><p><a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a> is a class which has overridden the <code>step</code> method to call the Pytorch-XLA function <code>xm.optimizer_step</code> which synchronizes the XLA graph. All other calls to <a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a> just forward it to the internal <code>self.opt</code> instance.</p>
 
 </div>
@@ -131,7 +138,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="XLAOptimProxy" class="doc_header"><code>class</code> <code>XLAOptimProxy</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L17" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptimProxy</code>(<strong><code>opt</code></strong>, <strong><code>barrier</code></strong>=<em><code>True</code></em>)</p>
+<h2 id="XLAOptimProxy" class="doc_header"><code>class</code> <code>XLAOptimProxy</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L32" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptimProxy</code>(<strong><code>opt</code></strong>, <strong><code>barrier</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Proxy optimizer to override <code>opt.step</code> with Pytorch XLA sync method <code>xm.optimizer_step</code></p>
 
@@ -184,6 +191,36 @@ nb_path: "nbs/00_core.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If XLA is available, then it is assumed that XLA is intended 
+to be used -- this requires the following:</p>
+<ul>
+<li><p>The <code>fastai.torch_core.default_device</code> should return an <code>xla_device</code> by calling <code>xm.xla_device</code>.</p>
+</li>
+<li><p>The <code>fastai.torch_core.to_device</code> should handle the possibility of using a TPU device.</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The <a href="/fastai_xla_extensions/core#XLAOptCallback"><code>XLAOptCallback</code></a> (which enables the <code>Learner</code> to call <code>xm.optimizer_step</code> via the <a href="/fastai_xla_extensions/core#XLAOptimProxy"><code>XLAOptimProxy</code></a>) is automatically added as a default callback. </li>
+</ul>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
