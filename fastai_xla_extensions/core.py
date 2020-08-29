@@ -10,9 +10,9 @@ try:
     import torch_xla.core.xla_model as xm
 except ImportError as e:
     XLA_AVAILABLE = False
-    import warnings
-    warnings.warn('fastai_xla_extensions requires Pytorch-XLA, will not add XLAOptCallback to learner',
-                 RuntimeWarning)
+    # import warnings
+    # warnings.warn('fastai_xla_extensions requires Pytorch-XLA, will not add XLAOptCallback to learner',
+                #  RuntimeWarning)
 
 # Internal Cell
 if not globals().get('XLA_AVAILABLE'):
@@ -79,7 +79,6 @@ class XLAOptCallback(Callback):
 # Cell
 if globals().get('XLA_AVAILABLE'):
     import fastai.torch_core
-    from fastai.torch_core import apply
     from torch import Tensor
     def default_device(use_cuda=-1):
         "Return `TPU` as default device"
@@ -88,14 +87,16 @@ if globals().get('XLA_AVAILABLE'):
         "Recursively put `b` on `device`."
         if device is None: device=default_device()
         # print(f'setting device to {device}')
-        def _inner(o): return o.to(device, non_blocking=True)
+        def _inner(o):
+            return o.to(device, non_blocking=True) if isinstance(o,Tensor) else o.to_device(device) if hasattr(o, "to_device") else o
+        return fastai.torch_core.apply(_inner, b)
+    # override default_device implementations
     fastai.torch_core.default_device = default_device
     fastai.torch_core.to_device = to_device
 
 # Cell
 if globals().get('XLA_AVAILABLE'):
     from fastcore.foundation import defaults
-    from fastai.torch_core import default_device, to_device
     if hasattr(defaults,'callbacks'):
         if XLAOptCallback not in defaults.callbacks:
             defaults.callbacks.append(XLAOptCallback)
