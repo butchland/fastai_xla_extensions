@@ -52,6 +52,8 @@ class XLAOptimProxy:
 # Cell
 from fastai.callback.core import Callback
 from fastai.data.core import DataLoaders
+from fastai.vision.all import to_device
+
 
 class XLAOptCallback(Callback):
     'Callback to replace `opt.step` with `xm.optimizer_step(opt)` as required to run on TPU'
