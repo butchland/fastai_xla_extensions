@@ -28,6 +28,8 @@ if not globals().get('XLA_AVAILABLE'):
 
 # Cell
 from fastai.optimizer import Optimizer
+from copy import deepcopy
+
 class PickableOpt(Optimizer):
   def __init__(self, opt):
     # copy the passed optimizer dictionary
