@@ -3,8 +3,8 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"XLA_AVAILABLE": "00_core.ipynb",
+         "PickableOpt": "00_core.ipynb",
          "XLAOptimProxy": "00_core.ipynb",
-         "set2xla_device": "00_core.ipynb",
          "XLAOptCallback": "00_core.ipynb"}
 
 modules = ["core.py"]
