@@ -27,6 +27,7 @@ if not globals().get('XLA_AVAILABLE'):
 
 
 # Cell
+from fastcore.foundation import GetAttr
 from fastai.optimizer import Optimizer
 from copy import deepcopy
 
@@ -42,7 +43,8 @@ class PickableOpt(Optimizer):
     return v
 
 # Cell
-class XLAOptimProxy:
+class XLAOptimProxy(GetAttr):
+    _default='opt'
     "Proxy optimizer to override `opt.step` with Pytorch XLA sync method `xm.optimizer_step` "
     def __init__(self,opt, barrier=True):
         self.opt = PickableOpt(opt)
@@ -51,14 +53,6 @@ class XLAOptimProxy:
     def xla_step(self):
         xm.optimizer_step(self.opt,barrier=self._barrier) # sync on gradient update
 
-    def __getattr__(self,name):
-        if name == 'step': # override proxying for step
-            return getattr(self,'xla_step')
-        if name in ('barrier','_barrier'):
-            return getattr(self,name)
-
-        # proxy everything else
-        return getattr(self.opt,name)
     @property
     def barrier(self): return self._barrier
     @barrier.setter
