@@ -54,7 +54,10 @@ def __setstate__(self, data):
     self.param_groups = data['param_groups']
 
 # Cell
+#colab
 import torch_xla.core.xla_model as xm
+
+# Cell
 
 class XLAOptimProxy(GetAttr):
     _default='opt'
