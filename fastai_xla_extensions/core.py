@@ -4,12 +4,10 @@ __all__ = ['xla_imported', 'xla_available_config', 'xla_module_exist', '__getsta
            'XLAOptCallback']
 
 # Cell
-#colab
 #hide_output
 import importlib
 import os
 import sys
-import torch_xla.core.xla_model as xm
 
 def xla_imported(): return 'torch_xla' in sys.modules
 def xla_available_config(): return os.environ.get("XRT_DEVICE_MAP", False) and os.environ.get("XRT_WORKERS", False)
@@ -56,6 +54,8 @@ def __setstate__(self, data):
     self.param_groups = data['param_groups']
 
 # Cell
+import torch_xla.core.xla_model as xm
+
 class XLAOptimProxy(GetAttr):
     _default='opt'
     "Proxy optimizer to override `opt.step` with Pytorch XLA sync method `xm.optimizer_step` "
