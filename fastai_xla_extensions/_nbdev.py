@@ -2,8 +2,11 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"XLA_AVAILABLE": "00_core.ipynb",
-         "PickableOpt": "00_core.ipynb",
+index = {"xla_imported": "00_core.ipynb",
+         "xla_available_config": "00_core.ipynb",
+         "xla_module_exist": "00_core.ipynb",
+         "__getstate__": "00_core.ipynb",
+         "__setstate__": "00_core.ipynb",
          "XLAOptimProxy": "00_core.ipynb",
          "XLAOptCallback": "00_core.ipynb"}
 
