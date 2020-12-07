@@ -44,7 +44,7 @@ def __getstate__(self):
             'state': self.state_dict(),
             'param_groups': self.param_groups,
         }
-    return
+    return d
 
 @patch_to(_BaseOptimizer)
 def __setstate__(self, data):
