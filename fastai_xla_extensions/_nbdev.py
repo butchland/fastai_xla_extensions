@@ -2,7 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"xla_imported": "00_core.ipynb",
+index = {"IN_COLAB": "00_core.ipynb",
+         "DEBUG": "00_core.ipynb",
+         "TRACE": "00_core.ipynb",
+         "xla_imported": "00_core.ipynb",
          "xla_available_config": "00_core.ipynb",
          "xla_module_exist": "00_core.ipynb",
          "__getstate__": "00_core.ipynb",

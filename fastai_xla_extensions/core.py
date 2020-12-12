@@ -3,6 +3,21 @@
 __all__ = ['xla_imported', 'xla_available_config', 'xla_module_exist', '__getstate__', '__setstate__', 'XLAOptimProxy',
            'XLAOptCallback']
 
+# Internal Cell
+#colab
+IN_COLAB = True
+
+# Internal Cell
+DEBUG = False # set to false for prod release
+TRACE = False # set to false for prod release
+
+# Internal Cell
+if DEBUG:
+    from pdb import set_trace
+else:
+    from fastcore.imports import noop
+    set_trace = noop
+
 # Cell
 #hide_output
 import importlib
@@ -10,8 +25,17 @@ import os
 import sys
 
 def xla_imported(): return 'torch_xla' in sys.modules
+# currently unused, might be deleted later?
 def xla_available_config(): return os.environ.get("XRT_DEVICE_MAP", False) and os.environ.get("XRT_WORKERS", False)
 def xla_module_exist(): return importlib.util.find_spec('torch_xla')
+
+# Internal Cell
+import warnings
+try:
+    import torch_xla
+except ImportError as e:
+    if DEBUG: warnings.warn('TPU environment not available')
+
 
 # Internal Cell
 if not xla_imported():
@@ -22,17 +46,19 @@ if not xla_imported():
     def fake_device(n=None, devkind=None):
         gpu_available = torch.cuda.is_available()
         return torch.device(torch.cuda.current_device()) if gpu_available else torch.device('cpu')
-    #xm = SimpleNamespace(
-    #    optimizer_step = fake_opt_step,
-    #    xla_device = fake_device
-    #)
+    xm = SimpleNamespace(
+        optimizer_step = fake_opt_step,
+        xla_device = fake_device
+    )
+else:
+    import torch_xla.core.xla_model as xm
 
 # Cell
-from fastcore.foundation import GetAttr
-from fastai.optimizer import Optimizer
-from copy import deepcopy
+# from fastcore.foundation import GetAttr
+# from fastai.optimizer import Optimizer
+# from copy import deepcopy
 
-# Right now deciding to patch instead of add with a PickableOpt(Optimizer) class like in previous versions
+# Right now deciding to patch BaseOptimizer instead of add with a PickableOpt(Optimizer) class like in previous versions
 from fastcore.basics import patch_to
 from fastai.optimizer import _BaseOptimizer
 
@@ -55,9 +81,10 @@ def __setstate__(self, data):
 
 # Cell
 #colab
-import torch_xla.core.xla_model as xm
+# import torch_xla.core.xla_model as xm
 
 # Cell
+from fastcore.foundation import GetAttr
 
 class XLAOptimProxy(GetAttr):
     _default='opt'
@@ -67,7 +94,7 @@ class XLAOptimProxy(GetAttr):
         self._barrier = barrier
 
     def step(self):
-        xm.optimizer_step(self.opt,barrier=self._barrier) if xla_imported() else self.opt.step()
+        xm.optimizer_step(self.opt,barrier=self._barrier)
 
     @property
     def barrier(self): return self._barrier
@@ -89,6 +116,7 @@ class XLAOptCallback(Callback):
         'replace opt with proxy which calls `xm.optimizer_step` instead of `opt.step` and set `dls.device` and model to `xla_device`'
         if self.learn.opt is not None:
             if not isinstance(self.learn.opt,XLAOptimProxy):
+                # force opt to reinitialize its parameters and make sure its parameters
                 opt = self.learn.opt
                 self.learn.opt = XLAOptimProxy(opt, barrier=self._barrier)
 
@@ -103,20 +131,52 @@ class XLAOptCallback(Callback):
     def barrier(self,v): self._barrier = v
 
 # Cell
-# if xla_imported():
-#     from fastcore.foundation import defaults
-#     if hasattr(defaults,'callbacks'):
-#         if XLAOptCallback not in defaults.callbacks:
-#             defaults.callbacks.append(XLAOptCallback)
-#     else:
-#         defaults.callbacks = [XLAOptCallback]
+from fastcore.foundation import defaults
+if hasattr(defaults,'callbacks'):
+    if XLAOptCallback not in defaults.callbacks:
+        defaults.callbacks.append(XLAOptCallback)
+else:
+    defaults.callbacks = [XLAOptCallback]
 
 # Cell
 if xla_imported():
     from fastcore.foundation import patch
     from fastai.learner import Learner
-    from fastai.callback.hook import summary as orig_summary
     @patch
-    def xlasummary(self:Learner):
-        to_device(self.dls, device=xm.xla_device())
+    def move2_xla_device(self:Learner):
+        if DEBUG: print('call move2_xla_device')
+        if TRACE: set_trace()
+        if not hasattr(self,'xla_model_device'):
+            xla_model_device = xm.xla_device()
+            if DEBUG: print(f'move2_xla_device: moving dls, model to {xla_model_device}')
+            self.model.to(xla_model_device)
+            self.dls.device = xla_model_device
+            self.xla_model_device = xla_model_device
+
+
+# Cell
+if xla_imported():
+    from fastcore.foundation import patch
+    from fastai.learner import Learner
+    from fastai.callback.hook import *
+    orig_summary = Learner.summary
+    @patch
+    def summary(self:Learner):
+        self.move2_xla_device()
         return orig_summary(self)
+
+
+
+# Cell
+if xla_imported():
+    from fastai.learner import Learner
+    orig_create_opt = Learner.create_opt
+
+
+# Cell
+if xla_imported():
+    @patch
+    def create_opt(self:Learner):
+        if DEBUG: print('creating opt')
+        self.move2_xla_device()
+        orig_create_opt(self)
