@@ -15,26 +15,29 @@ The Pytorch xla package requires an environment supporting TPUs (Kaggle kernels,
 If running on Colab, make sure the Runtime Type is set to TPU.
 
 
-Install fastai and the fastai_xla_extensions packages
+## Install fastai
+
+Use latest fastai and fastcore versions
 
 ```
 #hide_output
 #colab
-!pip install -Uqq fastcore --upgrade
-!pip install -Uqq fastai --upgrade
+![ -d /content ] && pip install -Uqq fastcore --upgrade
+![ -d /content ] && pip install -Uqq fastai --upgrade
 ```
 
-```
-!pip install git+https://github.com/butchland/fastai_xla_extensions
-```
+## Setup torch XLA
 
-Install Pytorch-XLA
+
+This is the official way to install Pytorch-XLA 1.7 [instructions here](https://colab.research.google.com/github/pytorch/xla/blob/master/contrib/colab/getting-started.ipynb#scrollTo=CHzziBW5AoZH)
 
 ```
 #hide_output
 #colab
-!pip install -Uqq cloud-tpu-client==0.10 https://storage.googleapis.com/tpu-pytorch/wheels/torch_xla-1.6-cp36-cp36m-linux_x86_64.whl
+![ -d /content ] && pip install -Uqq cloud-tpu-client==0.10 https://storage.googleapis.com/tpu-pytorch/wheels/torch_xla-1.7-cp36-cp36m-linux_x86_64.whl
 ```
+
+## Check if XLA is available
 
 ### Import the libraries
 Import the fastai and fastai_xla_extensions libraries
@@ -90,38 +93,43 @@ datablock.summary(path)
     Found 1428 items
     2 datasets of sizes 709,699
     Setting up Pipeline: PILBase.create
-    Setting up Pipeline: parent_label -> Categorize -- {'vocab': None, 'add_na': False}
+    Setting up Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
     
     Building one sample
       Pipeline: PILBase.create
         starting from
-          /root/.fastai/data/mnist_tiny/train/7/7959.png
+          /root/.fastai/data/mnist_tiny/train/3/9612.png
         applying PILBase.create gives
           PILImage mode=RGB size=28x28
-      Pipeline: parent_label -> Categorize -- {'vocab': (#2) ['3','7'], 'add_na': False}
+      Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
         starting from
-          /root/.fastai/data/mnist_tiny/train/7/7959.png
+          /root/.fastai/data/mnist_tiny/train/3/9612.png
         applying parent_label gives
-          7
-        applying Categorize -- {'vocab': (#2) ['3','7'], 'add_na': False} gives
-          TensorCategory(1)
+          3
+        applying Categorize -- {'vocab': None, 'sort': True, 'add_na': False} gives
+          TensorCategory(0)
     
-    Final sample: (PILImage mode=RGB size=28x28, TensorCategory(1))
+    Final sample: (PILImage mode=RGB size=28x28, TensorCategory(0))
     
     
-    Setting up after_item: Pipeline: Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection'} -> ToTensor
+    Collecting items from /root/.fastai/data/mnist_tiny
+    Found 1428 items
+    2 datasets of sizes 709,699
+    Setting up Pipeline: PILBase.create
+    Setting up Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
+    Setting up after_item: Pipeline: Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection', 'resamples': (2, 0), 'p': 1.0} -> ToTensor
     Setting up before_batch: Pipeline: 
     Setting up after_batch: Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1}
     
     Building one batch
     Applying item_tfms to the first sample:
-      Pipeline: Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection'} -> ToTensor
+      Pipeline: Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection', 'resamples': (2, 0), 'p': 1.0} -> ToTensor
         starting from
-          (PILImage mode=RGB size=28x28, TensorCategory(1))
-        applying Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection'} gives
-          (PILImage mode=RGB size=28x28, TensorCategory(1))
+          (PILImage mode=RGB size=28x28, TensorCategory(0))
+        applying Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection', 'resamples': (2, 0), 'p': 1.0} gives
+          (PILImage mode=RGB size=28x28, TensorCategory(0))
         applying ToTensor gives
-          (TensorImage of size 3x28x28, TensorCategory(1))
+          (TensorImage of size 3x28x28, TensorCategory(0))
     
     Adding the next 3 samples
     
@@ -132,9 +140,9 @@ datablock.summary(path)
     Applying batch_tfms to the batch built
       Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1}
         starting from
-          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
+          (TensorImage of size 4x3x28x28, TensorCategory([0, 0, 0, 0]))
         applying IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} gives
-          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
+          (TensorImage of size 4x3x28x28, TensorCategory([0, 0, 0, 0]))
 
 
 Create the dataloader
@@ -149,17 +157,27 @@ dls.show_batch()
 ```
 
 
-![png](docs/images/output_20_0.png)
+![png](docs/images/output_21_0.png)
 
 
 Create a Fastai CNN Learner
 
-_Learner is currently set to `pretrained = False` due to a possible bug_
 
 ```
 #colab
-learner = cnn_learner(dls, resnet18, metrics=accuracy,pretrained=False)
+learner = cnn_learner(dls, resnet18, metrics=accuracy)
                       
+```
+
+    Downloading: "https://download.pytorch.org/models/resnet18-5c106cde.pth" to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
+
+
+    
+
+
+```
+#colab
+learner.unfreeze()
 ```
 
 ```
@@ -351,7 +369,7 @@ learner.lr_find()
 
 
 
-![png](docs/images/output_25_2.png)
+![png](docs/images/output_27_2.png)
 
 
 Run one cycle training.
@@ -493,7 +511,7 @@ learner.recorder.plot_loss()
 ```
 
 
-![png](docs/images/output_33_0.png)
+![png](docs/images/output_35_0.png)
 
 
 ## Samples
