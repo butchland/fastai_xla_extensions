@@ -8,33 +8,35 @@
 
 ## How to use
 
-### Configure the Pytorch XLA package 
+### Configure TPU Environment Access
 
-The Pytorch xla package requires an environment supporting TPUs (Kaggle kernels, GCP or Colab environments required)
+The Pytorch XLA package requires an environment supporting TPUs (Kaggle kernels, GCP or Colab environments required). 
+
+Nominally, Pytorch XLA also supports  GPUs so please see the [Pytorch XLA site for more instructions](https://pytorch.org/xla/release/1.7/index.html).
 
 If running on Colab, make sure the Runtime Type is set to TPU.
 
 
 ## Install fastai
 
-Use latest fastai and fastcore versions
+Use the latest fastai and fastcore versions
 
 ```
 #hide_output
 #colab
-![ -d /content ] && pip install -Uqq fastcore --upgrade
-![ -d /content ] && pip install -Uqq fastai --upgrade
+!pip install -Uqq fastcore --upgrade
+!pip install -Uqq fastai --upgrade
 ```
 
-## Setup torch XLA
+## Install Pytorch XLA
 
 
-This is the official way to install Pytorch-XLA 1.7 [instructions here](https://colab.research.google.com/github/pytorch/xla/blob/master/contrib/colab/getting-started.ipynb#scrollTo=CHzziBW5AoZH)
+This is the official way to install Pytorch-XLA 1.7 as per the [instructions here](https://colab.research.google.com/github/pytorch/xla/blob/master/contrib/colab/getting-started.ipynb#scrollTo=CHzziBW5AoZH)
 
 ```
 #hide_output
 #colab
-![ -d /content ] && pip install -Uqq cloud-tpu-client==0.10 https://storage.googleapis.com/tpu-pytorch/wheels/torch_xla-1.7-cp36-cp36m-linux_x86_64.whl
+!pip install -Uqq cloud-tpu-client==0.10 https://storage.googleapis.com/tpu-pytorch/wheels/torch_xla-1.7-cp36-cp36m-linux_x86_64.whl
 ```
 
 ## Check if XLA is available
