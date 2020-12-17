@@ -11,7 +11,15 @@ index = {"IN_COLAB": "00_core.ipynb",
          "__getstate__": "00_core.ipynb",
          "__setstate__": "00_core.ipynb",
          "XLAOptimProxy": "00_core.ipynb",
-         "XLAOptCallback": "00_core.ipynb"}
+         "DeviceMoverTransform": "00_core.ipynb",
+         "has_affinecoord_tfm": "00_core.ipynb",
+         "has_devicemover_tfm": "00_core.ipynb",
+         "get_last_affinecoord_tfm_idx": "00_core.ipynb",
+         "insert_batch_tfm": "00_core.ipynb",
+         "setup_input_device_mover": "00_core.ipynb",
+         "XLAOptCallback": "00_core.ipynb",
+         "Learner.to_xla": "00_core.ipynb",
+         "Learner.detach_xla": "00_core.ipynb"}
 
 modules = ["core.py"]
 
