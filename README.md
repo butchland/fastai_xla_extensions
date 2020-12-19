@@ -165,7 +165,6 @@ Create a Fastai CNN Learner
 
 
 ```
-#colab
 learner = cnn_learner(dls, resnet18, metrics=accuracy)
                       
 ```
@@ -344,6 +343,7 @@ learner.summary()
 This will setup the learner to use the XLA Device
 
 ```
+#colab
 learner.to_xla()
 ```
 

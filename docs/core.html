@@ -612,38 +612,6 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># @patch</span>
-<span class="c1"># def export(self:Learner, fname=&#39;export.pkl&#39;, pickle_module=pickle, pickle_protocol=2):</span>
-<span class="c1">#     &quot;Export the content of `self` without the items and the optimizer state for inference&quot;</span>
-<span class="c1">#     if rank_distrib(): return # don&#39;t export if child proc</span>
-<span class="c1">#     self._end_cleanup()</span>
-<span class="c1">#     old_dbunch = self.dls</span>
-<span class="c1">#     self.dls = self.dls.new_empty()</span>
-<span class="c1">#     state = self.opt.state_dict() if self.opt is not None else None</span>
-<span class="c1">#     self.opt = None</span>
-<span class="c1">#     with warnings.catch_warnings():</span>
-<span class="c1">#         #To avoid the warning that come from PyTorch about model not being checked</span>
-<span class="c1">#         warnings.simplefilter(&quot;ignore&quot;)</span>
-<span class="c1">#         xm.save(self, self.path/fname)</span>
-<span class="c1">#     self.create_opt()</span>
-<span class="c1">#     if state is not None: self.opt.load_state_dict(state)</span>
-<span class="c1">#     self.dls = old_dbunch</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Example:-Create-an-MNIST-classifier">Example: Create an MNIST classifier<a class="anchor-link" href="#Example:-Create-an-MNIST-classifier"> </a></h2><p>This is an example of the fastai_xla_extensions library
@@ -2231,23 +2199,6 @@ opt param device: xla:1
 
 </div>
 
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_images</span> <span class="o">=</span> <span class="n">get_image_files</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
