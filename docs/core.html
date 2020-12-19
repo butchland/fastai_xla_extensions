@@ -415,23 +415,13 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">This</span> <span class="n">inserts</span> <span class="n">a</span> <span class="n">batch</span> <span class="n">transform</span> <span class="k">for</span> <span class="n">a</span> <span class="n">dataloader</span> <span class="n">at</span> <span class="n">the</span> <span class="n">index</span> <span class="n">location</span> <span class="err">`</span><span class="n">idx</span><span class="err">`</span><span class="o">.</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This inserts a batch transform for a dataloader at the index location <code>idx</code>.</p>
 
 </div>
-    {% endraw %}
-
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -483,7 +473,7 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="setup_input_device_mover" class="doc_header"><code>setup_input_device_mover</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L165" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>setup_input_device_mover</code>(<strong><code>learn</code></strong>:<code>Learner</code>, <strong><code>new_device</code></strong>)</p>
+<h4 id="setup_input_device_mover" class="doc_header"><code>setup_input_device_mover</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L163" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>setup_input_device_mover</code>(<strong><code>learn</code></strong>:<code>Learner</code>, <strong><code>new_device</code></strong>)</p>
 </blockquote>
 <p>setup batch_tfms to use cpu if dataloader batch_tfms has AffineCoordTfms</p>
 
@@ -523,7 +513,7 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="XLAOptCallback" class="doc_header"><code>class</code> <code>XLAOptCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L189" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptCallback</code>(<strong><code>barrier</code></strong>=<em><code>True</code></em>) :: <code>Callback</code></p>
+<h2 id="XLAOptCallback" class="doc_header"><code>class</code> <code>XLAOptCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L187" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptCallback</code>(<strong><code>barrier</code></strong>=<em><code>True</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Callback to replace <code>opt.step</code> with <code>xm.optimizer_step(opt)</code> as required to run on TPU</p>
 
@@ -547,26 +537,12 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Make sure the model and dataloader has been moved to the xla device prior to creating the optimizer</li>
+<li>Make sure the model and dataloader has been moved to the xla device prior to creating the optimizer by setting the opt to None which will force a call to create_opt in the fit methods after already moving the model to the TPU device in this method.</li>
 </ul>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -578,7 +554,7 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_xla" class="doc_header"><code>Learner.to_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L234" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_xla</code>(<strong><code>new_device</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="Learner.to_xla" class="doc_header"><code>Learner.to_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L218" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_xla</code>(<strong><code>new_device</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -609,7 +585,7 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.detach_xla" class="doc_header"><code>Learner.detach_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L246" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.detach_xla</code>()</p>
+<h4 id="Learner.detach_xla" class="doc_header"><code>Learner.detach_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L230" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.detach_xla</code>()</p>
 </blockquote>
 
 </div>

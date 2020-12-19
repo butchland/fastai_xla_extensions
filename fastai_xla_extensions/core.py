@@ -158,8 +158,6 @@ def insert_batch_tfm(dl:DataLoader, batch_tfm:Transform, idx:int):
 
 
 # Cell
-
-#export
 from fastai.learner import Learner
 
 def setup_input_device_mover(learn: Learner, new_device):
@@ -214,20 +212,6 @@ class XLAOptCallback(Callback):
     def barrier(self): return self._barrier
     @barrier.setter
     def barrier(self,v): self._barrier = v
-
-# Cell
-# if xla_imported():
-#     from fastai.learner import Learner
-#     orig_create_opt = Learner.create_opt
-
-
-# Cell
-# if xla_imported():
-#     @patch
-#     def create_opt(self:Learner):
-#         if DEBUG: print('creating opt')
-#         self.move2_xla_device()
-#         orig_create_opt(self)
 
 # Cell
 from fastcore.foundation import patch
