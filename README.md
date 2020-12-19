@@ -63,16 +63,9 @@ Load MNIST dataset
 path = untar_data(URLs.MNIST_TINY)
 ```
 
-
-
-
-
 Create Fastai DataBlock
 
 
-_Note that batch transforms are currently
-set to none as they seem to slow the training
-on the TPU (for investigation)._
 
 ```
 datablock = DataBlock(
@@ -81,7 +74,7 @@ datablock = DataBlock(
     splitter=GrandparentSplitter(),
     get_y=parent_label,
     item_tfms=Resize(28),
-    batch_tfms=[]
+    batch_tfms=aug_transforms(do_flip=False,min_scale=0.8)
 )
 ```
 
@@ -100,18 +93,18 @@ datablock.summary(path)
     Building one sample
       Pipeline: PILBase.create
         starting from
-          /root/.fastai/data/mnist_tiny/train/3/9612.png
+          /root/.fastai/data/mnist_tiny/train/7/7770.png
         applying PILBase.create gives
           PILImage mode=RGB size=28x28
       Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
         starting from
-          /root/.fastai/data/mnist_tiny/train/3/9612.png
+          /root/.fastai/data/mnist_tiny/train/7/7770.png
         applying parent_label gives
-          3
+          7
         applying Categorize -- {'vocab': None, 'sort': True, 'add_na': False} gives
-          TensorCategory(0)
+          TensorCategory(1)
     
-    Final sample: (PILImage mode=RGB size=28x28, TensorCategory(0))
+    Final sample: (PILImage mode=RGB size=28x28, TensorCategory(1))
     
     
     Collecting items from /root/.fastai/data/mnist_tiny
@@ -121,17 +114,17 @@ datablock.summary(path)
     Setting up Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
     Setting up after_item: Pipeline: Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection', 'resamples': (2, 0), 'p': 1.0} -> ToTensor
     Setting up before_batch: Pipeline: 
-    Setting up after_batch: Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1}
+    Setting up after_batch: Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} -> Warp -- {'magnitude': 0.2, 'p': 1.0, 'draw_x': None, 'draw_y': None, 'size': None, 'mode': 'bilinear', 'pad_mode': 'reflection', 'batch': False, 'align_corners': True, 'mode_mask': 'nearest'} -> RandomResizedCropGPU -- {'size': None, 'min_scale': 0.8, 'ratio': (1, 1), 'mode': 'bilinear', 'valid_scale': 1.0, 'p': 1.0} -> Brightness -- {'max_lighting': 0.2, 'p': 1.0, 'draw': None, 'batch': False}
     
     Building one batch
     Applying item_tfms to the first sample:
       Pipeline: Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection', 'resamples': (2, 0), 'p': 1.0} -> ToTensor
         starting from
-          (PILImage mode=RGB size=28x28, TensorCategory(0))
+          (PILImage mode=RGB size=28x28, TensorCategory(1))
         applying Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection', 'resamples': (2, 0), 'p': 1.0} gives
-          (PILImage mode=RGB size=28x28, TensorCategory(0))
+          (PILImage mode=RGB size=28x28, TensorCategory(1))
         applying ToTensor gives
-          (TensorImage of size 3x28x28, TensorCategory(0))
+          (TensorImage of size 3x28x28, TensorCategory(1))
     
     Adding the next 3 samples
     
@@ -140,11 +133,17 @@ datablock.summary(path)
     Collating items in a batch
     
     Applying batch_tfms to the batch built
-      Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1}
+      Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} -> Warp -- {'magnitude': 0.2, 'p': 1.0, 'draw_x': None, 'draw_y': None, 'size': None, 'mode': 'bilinear', 'pad_mode': 'reflection', 'batch': False, 'align_corners': True, 'mode_mask': 'nearest'} -> RandomResizedCropGPU -- {'size': None, 'min_scale': 0.8, 'ratio': (1, 1), 'mode': 'bilinear', 'valid_scale': 1.0, 'p': 1.0} -> Brightness -- {'max_lighting': 0.2, 'p': 1.0, 'draw': None, 'batch': False}
         starting from
-          (TensorImage of size 4x3x28x28, TensorCategory([0, 0, 0, 0]))
+          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
         applying IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} gives
-          (TensorImage of size 4x3x28x28, TensorCategory([0, 0, 0, 0]))
+          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
+        applying Warp -- {'magnitude': 0.2, 'p': 1.0, 'draw_x': None, 'draw_y': None, 'size': None, 'mode': 'bilinear', 'pad_mode': 'reflection', 'batch': False, 'align_corners': True, 'mode_mask': 'nearest'} gives
+          (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
+        applying RandomResizedCropGPU -- {'size': None, 'min_scale': 0.8, 'ratio': (1, 1), 'mode': 'bilinear', 'valid_scale': 1.0, 'p': 1.0} gives
+          (TensorImage of size 4x3x27x27, TensorCategory([1, 1, 1, 1]))
+        applying Brightness -- {'max_lighting': 0.2, 'p': 1.0, 'draw': None, 'batch': False} gives
+          (TensorImage of size 4x3x27x27, TensorCategory([1, 1, 1, 1]))
 
 
 Create the dataloader
@@ -169,17 +168,6 @@ Create a Fastai CNN Learner
 #colab
 learner = cnn_learner(dls, resnet18, metrics=accuracy)
                       
-```
-
-    Downloading: "https://download.pytorch.org/models/resnet18-5c106cde.pth" to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
-
-
-    
-
-
-```
-#colab
-learner.unfreeze()
 ```
 
 ```
@@ -352,6 +340,20 @@ learner.summary()
 
 
 
+### Set Learner to XLA mode
+This will setup the learner to use the XLA Device
+
+```
+learner.to_xla()
+```
+
+
+
+
+    <fastai.learner.Learner at 0x7fb6809e7f28>
+
+
+
 Using the `lr_find` works 
 
 ```
@@ -366,12 +368,12 @@ learner.lr_find()
 
 
 
-    SuggestedLRs(lr_min=0.010000000149011612, lr_steep=6.309573450380412e-07)
+    SuggestedLRs(lr_min=0.02089296132326126, lr_steep=0.0010000000474974513)
 
 
 
 
-![png](docs/images/output_27_2.png)
+![png](docs/images/output_28_2.png)
 
 
 Run one cycle training.
@@ -379,7 +381,7 @@ Run one cycle training.
 
 ```
 #colab
-learner.fit_one_cycle(5,lr_max=slice(6.3e-07,0.01))
+learner.fit_one_cycle(5,lr_max=slice(1e-4,0.02))
 ```
 
 
@@ -396,38 +398,38 @@ learner.fit_one_cycle(5,lr_max=slice(6.3e-07,0.01))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.629290</td>
-      <td>1.190237</td>
-      <td>0.566524</td>
-      <td>00:10</td>
+      <td>0.749318</td>
+      <td>0.348496</td>
+      <td>0.861230</td>
+      <td>00:12</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.358590</td>
-      <td>0.232812</td>
-      <td>0.911302</td>
-      <td>00:02</td>
+      <td>0.634834</td>
+      <td>0.676399</td>
+      <td>0.791130</td>
+      <td>00:03</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.237743</td>
-      <td>0.130314</td>
-      <td>0.971388</td>
-      <td>00:02</td>
+      <td>0.621724</td>
+      <td>0.506193</td>
+      <td>0.834049</td>
+      <td>00:03</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.169761</td>
-      <td>0.126199</td>
-      <td>0.969957</td>
-      <td>00:02</td>
+      <td>0.553649</td>
+      <td>0.503763</td>
+      <td>0.824034</td>
+      <td>00:03</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.122370</td>
-      <td>0.111455</td>
-      <td>0.971388</td>
-      <td>00:02</td>
+      <td>0.500875</td>
+      <td>0.435466</td>
+      <td>0.846924</td>
+      <td>00:03</td>
     </tr>
   </tbody>
 </table>
@@ -454,38 +456,38 @@ learner.fit_one_cycle(5,slice(7e-4, 1e-3))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.005863</td>
-      <td>0.070885</td>
-      <td>0.984263</td>
-      <td>00:02</td>
+      <td>0.355362</td>
+      <td>0.312893</td>
+      <td>0.889843</td>
+      <td>00:07</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.038074</td>
-      <td>0.360497</td>
-      <td>0.948498</td>
-      <td>00:02</td>
+      <td>0.361367</td>
+      <td>0.271736</td>
+      <td>0.895565</td>
+      <td>00:03</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.109056</td>
-      <td>0.150170</td>
-      <td>0.979971</td>
-      <td>00:02</td>
+      <td>0.324752</td>
+      <td>0.205274</td>
+      <td>0.932761</td>
+      <td>00:03</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.114290</td>
-      <td>0.122179</td>
-      <td>0.984263</td>
-      <td>00:02</td>
+      <td>0.282965</td>
+      <td>0.197236</td>
+      <td>0.925608</td>
+      <td>00:03</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.087704</td>
-      <td>0.071846</td>
-      <td>0.989986</td>
-      <td>00:02</td>
+      <td>0.246091</td>
+      <td>0.187480</td>
+      <td>0.939914</td>
+      <td>00:03</td>
     </tr>
   </tbody>
 </table>
@@ -513,7 +515,7 @@ learner.recorder.plot_loss()
 ```
 
 
-![png](docs/images/output_35_0.png)
+![png](docs/images/output_36_0.png)
 
 
 ## Samples

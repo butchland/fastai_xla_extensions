@@ -41,15 +41,23 @@ except ImportError as e:
 # Internal Cell
 if not xla_imported():
     from types import SimpleNamespace
+    from typing import Union,BinaryIO
+    import os
+    import pickle
     import torch.cuda
     def fake_opt_step(opt,barrier=False):
         opt.step()
     def fake_device(n=None, devkind=None):
         gpu_available = torch.cuda.is_available()
         return torch.device(torch.cuda.current_device()) if gpu_available else torch.device('cpu')
+    def fake_save(obj, f: Union[str, os.PathLike, BinaryIO], master_only=True, global_master=False):
+        return torch.save(obj,f,pickle_module=pickle,
+                          pickle_protocol=2,
+                          _use_new_zipfile_serialization=True)
     xm = SimpleNamespace(
         optimizer_step = fake_opt_step,
-        xla_device = fake_device
+        xla_device = fake_device,
+        save = fake_save
     )
 else:
     import torch_xla.core.xla_model as xm
@@ -104,6 +112,7 @@ class XLAOptimProxy(GetAttr):
 
 # Cell
 from fastcore.transform import DisplayedTransform
+from fastcore.basics import store_attr
 from torch import Tensor
 import torch
 class DeviceMoverTransform(DisplayedTransform):
@@ -207,43 +216,6 @@ class XLAOptCallback(Callback):
     def barrier(self,v): self._barrier = v
 
 # Cell
-# from fastcore.foundation import defaults
-# if hasattr(defaults,'callbacks'):
-#     if XLAOptCallback not in defaults.callbacks:
-#         defaults.callbacks.append(XLAOptCallback)
-# else:
-#     defaults.callbacks = [XLAOptCallback]
-
-# Cell
-# if xla_imported():
-#     from fastcore.foundation import patch
-#     from fastai.learner import Learner
-#     @patch
-#     def move2_xla_device(self:Learner):
-#         if DEBUG: print('call move2_xla_device')
-#         if TRACE: set_trace()
-#         if not hasattr(self,'xla_model_device'):
-#             xla_model_device = xm.xla_device()
-#             if DEBUG: print(f'move2_xla_device: moving dls, model to {xla_model_device}')
-#             self.model.to(xla_model_device)
-#             self.dls.device = xla_model_device
-#             self.xla_model_device = xla_model_device
-
-
-# Cell
-# if xla_imported():
-#     from fastcore.foundation import patch
-#     from fastai.learner import Learner
-#     from fastai.callback.hook import *
-#     orig_summary = Learner.summary
-#     @patch
-#     def summary(self:Learner):
-#         self.move2_xla_device()
-#         return orig_summary(self)
-
-
-
-# Cell
 # if xla_imported():
 #     from fastai.learner import Learner
 #     orig_create_opt = Learner.create_opt
@@ -259,7 +231,6 @@ class XLAOptCallback(Callback):
 
 # Cell
 from fastcore.foundation import patch
-#export
 @patch
 def to_xla(self:Learner, new_device=None):
     self.add_cb(XLAOptCallback())
