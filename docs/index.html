@@ -959,6 +959,32 @@ Callbacks:
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Performance-troubleshooting">Performance troubleshooting<a class="anchor-link" href="#Performance-troubleshooting"> </a></h1><p>To check if your model is hiting an <code>aten operation</code> (an operation that is not handled by accelerator device and returned to CPU for default implementation) you can check it with ands then you can report to pytorch xla team.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai_xla_extensions.utils</span> <span class="kn">import</span> <span class="n">print_aten_ops</span>
+
+<span class="n">print_aten_ops</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Samples">Samples<a class="anchor-link" href="#Samples"> </a></h2><p>Other examples of fastai notebooks using the fastai_xla_extensions package are also available here:</p>
 <ul>
 <li><p><a href="https://github.com/butchland/fastai_xla_extensions/blob/master/samples/MNIST_TPU_demo.ipynb">Vision</a> <a href="https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/MNIST_TPU_demo.ipynb"><img src="https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt=""></a></p>

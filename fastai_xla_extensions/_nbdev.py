@@ -19,9 +19,11 @@ index = {"IN_COLAB": "00_core.ipynb",
          "setup_input_device_mover": "00_core.ipynb",
          "XLAOptCallback": "00_core.ipynb",
          "Learner.to_xla": "00_core.ipynb",
-         "Learner.detach_xla": "00_core.ipynb"}
+         "Learner.detach_xla": "00_core.ipynb",
+         "print_aten_ops": "01_utils.ipynb"}
 
-modules = ["core.py"]
+modules = ["core.py",
+           "utils.py"]
 
 doc_url = "https://butchland.github.io/fastai_xla_extensions/"
 
