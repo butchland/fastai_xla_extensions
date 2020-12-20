@@ -11,7 +11,10 @@ entries:
       url: /
     - output: web,pdf
       title: Core XLA extensions
-      url: core
+      url: core.html
+    - output: web,pdf
+      title: Utils
+      url: utils.html
     output: web
     title: fastai_xla_extensions
   output: web

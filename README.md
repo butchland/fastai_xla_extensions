@@ -522,6 +522,16 @@ learner.recorder.plot_loss()
 ![png](docs/images/output_37_0.png)
 
 
+# Performance troubleshooting
+
+To check if your model is hiting an `aten operation` (an operation that is not handled by accelerator device and returned to CPU for default implementation) you can check it with ands then you can report to pytorch xla team.
+
+```
+from fastai_xla_extensions.utils import print_aten_ops
+
+print_aten_ops()
+```
+
 ## Samples
 
 Other examples of fastai notebooks using the fastai_xla_extensions package are also available here: 

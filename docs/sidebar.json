@@ -1,6 +1,7 @@
 {
   "fastai_xla_extensions": {
     "Overview": "/",
-    "Core XLA extensions": "core"
+    "Core XLA extensions": "core.html",
+    "Utils": "utils.html"
   }
 }
