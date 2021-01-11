@@ -2,9 +2,27 @@
 
 __all__ = ['print_aten_ops']
 
+# Internal Cell
+#hide_output
+import sys
+
+def xla_imported():
+    return 'torch_xla' in sys.modules
+
+# Internal Cell
+if not xla_imported():
+    from types import SimpleNamespace
+    def fake_metrics_report(*args,**kwargs):
+        return ""
+    met = SimpleNamespace(
+        metrics_report = fake_metrics_report
+    )
+else:
+    import torch_xla.debug.metrics as met
+
 # Cell
 def print_aten_ops():
-    import torch_xla.debug.metrics as met
+    # import torch_xla.debug.metrics as met
     from io import StringIO
     import sys
 
