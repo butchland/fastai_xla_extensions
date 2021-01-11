@@ -11,10 +11,13 @@ entries:
       url: /
     - output: web,pdf
       title: Core XLA extensions
-      url: core.html
+      url: core
     - output: web,pdf
       title: Utils
-      url: utils.html
+      url: utils
+    - output: web,pdf
+      title: Title
+      url: cifar_loader
     output: web
     title: fastai_xla_extensions
   output: web
