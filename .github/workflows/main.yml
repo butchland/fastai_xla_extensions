@@ -15,7 +15,7 @@ jobs:
         pip install -e .
     - name: Install git hooks 
       run: |
-        nbdev_git_install_git_hooks
+        nbdev_install_git_hooks
     - name: Read all notebooks
       run: |
         nbdev_read_nbs
