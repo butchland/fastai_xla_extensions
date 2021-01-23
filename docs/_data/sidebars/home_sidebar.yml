@@ -18,6 +18,9 @@ entries:
     - output: web,pdf
       title: Title
       url: cifar_loader
+    - output: web,pdf
+      title: Multi Core XLA extensions
+      url: multi_core
     output: web
     title: fastai_xla_extensions
   output: web
