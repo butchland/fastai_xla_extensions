@@ -57,7 +57,6 @@ from fastai.data.load import _loaders
 from fastai.torch_core import to_device
 from fastcore.basics import first
 
-
 # Cell
 @patch_to(_BaseOptimizer)
 def __getstate__(self):
@@ -86,7 +85,6 @@ def _recast2tensor(o):
 
 def _round_to_multiple(number,multiple):
     return int(math.ceil(number/multiple)*multiple)
-
 
 # Cell
 class TPUDistributedDL(TfmdDL):
@@ -159,8 +157,6 @@ class TPUDistributedDL(TfmdDL):
         self.dl.device = device
         self.device = device
         return self
-
-
 
 # Internal Cell
 from fastai.torch_core import default_device, apply
@@ -283,7 +279,6 @@ class VocabularyMapper:
         except KeyError as e:
             raise KeyError(f"Label '{o}' was not included in the training dataset") from e
 
-
 # Cell
 @patch_to(th_data.DataLoader)
 def to(self, device):
@@ -373,7 +368,6 @@ class FileNamePatternLabeller:
         assert res, f'Failed to find "{self.pat}" in {o}'
         return res.group(1)
 
-
 # Cell
 def make_distributed_dataloaders(dls, rank, world_size, sync_valid=False):
     """Wrap dataloaders with distributed TPU aware dataloader """
@@ -397,7 +391,6 @@ def make_fastai_dataloaders(datablock, source, rank, world_size, device=None, pa
     dls = datablock.dataloaders(source=source, path=path, device=device, **kwargs)
     distrib_dls = make_distributed_dataloaders(dls, rank, world_size, sync_valid=sync_valid)
     return distrib_dls
-
 
 # Cell
 def wrap_parallel_loader(loader, device):
@@ -459,7 +452,6 @@ class XLATrainingCallback(Callback):
     def after_cancel_step(self):
         xm.optimizer_step(self.learn.opt)
 
-
 # Internal Cell
 import copy
 from fastcore.imports import noop
@@ -485,17 +477,14 @@ def update_metric(self:(AvgMetric,AvgLoss), other_metrics):
     self.total = other_metrics.attrgot('total').sum()
     self.count = other_metrics.attrgot('count').sum()
 
-
 # Cell
 def unpack_sync(res):
     return [pickle.loads(o) for o in res]
-
 
 # Internal Cell
 from fastai.learner import _maybe_item
 from fastprogress.fastprogress import format_time
 import time
-
 
 # Cell
 class SyncRecorderCallback(Callback):
@@ -573,8 +562,6 @@ class SyncRecorderCallback(Callback):
             m.update_metric(all_metrics.attrgot('valid_mets').itemgot(i))
             self.sync_log += _maybe_item(m)
 
-
-
 # Internal Cell
 from fastcore.imports import noop
 from fastcore.basics import patch
@@ -582,7 +569,6 @@ from fastai.learner import Learner
 from fastai.callback.progress import ProgressCallback
 from fastcore.xtras import join_path_file
 from fastai.torch_core import get_model
-
 
 # Internal Cell
 @patch
@@ -638,4 +624,3 @@ def do_one_loop(dls, rank, world_size, device, sync_valid, is_train=True):
         print(f'xla: {rank} iter:{i} xb.shape {xb.shape} yb.shape: {yb.shape}')
         print(f'xla: {rank} iter:{i} xb.device {xb.device} yb.device: {yb.device}')
         print(f'xla: {rank} iter:{i} xb.dtype {xb.dtype} yb.device: {yb.dtype}')
-
