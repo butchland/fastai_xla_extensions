@@ -81,7 +81,7 @@ def _recast2tensor(o):
     if isinstance(o,TensorBase):
         # return plain tensor since pl.parallelloader doesn't
         # seem to work with tensor subclasses
-        return torch.tensor(o.numpy())
+        return torch.as_tensor(o.numpy())
     return o
 
 def _round_to_multiple(number,multiple):
