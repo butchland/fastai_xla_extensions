@@ -199,7 +199,7 @@ in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TPUDistributedDL" class="doc_header"><code>class</code> <code>TPUDistributedDL</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L92" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TPUDistributedDL</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>seed</code></strong>=<em><code>42</code></em>) :: <code>TfmdDL</code></p>
+<h2 id="TPUDistributedDL" class="doc_header"><code>class</code> <code>TPUDistributedDL</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L90" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TPUDistributedDL</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>seed</code></strong>=<em><code>42</code></em>) :: <code>TfmdDL</code></p>
 </blockquote>
 <p>A <code>TfmdDL</code> which splits a batch into equal size pieces for each TPU core
 It also recasts the output of a batch from a Tensorbase subclass to
@@ -234,7 +234,7 @@ to it.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TfmdTorchDS" class="doc_header"><code>class</code> <code>TfmdTorchDS</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L181" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TfmdTorchDS</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>Dataset</code></p>
+<h2 id="TfmdTorchDS" class="doc_header"><code>class</code> <code>TfmdTorchDS</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L177" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TfmdTorchDS</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>Dataset</code></p>
 </blockquote>
 <p>An abstract class representing a :class:<code>Dataset</code>.</p>
 <p>All datasets that represent a map from keys to data samples should subclass
@@ -276,7 +276,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="to_list" class="doc_header"><code>to_list</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_list</code>(<strong><code>o</code></strong>)</p>
+<h4 id="to_list" class="doc_header"><code>to_list</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L200" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_list</code>(<strong><code>o</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -300,7 +300,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="has_setup" class="doc_header"><code>has_setup</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L207" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>has_setup</code>(<strong><code>tfms</code></strong>)</p>
+<h4 id="has_setup" class="doc_header"><code>has_setup</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L203" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>has_setup</code>(<strong><code>tfms</code></strong>)</p>
 </blockquote>
 <p>returns last index if at least 1 <code>tfm</code> in <code>tfms</code> has a method <code>setup</code> else return -1</p>
 
@@ -325,7 +325,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="run_setups" class="doc_header"><code>run_setups</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L212" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>run_setups</code>(<strong><code>tfms</code></strong>, <strong><code>items</code></strong>)</p>
+<h4 id="run_setups" class="doc_header"><code>run_setups</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L208" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>run_setups</code>(<strong><code>tfms</code></strong>, <strong><code>items</code></strong>)</p>
 </blockquote>
 <p>run tfm setups including tfm for all items</p>
 
@@ -357,7 +357,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TorchDatasetBuilder" class="doc_header"><code>class</code> <code>TorchDatasetBuilder</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L226" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TorchDatasetBuilder</code>(<strong><code>source</code></strong>, <strong><code>get_items</code></strong>, <strong><code>splitter</code></strong>, <strong><code>x_tfms</code></strong>, <strong><code>y_tfms</code></strong>, <strong><code>x_type_tfms</code></strong>=<em><code>None</code></em>, <strong><code>x_train_tfms</code></strong>=<em><code>None</code></em>, <strong><code>x_test_tfms</code></strong>=<em><code>None</code></em>, <strong><code>do_setup</code></strong>=<em><code>False</code></em>)</p>
+<h2 id="TorchDatasetBuilder" class="doc_header"><code>class</code> <code>TorchDatasetBuilder</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L222" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TorchDatasetBuilder</code>(<strong><code>source</code></strong>, <strong><code>get_items</code></strong>, <strong><code>splitter</code></strong>, <strong><code>x_tfms</code></strong>, <strong><code>y_tfms</code></strong>, <strong><code>x_type_tfms</code></strong>=<em><code>None</code></em>, <strong><code>x_train_tfms</code></strong>=<em><code>None</code></em>, <strong><code>x_test_tfms</code></strong>=<em><code>None</code></em>, <strong><code>do_setup</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -388,7 +388,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="VocabularyMapper" class="doc_header"><code>class</code> <code>VocabularyMapper</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L271" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>VocabularyMapper</code>(<strong><code>vocab</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="VocabularyMapper" class="doc_header"><code>class</code> <code>VocabularyMapper</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L267" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>VocabularyMapper</code>(<strong><code>vocab</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>A simplified version of the fastai Categorize Transform</p>
 
@@ -507,7 +507,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_torch_dataloaders" class="doc_header"><code>make_torch_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L293" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_torch_dataloaders</code>(<strong><code>train_dataset</code></strong>, <strong><code>test_dataset</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>bs</code></strong>, <strong><code>num_workers</code></strong>=<em><code>4</code></em>, <strong><code>distrib</code></strong>=<em><code>True</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="make_torch_dataloaders" class="doc_header"><code>make_torch_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L288" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_torch_dataloaders</code>(<strong><code>train_dataset</code></strong>, <strong><code>test_dataset</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>bs</code></strong>, <strong><code>num_workers</code></strong>=<em><code>4</code></em>, <strong><code>distrib</code></strong>=<em><code>True</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -538,7 +538,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FileNamePatternLabeller" class="doc_header"><code>class</code> <code>FileNamePatternLabeller</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L358" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FileNamePatternLabeller</code>(<strong><code>pat_str</code></strong>, <strong><code>match</code></strong>=<em><code>False</code></em>)</p>
+<h2 id="FileNamePatternLabeller" class="doc_header"><code>class</code> <code>FileNamePatternLabeller</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L353" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FileNamePatternLabeller</code>(<strong><code>pat_str</code></strong>, <strong><code>match</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Delayed action version of fastai RegexLabeller with file name selection</p>
 
@@ -570,7 +570,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_distributed_dataloaders" class="doc_header"><code>make_distributed_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L378" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_distributed_dataloaders</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="make_distributed_dataloaders" class="doc_header"><code>make_distributed_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L372" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_distributed_dataloaders</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Wrap dataloaders with distributed TPU aware dataloader</p>
 
@@ -602,7 +602,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_fastai_dataloaders" class="doc_header"><code>make_fastai_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L396" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_fastai_dataloaders</code>(<strong><code>datablock</code></strong>, <strong><code>source</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>'.'</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="make_fastai_dataloaders" class="doc_header"><code>make_fastai_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L390" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_fastai_dataloaders</code>(<strong><code>datablock</code></strong>, <strong><code>source</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>'.'</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -633,7 +633,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L403" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L396" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -664,7 +664,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L418" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
+<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L411" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
 
@@ -696,7 +696,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="unpack_sync" class="doc_header"><code>unpack_sync</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L490" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unpack_sync</code>(<strong><code>res</code></strong>)</p>
+<h4 id="unpack_sync" class="doc_header"><code>unpack_sync</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L481" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unpack_sync</code>(<strong><code>res</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -727,7 +727,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L501" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>() :: <code>Callback</code></p>
+<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L490" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>() :: <code>Callback</code></p>
 </blockquote>
 <p>Sync metrics from each spawned process update statistics
 accordingly so it will display correctly in the progress callback</p>
@@ -760,7 +760,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L622" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>sync_valid</code></strong>, <strong><code>is_train</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core.py#L608" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>sync_valid</code></strong>, <strong><code>is_train</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
