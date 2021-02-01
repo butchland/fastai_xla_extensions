@@ -3,7 +3,7 @@
     "Overview": "/",
     "Core XLA extensions": "core",
     "Utils": "utils",
-    "Title": "cifar_loader",
+    "CIFAR Loader": "cifar_loader",
     "Multi Core XLA extensions": "multi_core"
   }
 }

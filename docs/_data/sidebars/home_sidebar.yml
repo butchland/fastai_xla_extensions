@@ -16,7 +16,7 @@ entries:
       title: Utils
       url: utils
     - output: web,pdf
-      title: Title
+      title: CIFAR Loader
       url: cifar_loader
     - output: web,pdf
       title: Multi Core XLA extensions
