@@ -3,7 +3,8 @@
 __all__ = ['__getstate__', '__setstate__', 'revert_tensor', 'TPUDistributedDL', 'TfmdTorchDS', 'to_list', 'has_setup',
            'run_setups', 'TorchDatasetBuilder', 'VocabularyMapper', 'to', 'make_torch_dataloaders',
            'FileNamePatternLabeller', 'make_distributed_dataloaders', 'make_fastai_dataloaders', 'wrap_parallel_loader',
-           'XLATrainingCallback', 'unpack_sync', 'SyncRecorderCallback', 'do_one_loop']
+           'XLATrainingCallback', 'pack_metric', 'make_tensor', 'pack_metrics', 'restore_metrics',
+           'SyncRecorderCallback', 'do_one_loop']
 
 # Internal Cell
 import sys
@@ -193,8 +194,8 @@ class TfmdTorchDS(th_data.Dataset):
 
     def __getitem__(self, index):
         item = self.items[index]
-        x = self.x_tfm(item) if self.x_tfm is not None else x
-        y = self.y_tfm(item) if self.y_tfm is not None else y
+        x = self.x_tfm(item) if self.x_tfm is not None else item
+        y = self.y_tfm(item) if self.y_tfm is not None else item
         return (x,y)
 
 # Internal Cell
@@ -462,37 +463,49 @@ class XLATrainingCallback(Callback):
 
 # Internal Cell
 import copy
-from fastcore.imports import noop
 from fastcore.foundation import L
-from fastai.learner import Metric, AvgMetric, AvgLoss, AvgSmoothLoss
 import torch
-import pickle
-from fastai.torch_core import find_bs, to_detach
-
-# Internal Cell
-@patch
-def update_metric(self:Metric, other_metrics):
-    # dunno how to handle updates for metrics other than AvgMetric, AvgLoss
-    pass
-
-@patch
-def update_metric(self:(AvgMetric,AvgLoss), other_metrics):
-    other_metrics = L(other_metrics)
-    # other metrics must also be AvgMetric or AvgLoss
-    assert len(other_metrics.map(lambda o: not isinstance(o, (AvgLoss,AvgMetric))).argwhere(noop)) == 0
-    # other metrics must have same name
-    assert len(other_metrics.attrgot('name').map(lambda o: o != self.name).argwhere(noop)) == 0
-    self.total = other_metrics.attrgot('total').sum()
-    self.count = other_metrics.attrgot('count').sum()
-
-# Cell
-def unpack_sync(res):
-    return [pickle.loads(o) for o in res]
 
 # Internal Cell
 from fastai.learner import _maybe_item
 from fastprogress.fastprogress import format_time
 import time
+
+# Cell
+def pack_metric(metrics):
+    counts = metrics.attrgot('count',0)
+    totals = metrics.attrgot('total',0)
+    metrics_list = counts + totals
+    return metrics_list
+
+def make_tensor(o, device):
+    if not isinstance(o, torch.Tensor):
+        o = torch.tensor(o)
+    return o.float().to(device)
+
+def pack_metrics(all_metrics, device):
+    metrics_list = pack_metric(all_metrics['train_mets']) + pack_metric(all_metrics['valid_mets'])
+    return [make_tensor(item,device) for item in metrics_list ]
+
+def restore_metrics(reduced_metrics, all_metrics):
+    n_train = len(all_metrics['train_mets'])
+    n_valid = len(all_metrics['valid_mets'])
+    train_counts = reduced_metrics[:n_train]
+    train_totals = reduced_metrics[n_train: n_train*2]
+    valid_counts = reduced_metrics[n_train*2: n_train*2 + n_valid]
+    valid_totals = reduced_metrics[n_train*2 + n_valid:]
+    for i,metric in enumerate(all_metrics['train_mets']):
+        if hasattr(metric,'count'):
+            metric.count = train_counts[i].clone().detach().long()
+        if hasattr(metric,'total'):
+            metric.total = train_totals[i].clone().detach()
+    for i,metric in enumerate(all_metrics['valid_mets']):
+        if hasattr(metric,'count'):
+            metric.count = valid_counts[i].clone().detach().long()
+        if hasattr(metric,'total'):
+            metric.total = valid_totals[i].clone().detach()
+    return all_metrics
+
 
 # Cell
 class SyncRecorderCallback(Callback):
@@ -529,12 +542,17 @@ class SyncRecorderCallback(Callback):
                 'valid_mets': self.recorder._valid_mets,
             }
         # send metrics data to sync ranks across spawned processes
-        sync_tag = f'sync_recorder_after_epoch{self.learn.epoch}'
-        res = xm.rendezvous(sync_tag, pickle.dumps(all_metrics))
-
+        device = self.learn.xla_training.pdevice
+        packed_metrics = pack_metrics(all_metrics, device) # convert metrics to tensor list on TPU
+        reduced_metrics = xm.all_reduce(xm.REDUCE_SUM, packed_metrics)
+        xm.mark_step()
         if xm.is_master_ordinal():
-            all_metrics = unpack_sync(res)
-            self._sync_log(all_metrics) # use metrics across ranks to update log
+            all_metrics = restore_metrics(reduced_metrics, all_metrics) # convert list to metric objects
+            for m in self.recorder._train_mets:
+                self.sync_log += _maybe_item(m)
+
+            for m in self.recorder._valid_mets:
+                self.sync_log += _maybe_item(m)
 
             self.learn.final_record = self.sync_log[:1].copy()
             del self.recorder.values[-1] # remove last entry added by recorder
@@ -545,7 +563,6 @@ class SyncRecorderCallback(Callback):
             self.recorder.log = self.sync_log
             self._sync_stats_log(self.sync_log) # write_stats to output
             self.learn.logger = self.orig_logger # restore orig logger after skipping recorder.logger(log)
-
 
     def before_validate(self):
         pass
@@ -559,16 +576,6 @@ class SyncRecorderCallback(Callback):
     def before_batch(self):
         pass
 
-    def _sync_log(self, all_metrics):
-        all_metrics = L(all_metrics)
-
-        for i,m in enumerate(self.recorder._train_mets):
-            m.update_metric(all_metrics.attrgot('train_mets').itemgot(i))
-            self.sync_log += _maybe_item(m)
-
-        for i,m in enumerate(self.recorder._valid_mets):
-            m.update_metric(all_metrics.attrgot('valid_mets').itemgot(i))
-            self.sync_log += _maybe_item(m)
 
 # Internal Cell
 from fastcore.imports import noop
