@@ -60,7 +60,11 @@ index = {"IN_COLAB": "00_core.ipynb",
          "restore_metrics": "03_multi_core.ipynb",
          "SyncRecorderCallback": "03_multi_core.ipynb",
          "Learner.save": "03_multi_core.ipynb",
-         "do_one_loop": "03_multi_core.ipynb"}
+         "do_one_loop": "03_multi_core.ipynb",
+         "pack_learner_args": "03_multi_core.ipynb",
+         "reload_child_model": "03_multi_core.ipynb",
+         "Learner.xla_fit": "03_multi_core.ipynb",
+         "Learner.xla_fit_one_cycle": "03_multi_core.ipynb"}
 
 modules = ["core.py",
            "utils.py",

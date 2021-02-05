@@ -4,7 +4,7 @@ __all__ = ['__getstate__', '__setstate__', 'revert_tensor', 'TPUDistributedDL', 
            'run_setups', 'TorchDatasetBuilder', 'VocabularyMapper', 'to', 'make_torch_dataloaders',
            'FileNamePatternLabeller', 'make_distributed_dataloaders', 'make_fastai_dataloaders', 'wrap_parallel_loader',
            'XLATrainingCallback', 'pack_metric', 'make_tensor', 'pack_metrics', 'restore_metrics',
-           'SyncRecorderCallback', 'do_one_loop']
+           'SyncRecorderCallback', 'do_one_loop', 'pack_learner_args', 'reload_child_model']
 
 # Internal Cell
 import sys
@@ -56,7 +56,7 @@ import random
 import torch
 from fastai.data.load import _loaders
 from fastai.torch_core import to_device
-from fastcore.basics import first
+from fastcore.basics import first, patch_to, patch
 
 # Cell
 @patch_to(_BaseOptimizer)
@@ -166,6 +166,9 @@ class TPUDistributedDL(TfmdDL):
         self.dl.device = device
         self.device = device
         return self
+
+    def one_batch(self):
+        return self.dl.one_batch()
 
 # Internal Cell
 from fastai.torch_core import default_device, apply
@@ -525,7 +528,8 @@ class SyncRecorderCallback(Callback):
             self._sync_stats_log = self.learn.logger
 
     def after_fit(self):
-        xm.rendezvous('sync recorder after_fit')
+        pass
+        # xm.rendezvous('sync recorder after_fit')
 
     def before_epoch(self):
         self.sync_log = copy.copy(self.recorder.log)
@@ -639,3 +643,110 @@ def do_one_loop(dls, rank, world_size, device, sync_valid, is_train=True):
         print(f'xla: {rank} iter:{i} xb.shape {xb.shape} yb.shape: {yb.shape}')
         print(f'xla: {rank} iter:{i} xb.device {xb.device} yb.device: {yb.device}')
         print(f'xla: {rank} iter:{i} xb.dtype {xb.dtype} yb.device: {yb.dtype}')
+
+# Internal Cell
+# from fastai.vision.all import *
+# import torch_xla.core.xla_model as xm
+# import torch_xla.distributed.xla_multiprocessing as xmp
+# import torch
+
+# Cell
+def _make_xla_child_learner(rank, sync_valid,learner_args):
+    sync_valid = True
+    device = xm.xla_device()
+    world_size = xm.xrt_world_size()
+    dls = make_distributed_dataloaders(learner_args.pop('base_dls'),
+                                       rank, world_size, sync_valid=sync_valid)
+
+    model = learner_args.pop('wrapped_model').to(device)
+
+    learner = Learner(dls, model,**learner_args)
+    learner.to_xla(device, rank, sync_valid=sync_valid)
+    return learner
+
+
+
+# Cell
+def _xla_run_fit(rank, learner_args, fit_args):
+    sync_valid = True
+    learner = _make_xla_child_learner(rank, sync_valid, learner_args)
+    learner.fit(**fit_args)
+    learner.save('_xla_tmp_model')
+    xm.mark_step()
+
+# Cell
+def _xla_run_fit_one_cycle(rank, learner_args, fit_args):
+    sync_valid = True
+    learner = _make_xla_child_learner(rank, sync_valid, learner_args)
+    learner.fit_one_cycle(**fit_args)
+    learner.save('_xla_tmp_model')
+    xm.mark_step()
+
+# Cell
+from fastcore.basics import defaults, patch_to, patch
+from fastai.learner import Learner
+
+@patch_to(Learner)
+def pack_learner_args(self):
+    learner_args = {}
+    learner_args['wrapped_model'] =  xmp.MpModelWrapper(self.model)
+    learner_args['base_dls'] = self.dls
+    learner_args['opt_func'] = self.opt_func
+    learner_args['loss_func'] = self.loss_func
+    learner_args['metrics'] = self.metrics
+    # fetch only cbs not in default
+    learner_args['cbs'] = [cb for cb in self.cbs
+                      if cb.name not in L(defaults.callbacks).attrgot('name')]
+    learner_args['wd'] = self.wd
+    learner_args['moms'] = self.moms
+    learner_args['lr'] = self.lr
+    learner_args['splitter'] = self.splitter
+    learner_args['path'] = self.path
+    learner_args['model_dir'] = self.model_dir
+    learner_args['wd_bn_bias'] = self.wd_bn_bias
+    learner_args['train_bn'] = self.train_bn
+    return learner_args
+
+# Cell
+@patch_to(Learner)
+def reload_child_model(self):
+    # blatantly stolen from fastai LRFinder after_fit :)
+    tmp_f = self.path/self.model_dir/'_xla_tmp_model.pth'
+    if tmp_f.exists():
+        self.opt.zero_grad()
+        self.load('_xla_tmp_model', with_opt=False)
+        os.remove(tmp_f)
+        self.create_opt()
+
+# Cell
+
+from fastcore.meta import delegates
+@patch
+@delegates(Learner.fit, but='num_cores')
+def xla_fit(self:Learner, n_epoch, num_cores=8, **kwargs):
+    """call fit in multicore tpu environment"""
+    learner_args = self.pack_learner_args()
+    fit_args={**kwargs}
+    fit_args['n_epoch'] = n_epoch
+    xmp.spawn(_xla_run_fit,
+              args=(learner_args, fit_args,),
+              nprocs=num_cores,
+              start_method='fork')
+    self.reload_child_model()
+
+
+# Cell
+from fastai.learner import Learner
+from fastai.callback.schedule import *
+@patch
+@delegates(Learner.fit_one_cycle, but='num_cores')
+def xla_fit_one_cycle(self:Learner, n_epoch, num_cores=8, **kwargs):
+    """call fit_one_cycle in multicore tpu environment"""
+    learner_args = self.pack_learner_args()
+    fit_args={**kwargs}
+    fit_args['n_epoch'] = n_epoch
+    xmp.spawn(_xla_run_fit_one_cycle,
+              args=(learner_args, fit_args,),
+              nprocs=num_cores,
+              start_method='fork')
+    self.reload_child_model()
