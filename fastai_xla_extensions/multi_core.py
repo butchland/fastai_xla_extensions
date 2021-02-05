@@ -685,7 +685,7 @@ def _xla_run_fit_one_cycle(rank, learner_args, fit_args):
 # Cell
 from fastcore.basics import defaults, patch_to, patch
 from fastai.learner import Learner
-
+from fastai.callback.progress import ProgressCallback
 @patch_to(Learner)
 def pack_learner_args(self):
     learner_args = {}
@@ -694,9 +694,12 @@ def pack_learner_args(self):
     learner_args['opt_func'] = self.opt_func
     learner_args['loss_func'] = self.loss_func
     learner_args['metrics'] = self.metrics
-    # fetch only cbs not in default
+    # fetch only cbs not in defaults
+    if ProgressCallback not in defaults.callbacks:
+        defaults.callbacks.append(ProgressCallback)
     learner_args['cbs'] = [cb for cb in self.cbs
                       if cb.name not in L(defaults.callbacks).attrgot('name')]
+
     learner_args['wd'] = self.wd
     learner_args['moms'] = self.moms
     learner_args['lr'] = self.lr
