@@ -28,7 +28,7 @@ import sys
 def xla_imported(): return 'torch_xla' in sys.modules
 # currently unused, might be deleted later?
 def xla_available_config(): return os.environ.get("XRT_DEVICE_MAP", False) and os.environ.get("XRT_WORKERS", False)
-def xla_module_exist(): return importlib.util.find_spec('torch_xla')
+def xla_module_exist(): return importlib.util.find_spec('torch_xla') is not None
 
 # Internal Cell
 import warnings

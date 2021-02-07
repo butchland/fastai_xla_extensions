@@ -180,7 +180,7 @@ nb_path: "nbs/00_core.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Patching-BaseOptimizer-to-be-Pickable">Patching BaseOptimizer to be Pickable<a class="anchor-link" href="#Patching-BaseOptimizer-to-be-Pickable"> </a></h2><p>Patching Base Optimizer <a href="/fastai_xla_extensions/multi_core.html#__getstate__"><code>__getstate__</code></a> and <a href="/fastai_xla_extensions/multi_core.html#__setstate__"><code>__setstate__</code></a> whichi is used in pickling
+<h2 id="Patching-BaseOptimizer-to-be-Pickable">Patching BaseOptimizer to be Pickable<a class="anchor-link" href="#Patching-BaseOptimizer-to-be-Pickable"> </a></h2><p>Patching Base Optimizer <a href="/fastai_xla_extensions/core.html#__getstate__"><code>__getstate__</code></a> and <a href="/fastai_xla_extensions/core.html#__setstate__"><code>__setstate__</code></a> whichi is used in pickling
 the optimizer which should fix the bug in running the learner in multiple TPU cores
 in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for param_group in optimizer.__getstate__()['param_groups']:</code> fails, and this patch fixes the "copy constructor" to include the param_groups.</p>
 
