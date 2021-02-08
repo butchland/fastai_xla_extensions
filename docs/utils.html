@@ -31,7 +31,9 @@ nb_path: "nbs/01_utils.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One of the problems we have hit testing different models and transforms is that sometimes it is slower even than CPUs, but this happens because we hit operations on pytorch that are only handled by CPU and not by hte accelerator. <a href="/fastai_xla_extensions/utils.html#print_aten_ops"><code>print_aten_ops</code></a> calls directly some pytorch metrics wich ouputs to stdout, so the only way to get that info is capture it.</p>
+<p><a href="https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/nbs/01_utils.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<p>One of the problems we have hit testing different models and transforms is that sometimes it is slower on TPUs compared to running on CPUs, but this happens because we hit operations on Pytorch XLA that are only handled by the CPU and not by the accelerator.</p>
+<p><a href="/fastai_xla_extensions/utils.html#print_aten_ops"><code>print_aten_ops</code></a> calls directly some pytorch metrics which outputs to <code>stdout</code>, so the only way to get that info is capture it.</p>
 
 </div>
 </div>
@@ -39,44 +41,20 @@ nb_path: "nbs/01_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -Uqq cloud-tpu-client<span class="o">==</span><span class="m">0</span>.10 https://storage.googleapis.com/tpu-pytorch/wheels/torch_xla-1.7-cp36-cp36m-linux_x86_64.whl
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>     |████████████████████████████████| 133.6MB 72kB/s 
-     |████████████████████████████████| 61kB 2.4MB/s 
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="xla_imported" class="doc_header"><code>xla_imported</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/utils.py#L8" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xla_imported</code>()</p>
+</blockquote>
+<p>Check whether the <code>torch_xla</code> module has been sucessfully imported</p>
+
 </div>
+
 </div>
 
 </div>
@@ -88,16 +66,6 @@ nb_path: "nbs/01_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -113,7 +81,7 @@ nb_path: "nbs/01_utils.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="print_aten_ops" class="doc_header"><code>print_aten_ops</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/utils.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_aten_ops</code>()</p>
+<h4 id="print_aten_ops" class="doc_header"><code>print_aten_ops</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/utils.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_aten_ops</code>()</p>
 </blockquote>
 
 </div>
@@ -140,24 +108,8 @@ nb_path: "nbs/01_utils.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">xla_imported</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#test that torch_xla has been imported on colab</span>
+<span class="k">assert</span> <span class="n">xla_imported</span><span class="p">()</span>
 </pre></div>
 
     </div>
