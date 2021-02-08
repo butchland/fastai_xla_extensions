@@ -6,6 +6,7 @@ __all__ = ['revert_tensor', 'TPUDistributedDL', 'make_distributed_dataloaders', 
 
 # Internal Cell
 from .utils import xla_imported
+from .misc_utils import *
 
 # Internal Cell
 try:
@@ -55,7 +56,12 @@ from fastai.torch_core import to_device
 from fastcore.basics import first, patch_to, patch
 
 # Cell
+import torch
+from fastai.torch_core import find_bs, TensorBase
+import math
+
 def revert_tensor(o):
+    """Remove tensor subclass info from class and revert back to Tensor"""
     try:
         o.__class__ = torch.Tensor
     except:

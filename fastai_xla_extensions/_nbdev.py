@@ -52,15 +52,27 @@ index = {"IN_COLAB": "00_core.ipynb",
          "SyncRecorderCallback": "03_multi_core.ipynb",
          "Learner.save": "03_multi_core.ipynb",
          "do_one_loop": "03_multi_core.ipynb",
-         "pack_learner_args": "03_multi_core.ipynb",
-         "reload_child_model": "03_multi_core.ipynb",
-         "Learner.xla_fit": "03_multi_core.ipynb",
-         "Learner.xla_fit_one_cycle": "03_multi_core.ipynb"}
+         "pack_learner_args": "03b_multi_core.learner.ipynb",
+         "reload_child_model": "03b_multi_core.learner.ipynb",
+         "Learner.xla_fit": "03b_multi_core.learner.ipynb",
+         "Learner.xla_fit_one_cycle": "03b_multi_core.learner.ipynb",
+         "TfmdTorchDS": "03a_torch_compat.ipynb",
+         "to_list": "03a_torch_compat.ipynb",
+         "has_setup": "03a_torch_compat.ipynb",
+         "run_setups": "03a_torch_compat.ipynb",
+         "TorchDatasetBuilder": "03a_torch_compat.ipynb",
+         "VocabularyMapper": "03a_torch_compat.ipynb",
+         "to": "03a_torch_compat.ipynb",
+         "make_torch_dataloaders": "03a_torch_compat.ipynb",
+         "FileNamePatternLabeller": "03a_torch_compat.ipynb"}
 
 modules = ["core.py",
            "utils.py",
            "cifar_loader.py",
-           "multi_core.py"]
+           "misc_utils.py",
+           "multi_core.py",
+           "torch_compat.py",
+           "multi_core/learner.py"]
 
 doc_url = "https://butchland.github.io/fastai_xla_extensions/"
 
