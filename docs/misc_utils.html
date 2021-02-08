@@ -1,6 +1,6 @@
 ---
 
-title: Miscellaneneous Utilities
+title: Miscellaneous Utilities
 
 
 keywords: fastai
@@ -38,7 +38,9 @@ nb_path: "nbs/02b_misc_utils.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-fastai">Install fastai<a class="anchor-link" href="#Install-fastai"> </a></h2><p>Use latest fastai and fastcore versions</p>
+<h2 id="Patch-the-fastai-_BaseOptimizer-to-be-Pickable">Patch the fastai <code>_BaseOptimizer</code> to be Pickable<a class="anchor-link" href="#Patch-the-fastai-_BaseOptimizer-to-be-Pickable"> </a></h2><p>Patch the <code>fastai.optimizer._BaseOptimizer</code> <a href="/fastai_xla_extensions/core.html#__getstate__"><code>__getstate__</code></a> and <a href="/fastai_xla_extensions/core.html#__setstate__"><code>__setstate__</code></a> methods which are used in pickling fastai optimizers.</p>
+<p>This should fix the bug where running the learner on multiple TPU cores on XLA triggers an error in which the method <code>_fetch_gradients(optimizer)</code> fails in the statement <code>for param_group in optimizer.__getstate__()['param_groups']:</code> in the  <code>torch_xla.core.xla_model</code> module.</p>
+<p>The patch modifies the copy constructor to include the param_groups and defaults.</p>
 
 </div>
 </div>
@@ -46,63 +48,41 @@ nb_path: "nbs/02b_misc_utils.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !pip install -Uqq git+https://github.com/fastai/fastai.git </span>
-<span class="o">!</span>pip install -Uqq fastai --upgrade
-</pre></div>
+</div>
+    {% endraw %}
 
-    </div>
-</div>
-</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>     |████████████████████████████████| 194kB 5.8MB/s 
-     |████████████████████████████████| 61kB 5.2MB/s 
-</pre>
-</div>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="_BaseOptimizer.__getstate__" class="doc_header"><code>_BaseOptimizer.__getstate__</code><a href="__main__.py#L5" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>_BaseOptimizer.__getstate__</code>()</p>
+</blockquote>
+<p>Pickling opt state should include <code>param_groups</code> and <code>defaults</code></p>
+
 </div>
 
 </div>
-</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="_BaseOptimizer.__setstate__" class="doc_header"><code>_BaseOptimizer.__setstate__</code><a href="__main__.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>_BaseOptimizer.__setstate__</code>(<strong><code>data</code></strong>)</p>
+</blockquote>
+<p>Pickling opt state should include <code>param_groups</code> and <code>defaults</code></p>
 
 </div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Patching-BaseOptimizer-to-be-Pickable">Patching BaseOptimizer to be Pickable<a class="anchor-link" href="#Patching-BaseOptimizer-to-be-Pickable"> </a></h2><p>Patching Base Optimizer <a href="/fastai_xla_extensions/core.html#__getstate__"><code>__getstate__</code></a> and <a href="/fastai_xla_extensions/core.html#__setstate__"><code>__setstate__</code></a> whichi is used in pickling
-the optimizer which should fix the bug in running the learner in multiple TPU cores
-in XLA by which the  <code>def _fetch_gradients(optimizer)</code> in <code>for param_group in optimizer.__getstate__()['param_groups']:</code> fails, and this patch fixes the "copy constructor" to include the param_groups.</p>
 
 </div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
 </div>
 </div>
 

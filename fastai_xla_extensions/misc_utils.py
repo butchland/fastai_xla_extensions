@@ -8,6 +8,7 @@ from fastcore.basics import patch
 
 @patch
 def __getstate__(self:_BaseOptimizer):
+    "Pickling opt state should include `param_groups` and `defaults` "
     d = {
             'state': self.state_dict(),
             'param_groups': self.param_groups,
@@ -18,6 +19,8 @@ def __getstate__(self:_BaseOptimizer):
 
 @patch
 def __setstate__(self:_BaseOptimizer, data):
+    "Pickling opt state should include `param_groups` and `defaults` "
+
     if 'defaults' in data:
         self.defaults = data['defaults']
     self.load_state_dict(data['state'])

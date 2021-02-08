@@ -4,7 +4,7 @@
     "Core XLA extensions": "core",
     "Utils": "utils",
     "CIFAR Loader": "cifar_loader",
-    "Miscellaneneous Utilities": "misc_utils",
+    "Miscellaneous Utilities": "misc_utils",
     "Multi Core XLA extensions": "multi_core",
     "Torch Compatible Utilities": "torch_compat",
     "Multi Core XLA Learner extensions": "multi_core.learner"

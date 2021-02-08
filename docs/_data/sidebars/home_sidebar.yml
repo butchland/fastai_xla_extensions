@@ -19,7 +19,7 @@ entries:
       title: CIFAR Loader
       url: cifar_loader
     - output: web,pdf
-      title: Miscellaneneous Utilities
+      title: Miscellaneous Utilities
       url: misc_utils
     - output: web,pdf
       title: Multi Core XLA extensions
