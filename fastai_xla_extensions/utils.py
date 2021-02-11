@@ -9,6 +9,10 @@ def xla_imported():
     "Check whether the `torch_xla` module has been successfully imported"
     return 'torch_xla' in sys.modules
 
+# Internal Cell
+if xla_imported():
+    import torch_xla.debug.metrics as met
+
 # Cell
 def print_aten_ops():
     "print out xla aten operations (from xla debug metrics report `torch_xla.debug.metrics`)"
