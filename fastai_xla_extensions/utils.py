@@ -6,11 +6,12 @@ __all__ = ['xla_imported', 'print_aten_ops']
 import sys
 
 def xla_imported():
-    "Check whether the `torch_xla` module has been sucessfully imported"
+    "Check whether the `torch_xla` module has been successfully imported"
     return 'torch_xla' in sys.modules
 
 # Cell
 def print_aten_ops():
+    "print out xla aten operations (from xla debug metrics report `torch_xla.debug.metrics`)"
     # import torch_xla.debug.metrics as met
     from io import StringIO
     import sys

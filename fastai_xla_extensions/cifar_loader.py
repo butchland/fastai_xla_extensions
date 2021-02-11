@@ -31,7 +31,6 @@ def download_cifar10_dsets(path):
         )
     return train_dataset,test_dataset
 
-
 # Cell
 def load_cifar_items(downloaded_list, path, check=False):
     """loads cifar test/train items into tuple(data, target)

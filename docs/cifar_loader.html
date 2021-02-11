@@ -192,7 +192,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_cifar_items" class="doc_header"><code>load_cifar_items</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_cifar_items</code>(<strong><code>downloaded_list</code></strong>, <strong><code>path</code></strong>, <strong><code>check</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="load_cifar_items" class="doc_header"><code>load_cifar_items</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L35" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_cifar_items</code>(<strong><code>downloaded_list</code></strong>, <strong><code>path</code></strong>, <strong><code>check</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>loads cifar test/train items into tuple(data, target)</p>
 <p>scrobbled together from torch.data.utils.datasets.CIFAR10 code
@@ -230,7 +230,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_classes" class="doc_header"><code>load_classes</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_classes</code>(<strong><code>path</code></strong>)</p>
+<h4 id="load_classes" class="doc_header"><code>load_classes</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_classes</code>(<strong><code>path</code></strong>)</p>
 </blockquote>
 <p>Load classes to used to map categories to target labels</p>
 
@@ -262,7 +262,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="CifarNP2ImageTransform" class="doc_header"><code>class</code> <code>CifarNP2ImageTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L94" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarNP2ImageTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
+<h2 id="CifarNP2ImageTransform" class="doc_header"><code>class</code> <code>CifarNP2ImageTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L93" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarNP2ImageTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
 
@@ -294,7 +294,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Int2TensorTransform" class="doc_header"><code>class</code> <code>Int2TensorTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L99" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Int2TensorTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
+<h2 id="Int2TensorTransform" class="doc_header"><code>class</code> <code>Int2TensorTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L98" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Int2TensorTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
 
@@ -326,7 +326,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="CifarImageTransform" class="doc_header"><code>class</code> <code>CifarImageTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L104" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarImageTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
+<h2 id="CifarImageTransform" class="doc_header"><code>class</code> <code>CifarImageTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L103" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarImageTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
 
@@ -358,7 +358,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="CifarImage2FloatTransform" class="doc_header"><code>class</code> <code>CifarImage2FloatTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L109" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarImage2FloatTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
+<h2 id="CifarImage2FloatTransform" class="doc_header"><code>class</code> <code>CifarImage2FloatTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L108" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarImage2FloatTransform</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
 
@@ -390,7 +390,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_torch_tfms" class="doc_header"><code>make_torch_tfms</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L117" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_torch_tfms</code>()</p>
+<h4 id="make_torch_tfms" class="doc_header"><code>make_torch_tfms</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_torch_tfms</code>()</p>
 </blockquote>
 
 </div>
@@ -438,7 +438,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="CifarTupleTransform" class="doc_header"><code>class</code> <code>CifarTupleTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L137" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarTupleTransform</code>(<strong><code>x_tfm</code></strong>, <strong><code>y_tfm</code></strong>) :: <code>ItemTransform</code></p>
+<h2 id="CifarTupleTransform" class="doc_header"><code>class</code> <code>CifarTupleTransform</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L136" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CifarTupleTransform</code>(<strong><code>x_tfm</code></strong>, <strong><code>y_tfm</code></strong>) :: <code>ItemTransform</code></p>
 </blockquote>
 <p>A transform that always take tuples as items</p>
 
@@ -470,7 +470,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TupleTorchDS" class="doc_header"><code>class</code> <code>TupleTorchDS</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L150" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TupleTorchDS</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>Dataset</code></p>
+<h2 id="TupleTorchDS" class="doc_header"><code>class</code> <code>TupleTorchDS</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L149" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TupleTorchDS</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>Dataset</code></p>
 </blockquote>
 <p>An abstract class representing a :class:<code>Dataset</code>.</p>
 <p>All datasets that represent a map from keys to data samples should subclass
@@ -512,7 +512,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_cifar_item_tfm" class="doc_header"><code>make_cifar_item_tfm</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L172" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_cifar_item_tfm</code>(<strong><code>th_img_tfms</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="make_cifar_item_tfm" class="doc_header"><code>make_cifar_item_tfm</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L171" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_cifar_item_tfm</code>(<strong><code>th_img_tfms</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -561,7 +561,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_cifar_tls" class="doc_header"><code>make_cifar_tls</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L188" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_cifar_tls</code>(<strong><code>file_list</code></strong>, <strong><code>path</code></strong>, <strong><code>item_tfm</code></strong>, <strong><code>check</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="make_cifar_tls" class="doc_header"><code>make_cifar_tls</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L187" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_cifar_tls</code>(<strong><code>file_list</code></strong>, <strong><code>path</code></strong>, <strong><code>item_tfm</code></strong>, <strong><code>check</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -592,7 +592,7 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_cifar_dl" class="doc_header"><code>make_cifar_dl</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L195" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_cifar_dl</code>(<strong><code>file_list</code></strong>, <strong><code>path</code></strong>, <strong><code>th_img_tfms</code></strong>=<em><code>None</code></em>, <strong><code>check</code></strong>=<em><code>True</code></em>, <strong><code>bs</code></strong>=<em><code>64</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="make_cifar_dl" class="doc_header"><code>make_cifar_dl</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L194" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_cifar_dl</code>(<strong><code>file_list</code></strong>, <strong><code>path</code></strong>, <strong><code>th_img_tfms</code></strong>=<em><code>None</code></em>, <strong><code>check</code></strong>=<em><code>True</code></em>, <strong><code>bs</code></strong>=<em><code>64</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -692,7 +692,7 @@ encodes: (object,object) -&gt; Composedecodes: </pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_fastai_cifar_dls" class="doc_header"><code>make_fastai_cifar_dls</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L205" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_fastai_cifar_dls</code>(<strong><code>path</code></strong>, <strong><code>bs</code></strong>=<em><code>64</code></em>, <strong><code>check</code></strong>=<em><code>True</code></em>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="make_fastai_cifar_dls" class="doc_header"><code>make_fastai_cifar_dls</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_fastai_cifar_dls</code>(<strong><code>path</code></strong>, <strong><code>bs</code></strong>=<em><code>64</code></em>, <strong><code>check</code></strong>=<em><code>True</code></em>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>

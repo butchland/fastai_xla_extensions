@@ -32,8 +32,14 @@ nb_path: "nbs/01_utils.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/nbs/01_utils.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p>One of the problems we have hit testing different models and transforms is that sometimes it is slower on TPUs compared to running on CPUs, but this happens because we hit operations on Pytorch XLA that are only handled by the CPU and not by the accelerator.</p>
-<p><a href="/fastai_xla_extensions/utils.html#print_aten_ops"><code>print_aten_ops</code></a> calls directly some pytorch metrics which outputs to <code>stdout</code>, so the only way to get that info is capture it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Utilities used by other modules</p>
+</blockquote>
 
 </div>
 </div>
@@ -51,7 +57,7 @@ nb_path: "nbs/01_utils.ipynb"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="xla_imported" class="doc_header"><code>xla_imported</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/utils.py#L8" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xla_imported</code>()</p>
 </blockquote>
-<p>Check whether the <code>torch_xla</code> module has been sucessfully imported</p>
+<p>Check whether the <code>torch_xla</code> module has been successfully imported</p>
 
 </div>
 
@@ -70,6 +76,13 @@ nb_path: "nbs/01_utils.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="/fastai_xla_extensions/utils.html#xla_imported"><code>xla_imported</code></a> is a utility method that is used to check if the <code>torch_xla</code> module has been successfully imported.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -83,6 +96,7 @@ nb_path: "nbs/01_utils.ipynb"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="print_aten_ops" class="doc_header"><code>print_aten_ops</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/utils.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_aten_ops</code>()</p>
 </blockquote>
+<p>print out xla aten operations (from xla debug metrics report <code>torch_xla.debug.metrics</code>)</p>
 
 </div>
 
@@ -101,6 +115,14 @@ nb_path: "nbs/01_utils.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One of the problems we have hit testing different models and transforms is that sometimes it is slower on TPUs compared to running on CPUs, but this happens because we hit operations on Pytorch XLA that are only handled by the CPU and not by the accelerator.</p>
+<p><a href="/fastai_xla_extensions/utils.html#print_aten_ops"><code>print_aten_ops</code></a> calls directly some pytorch metrics which outputs to <code>stdout</code>, so the only way to get that info is capture it.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">

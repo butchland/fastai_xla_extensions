@@ -1,2 +1,1 @@
-from .multi_core import *
-
+from .multi_core.base import *

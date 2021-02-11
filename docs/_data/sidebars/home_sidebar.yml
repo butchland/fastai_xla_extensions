@@ -22,11 +22,11 @@ entries:
       title: Miscellaneous Utilities
       url: misc_utils
     - output: web,pdf
-      title: Multi Core XLA extensions
-      url: multi_core
+      title: 'Multi Core XLA Base '
+      url: multi_core.base
     - output: web,pdf
       title: Torch Compatible Utilities
-      url: torch_compat
+      url: multi_core.torch_compat
     - output: web,pdf
       title: Multi Core XLA Learner extensions
       url: multi_core.learner
