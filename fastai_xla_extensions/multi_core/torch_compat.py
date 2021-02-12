@@ -16,58 +16,60 @@ except ImportError:
 # Internal Cell
 if xla_imported():
     import torch_xla.core.xla_model as xm
-    import torch_xla.debug.metrics as met
-    import torch_xla.distributed.parallel_loader as pl
+#    import torch_xla.debug.metrics as met
+#    import torch_xla.distributed.parallel_loader as pl
     import torch_xla.distributed.xla_multiprocessing as xmp
-    import torch_xla.utils.utils as xu
+#    import torch_xla.utils.utils as xu
 
 # Internal Cell
 from fastcore.basics import patch_to
-from fastai.optimizer import _BaseOptimizer
-import numpy as np
-import os
-import time
+#from fastai.optimizer import _BaseOptimizer
+#import numpy as np
+#import os
+#import time
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torchvision import datasets, transforms
+#import torch.nn as nn
+#import torch.nn.functional as F
+#import torch.optim as optim
+#from torchvision import datasets, transforms
 import torch.utils.data as th_data
 from fastcore.foundation import L
 from pathlib import Path
-from fastcore.xtras import *
-from fastcore.transform import Pipeline
+#from fastcore.xtras import *
+#from fastcore.transform import Pipeline
 from fastai.data.core import DataLoaders
-from functools import partial
-import torch.utils.data.distributed as torch_distrib
-from pathlib import Path
-import fastcore.xtras
-import math
-from fastcore.basics import store_attr
-from operator import attrgetter
-from fastai.data.load import _FakeLoader
-from fastai.data.core import TfmdDL
-from fastai.torch_core import find_bs, TensorBase
-import random
-import torch
-from fastai.data.load import _loaders
-from fastai.torch_core import to_device
-from fastcore.basics import first, patch_to, patch
-
-# Internal Cell
-from fastai.torch_core import default_device, apply
-import torch
-from fastcore.xtras import is_listy
-import torch
-import torch.utils.hooks
-from fastcore.basics import patch
+#from functools import partial
+#import torch.utils.data.distributed as torch_distrib
+#from pathlib import Path
+#import fastcore.xtras
+#import math
+#from fastcore.basics import store_attr
+#from operator import attrgetter
+#from fastai.data.load import _FakeLoader
+#from fastai.data.core import TfmdDL
+#from fastai.torch_core import find_bs, TensorBase
 from fastai.torch_core import TensorBase
-from collections import OrderedDict
+#import random
+#import torch
+#from fastai.data.load import _loaders
+#from fastai.torch_core import to_device
+#from fastcore.basics import first, patch_to, patch
+#from fastcore.basics import patch
 
 # Internal Cell
-from fastcore.basics import patch_to
+#from fastai.torch_core import default_device, apply
+#import torch
+from fastcore.xtras import is_listy
+#import torch
+import torch.utils.hooks
+#from fastcore.basics import patch
+#from fastai.torch_core import TensorBase
+#from collections import OrderedDict
+
+# Internal Cell
+#from fastcore.basics import patch_to
 import torch.utils.data.distributed as th_distrib
-import torch.utils.data as th_data
+#import torch.utils.data as th_data
 
 # Cell
 class TfmdTorchDS(th_data.Dataset):
@@ -87,11 +89,11 @@ class TfmdTorchDS(th_data.Dataset):
         return (x,y)
 
 # Internal Cell
-from fastcore.xtras import is_listy
+#from fastcore.xtras import is_listy
 import torchvision as thv
 from operator import itemgetter
 from fastcore.imports import noop
-from fastcore.foundation import L
+#from fastcore.foundation import L
 
 # Cell
 def to_list(o):
@@ -181,6 +183,9 @@ class VocabularyMapper:
             raise KeyError(f"Label '{o}' was not included in the training dataset") from e
 
 # Cell
+import torch.utils.data as th_data
+#from fastcore.basics import patch_to
+
 @patch_to(th_data.DataLoader)
 def to(self, device):
     "move torch dataloader to device (for compatibility with fastai dataloader)"
