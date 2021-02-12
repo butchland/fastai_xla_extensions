@@ -5,10 +5,10 @@ __all__ = ['XLAOptimProxy', 'DeviceMoverTransform', 'has_affinecoord_tfm', 'has_
 
 # Internal Cell
 from .utils import xla_imported
-from .misc_utils import *
+# from .misc_utils import *
 
 # Internal Cell
-import warnings
+# import warnings
 try:
     import torch_xla
 except ImportError:
@@ -18,9 +18,24 @@ except ImportError:
 # Internal Cell
 if xla_imported():
     import torch_xla.core.xla_model as xm
+    
+from fastcore.foundation import GetAttr
+from fastcore.transform import DisplayedTransform
+from fastcore.basics import store_attr
+from torch import Tensor
+import torch
+from fastcore.transform import Transform
+from fastai.vision.augment import AffineCoordTfm, RandomResizedCropGPU
+from fastai.data.core import DataLoaders,DataLoader
+from fastcore.foundation import patch
+from fastai.learner import Learner
+from fastai.callback.core import Callback
+from fastai.data.core import DataLoaders
+# from fastai.vision.all import to_device
+from fastai.callback.core import TrainEvalCallback
+from fastai.learner import Recorder
 
 # Cell
-from fastcore.foundation import GetAttr
 
 class XLAOptimProxy(GetAttr):
     _default='opt'
@@ -38,10 +53,6 @@ class XLAOptimProxy(GetAttr):
     def barrier(self,v): self._barrier = v
 
 # Cell
-from fastcore.transform import DisplayedTransform
-from fastcore.basics import store_attr
-from torch import Tensor
-import torch
 class DeviceMoverTransform(DisplayedTransform):
     "Transform to move input to new device and reverse to cpu"
     def __init__(self, device_to, device_from=torch.device('cpu')):
@@ -52,9 +63,6 @@ class DeviceMoverTransform(DisplayedTransform):
         return o.to(self.device_from)
 
 # Cell
-from fastcore.transform import Transform
-from fastai.vision.augment import AffineCoordTfm, RandomResizedCropGPU
-from fastai.data.core import DataLoaders,DataLoader
 
 def _isAffineCoordTfm(o:Transform):
     return isinstance(o,(AffineCoordTfm,RandomResizedCropGPU))
@@ -84,8 +92,6 @@ def insert_batch_tfm(dl:DataLoader, batch_tfm:Transform, idx:int):
     dl.after_batch.fs.insert(idx, batch_tfm)
 
 # Cell
-from fastcore.foundation import patch
-from fastai.learner import Learner
 @patch
 def setup_input_device_mover(self: Learner, new_device):
     "setup batch_tfms to use cpu if dataloader batch_tfms has AffineCoordTfms"
@@ -103,11 +109,6 @@ def setup_input_device_mover(self: Learner, new_device):
                 insert_batch_tfm(dl, dm_tfm, idx+1)
 
 # Cell
-from fastai.callback.core import Callback
-from fastai.data.core import DataLoaders
-from fastai.vision.all import to_device
-from fastai.callback.core import TrainEvalCallback
-from fastai.learner import Recorder
 
 class XLAOptCallback(Callback):
     'Callback to replace `opt.step` with `xm.optimizer_step(opt)` as required to run on TPU'
@@ -139,8 +140,8 @@ class XLAOptCallback(Callback):
     def barrier(self,v): self._barrier = v
 
 # Cell
-from fastcore.foundation import patch
-from fastai.learner import Learner
+# from fastcore.foundation import patch
+# from fastai.learner import Learner
 @patch
 def to_xla(self:Learner, new_device=None):
     self.add_cb(XLAOptCallback())
