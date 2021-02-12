@@ -4,6 +4,8 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"XLAOptimProxy": "00_core.ipynb",
          "DeviceMoverTransform": "00_core.ipynb",
+         "isAffineCoordTfm": "00_core.ipynb",
+         "isDeviceMoverTransform": "00_core.ipynb",
          "has_affinecoord_tfm": "00_core.ipynb",
          "has_devicemover_tfm": "00_core.ipynb",
          "get_last_affinecoord_tfm_idx": "00_core.ipynb",
