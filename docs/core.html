@@ -209,7 +209,7 @@ as the main process.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="has_devicemover_tfm" class="doc_header"><code>has_devicemover_tfm</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L73" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>has_devicemover_tfm</code>(<strong><code>dl</code></strong>:<code>DataLoader</code>)</p>
+<h4 id="has_devicemover_tfm" class="doc_header"><code>has_devicemover_tfm</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>has_devicemover_tfm</code>(<strong><code>dl</code></strong>:<code>DataLoader</code>)</p>
 </blockquote>
 <p>returns true if train dataloader has a DeviceMoverTransform in the batch_tfms</p>
 
@@ -234,7 +234,7 @@ as the main process.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_last_affinecoord_tfm_idx" class="doc_header"><code>get_last_affinecoord_tfm_idx</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L79" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_last_affinecoord_tfm_idx</code>(<strong><code>dl</code></strong>:<code>DataLoader</code>)</p>
+<h4 id="get_last_affinecoord_tfm_idx" class="doc_header"><code>get_last_affinecoord_tfm_idx</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_last_affinecoord_tfm_idx</code>(<strong><code>dl</code></strong>:<code>DataLoader</code>)</p>
 </blockquote>
 <p>returns index of last AffineCoordTfm if it exists, otherwise returns -1</p>
 
@@ -280,7 +280,7 @@ as the main process.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="insert_batch_tfm" class="doc_header"><code>insert_batch_tfm</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L85" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>insert_batch_tfm</code>(<strong><code>dl</code></strong>:<code>DataLoader</code>, <strong><code>batch_tfm</code></strong>:<code>Transform</code>, <strong><code>idx</code></strong>:<code>int</code>)</p>
+<h4 id="insert_batch_tfm" class="doc_header"><code>insert_batch_tfm</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>insert_batch_tfm</code>(<strong><code>dl</code></strong>:<code>DataLoader</code>, <strong><code>batch_tfm</code></strong>:<code>Transform</code>, <strong><code>idx</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>adds a batch_tfm in the batch_tfms for the dataloader at idx location</p>
 
@@ -326,7 +326,7 @@ as the main process.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.setup_input_device_mover" class="doc_header"><code>Learner.setup_input_device_mover</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L90" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.setup_input_device_mover</code>(<strong><code>new_device</code></strong>)</p>
+<h4 id="Learner.setup_input_device_mover" class="doc_header"><code>Learner.setup_input_device_mover</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L92" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.setup_input_device_mover</code>(<strong><code>new_device</code></strong>)</p>
 </blockquote>
 <p>setup batch_tfms to use cpu if dataloader batch_tfms has AffineCoordTfms</p>
 
@@ -359,7 +359,7 @@ as the main process.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="XLAOptCallback" class="doc_header"><code>class</code> <code>XLAOptCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L108" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptCallback</code>(<strong><code>barrier</code></strong>=<em><code>True</code></em>) :: <code>Callback</code></p>
+<h2 id="XLAOptCallback" class="doc_header"><code>class</code> <code>XLAOptCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L110" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLAOptCallback</code>(<strong><code>barrier</code></strong>=<em><code>True</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Callback to replace <code>opt.step</code> with <code>xm.optimizer_step(opt)</code> as required to run on TPU</p>
 
@@ -399,7 +399,7 @@ as the main process.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_xla" class="doc_header"><code>Learner.to_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L139" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_xla</code>(<strong><code>new_device</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="Learner.to_xla" class="doc_header"><code>Learner.to_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L141" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_xla</code>(<strong><code>new_device</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Setup learner for single tpu core training</p>
 
@@ -438,7 +438,7 @@ as the main process.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.detach_xla" class="doc_header"><code>Learner.detach_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.detach_xla</code>()</p>
+<h4 id="Learner.detach_xla" class="doc_header"><code>Learner.detach_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/core.py#L154" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.detach_xla</code>()</p>
 </blockquote>
 <p>reset TPU single core setup and move model and dls back to cpu</p>
 

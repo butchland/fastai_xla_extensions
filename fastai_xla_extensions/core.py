@@ -67,11 +67,13 @@ def isDeviceMoverTransform(o:Transform):
 
 def has_affinecoord_tfm(dls: DataLoaders) -> bool:
     "returns true if train dataloader has an AffineCoordTfm in the batch_tfms"
+    if not hasattr(dls.train,'after_batch'): return False
     if not hasattr(dls.train.after_batch,'fs'): return False
     idxs = dls.train.after_batch.fs.argwhere(isAffineCoordTfm)
     return len(idxs) > 0
 def has_devicemover_tfm(dl: DataLoader) -> bool:
     "returns true if train dataloader has a DeviceMoverTransform in the batch_tfms"
+    if not hasattr(dl,'after_batch'): return False
     if not hasattr(dl.after_batch,'fs'): return False
     idxs = dl.after_batch.fs.argwhere(isDeviceMoverTransform)
     return len(idxs) > 0
