@@ -2,6 +2,12 @@
 
 __all__ = ['xla_imported', 'print_aten_ops']
 
+# Internal Cell
+try:
+    import torch_xla
+except ImportError:
+    pass
+
 # Cell
 import sys
 
