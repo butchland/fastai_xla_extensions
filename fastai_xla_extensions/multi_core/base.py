@@ -382,6 +382,7 @@ def to_multi_xla(self:Learner,device, rank, sync_valid=False):
 # Cell
 # for testing
 def do_one_loop(dl, rank, world_size, device, wrap_parallel=True):
+    "test one loop for a tpu distributed dataloader"
     n_batches = len(dl)
     print(f'xla: {rank} world_size: {world_size} n_batches:{n_batches}')
 
