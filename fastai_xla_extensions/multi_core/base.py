@@ -6,9 +6,9 @@ __all__ = ['TPUDistributedDL', 'build_distributed_dataloaders', 'make_fastai_dat
 
 # Internal Cell
 
-from fastai.vision.all import *
+#from fastai.vision.all import *
 from ..utils import xla_imported
-from ..misc_utils import *
+#from ..misc_utils import *
 from ..core import XLAOptCallback
 
 # Internal Cell
@@ -21,48 +21,50 @@ except ImportError:
 
 if xla_imported():
     import torch_xla.core.xla_model as xm
-    import torch_xla.debug.metrics as met
+#    import torch_xla.debug.metrics as met
     import torch_xla.distributed.parallel_loader as pl
-    import torch_xla.distributed.xla_multiprocessing as xmp
-    import torch_xla.utils.utils as xu
+#    import torch_xla.distributed.xla_multiprocessing as xmp
+#    import torch_xla.utils.utils as xu
 
 # Internal Cell
-from fastcore.basics import patch_to
-from fastai.optimizer import _BaseOptimizer
-import numpy as np
-import os
+#from fastcore.basics import patch_to
+#from fastai.optimizer import _BaseOptimizer
+#import numpy as np
+#import os
 import time
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torchvision import datasets, transforms
-import torch.utils.data as th_data
+#import torch.nn as nn
+#import torch.nn.functional as F
+#import torch.optim as optim
+#from torchvision import datasets, transforms
+#import torch.utils.data as th_data
 from fastcore.foundation import L
-from fastcore.xtras import *
-from fastcore.transform import Pipeline
+#from fastcore.xtras import *
+#from fastcore.transform import Pipeline
 from fastai.data.core import DataLoaders
-from functools import partial
-import torch.utils.data.distributed as torch_distrib
-from pathlib import Path
-import fastcore.xtras
+#from functools import partial
+#import torch.utils.data.distributed as torch_distrib
+#from pathlib import Path
+#import fastcore.xtras
 import math
 from fastcore.basics import store_attr
 from operator import attrgetter
 from fastai.data.load import _FakeLoader
 
-from fastai.torch_core import find_bs, TensorBase
+#from fastai.torch_core import find_bs, TensorBase
+from fastai.torch_core import TensorBase
 import random
-import torch
-from fastai.data.load import _loaders
-from fastai.torch_core import to_device
-from fastcore.basics import first, patch_to, patch
+#import torch
+#from fastai.data.load import _loaders
+#from fastai.torch_core import to_device
+#from fastcore.basics import first, patch_to, patch
+from fastcore.basics import patch
 
 # Cell
 
 # import torch
-from fastai.torch_core import TensorBase
-import math
+#from fastai.torch_core import TensorBase
+#import math
 
 def _revert_tensor(o):
     "Remove tensor subclass and revert to `torch.Tensor`"
@@ -173,7 +175,7 @@ class TPUDistributedDL(TfmdDL):
 
 # Cell
 
-from fastai.data.core import DataLoaders
+#from fastai.data.core import DataLoaders
 
 def build_distributed_dataloaders(dls, rank, world_size, sync_valid=False):
     """Wrap dataloaders with distributed TPU aware dataloader """
@@ -211,13 +213,14 @@ def wrap_parallel_loader(loader, device):
 
 # Internal Cell
 
-from fastai.callback.core import TrainEvalCallback
+#from fastai.callback.core import TrainEvalCallback
 from fastai.learner import Recorder
-from fastai.torch_core import one_param
-import torch
+#from fastai.torch_core import one_param
+#import torch
 from fastai.callback.core import Callback
-from fastai.learner import CancelTrainException, CancelValidException, CancelStepException
-from fastai.torch_core import tensor, TensorCategory
+#from fastai.learner import CancelTrainException, CancelValidException, CancelStepException
+from fastai.learner import CancelValidException
+#from fastai.torch_core import tensor, TensorCategory
 
 # Cell
 class XLATrainingCallback(Callback):
@@ -263,13 +266,13 @@ class XLATrainingCallback(Callback):
 
 # Cell
 import copy
-from fastcore.foundation import L
-import torch
+#from fastcore.foundation import L
+#import torch
 
 # Cell
 from fastai.learner import _maybe_item
 from fastprogress.fastprogress import format_time
-import time
+#import time
 
 # Cell
 def pack_metric(metrics):
@@ -372,11 +375,11 @@ class SyncRecorderCallback(Callback):
 
 # Cell
 from fastcore.imports import noop
-from fastcore.basics import patch
+#from fastcore.basics import patch
 from fastai.learner import Learner
 from fastai.callback.progress import ProgressCallback
 from fastcore.xtras import join_path_file
-from fastai.torch_core import get_model
+#from fastai.torch_core import get_model
 
 # Cell
 
