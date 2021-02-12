@@ -342,7 +342,7 @@ as the main process.</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This will add a device mover transform to the batch transforms if any of them trigger a lowering from the TPU to CPU. Currently identified transforms that cause this are the 'AffineCoordTfm<code>and</code>RandomResizeCropGPU` transforms.</p>
+<p>This will add a device mover transform to the batch transforms if any of them trigger a lowering from the TPU to CPU. Currently identified transforms that cause this are the <code>AffineCoordTfm</code> and <code>RandomResizeCropGPU</code> transforms.</p>
 <p>If none of the transforms are present, the dls.device is set to XLA so that when the <code>TrainEvalCallback.before_fit</code> is called, the model is also moved to the TPU.</p>
 
 </div>
