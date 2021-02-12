@@ -44,6 +44,81 @@ nb_path: "nbs/03_multi_core.base.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="revert_tensor" class="doc_header"><code>revert_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>revert_tensor</code>(<strong><code>o</code></strong>)</p>
+</blockquote>
+<p>Remove tensor subclass and revert to <code>torch.Tensor</code></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="recast2tensor" class="doc_header"><code>recast2tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>recast2tensor</code>(<strong><code>o</code></strong>)</p>
+</blockquote>
+<p>Recast <code>fastai.torch_core.TensorBase</code> subclassed tensors to torch.Tensors</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="round_to_multiple" class="doc_header"><code>round_to_multiple</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>round_to_multiple</code>(<strong><code>number</code></strong>, <strong><code>multiple</code></strong>)</p>
+</blockquote>
+<p>round up batch samples to fill number of cores</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 </div>
     {% endraw %}
 
@@ -179,7 +254,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="build_distributed_dataloaders" class="doc_header"><code>build_distributed_dataloaders</code><a href="__main__.py#L5" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>build_distributed_dataloaders</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="build_distributed_dataloaders" class="doc_header"><code>build_distributed_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>build_distributed_dataloaders</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Wrap dataloaders with distributed TPU aware dataloader</p>
 
@@ -243,7 +318,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L206" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L180" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>wraps a tpu distributed loader or a torch dataloader (with distributed sampler) with xla parallel loader</p>
 
@@ -268,7 +343,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L223" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
+<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L194" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A callback for training as a spawned process on multi-core TPUs</p>
 
@@ -307,20 +382,6 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -328,7 +389,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pack_metric" class="doc_header"><code>pack_metric</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L275" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metric</code>(<strong><code>metrics</code></strong>)</p>
+<h4 id="pack_metric" class="doc_header"><code>pack_metric</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L240" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metric</code>(<strong><code>metrics</code></strong>)</p>
 </blockquote>
 <p>extract counts and totals from avg metrics and avg losses into a list</p>
 
@@ -353,7 +414,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_tensor" class="doc_header"><code>make_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L282" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_tensor</code>(<strong><code>o</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="make_tensor" class="doc_header"><code>make_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L247" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_tensor</code>(<strong><code>o</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>convert a scalar or tensor into a float tensor and move them to <code>device</code></p>
 
@@ -378,7 +439,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pack_metrics" class="doc_header"><code>pack_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L288" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metrics</code>(<strong><code>all_metrics</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="pack_metrics" class="doc_header"><code>pack_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L253" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metrics</code>(<strong><code>all_metrics</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>pack train and valid metrics into a list of float tensors and move them to <code>device</code></p>
 
@@ -403,7 +464,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="restore_metrics" class="doc_header"><code>restore_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L293" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>restore_metrics</code>(<strong><code>reduced_metrics</code></strong>, <strong><code>all_metrics</code></strong>)</p>
+<h4 id="restore_metrics" class="doc_header"><code>restore_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L258" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>restore_metrics</code>(<strong><code>reduced_metrics</code></strong>, <strong><code>all_metrics</code></strong>)</p>
 </blockquote>
 <p>restore list of float tensors (count and values) back into train and valid metrics</p>
 
@@ -435,7 +496,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L315" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L279" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A <code>Callback</code> to sync the metrics from each rank and update statistics
 accordingly so it will display correctly in the progress callback</p>
@@ -482,7 +543,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L383" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L345" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 
 </div>
@@ -520,7 +581,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L397" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L359" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Sets up the learner on the spawned process for multi core TPU training</p>
 
@@ -545,7 +606,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L422" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L384" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -922,6 +983,7 @@ accordingly so it will display correctly in the progress callback</p>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">fastcore.xtras</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">torch_xla.distributed.xla_multiprocessing</span> <span class="k">as</span> <span class="nn">xmp</span>
 </pre></div>
 
     </div>
@@ -1083,12 +1145,12 @@ accordingly so it will display correctly in the progress callback</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>xla 7 start train model
-xla 0 start train model
-xla 3 start train model
-xla 1 start train model
+<pre>xla 0 start train model
 xla 5 start train model
+xla 3 start train model
 xla 2 start train model
+xla 1 start train model
+xla 7 start train model
 xla 6 start train model
 xla 4 start train model
 build learner
@@ -1115,38 +1177,38 @@ start fit
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.760628</td>
-      <td>1.073986</td>
-      <td>0.679730</td>
-      <td>01:09</td>
+      <td>0.759310</td>
+      <td>1.098083</td>
+      <td>0.662162</td>
+      <td>01:55</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.651683</td>
-      <td>0.710552</td>
-      <td>0.800676</td>
-      <td>01:25</td>
+      <td>0.637405</td>
+      <td>1.350417</td>
+      <td>0.690540</td>
+      <td>01:30</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.595324</td>
-      <td>0.604260</td>
-      <td>0.826351</td>
-      <td>01:21</td>
+      <td>0.578879</td>
+      <td>0.578579</td>
+      <td>0.842568</td>
+      <td>01:19</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.520409</td>
-      <td>0.317700</td>
-      <td>0.908108</td>
-      <td>01:27</td>
+      <td>0.505099</td>
+      <td>0.347587</td>
+      <td>0.893243</td>
+      <td>01:20</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.446734</td>
-      <td>0.254922</td>
-      <td>0.923649</td>
-      <td>01:28</td>
+      <td>0.429199</td>
+      <td>0.248740</td>
+      <td>0.926351</td>
+      <td>01:20</td>
     </tr>
   </tbody>
 </table>
@@ -1157,8 +1219,8 @@ start fit
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 116 ms, sys: 148 ms, total: 264 ms
-Wall time: 7min 33s
+<pre>CPU times: user 122 ms, sys: 122 ms, total: 244 ms
+Wall time: 7min 51s
 </pre>
 </div>
 </div>
@@ -1215,7 +1277,7 @@ Wall time: 7min 33s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;fastai.learner.Learner at 0x7fad258ed550&gt;</pre>
+<pre>&lt;fastai.learner.Learner at 0x7ff01f35aba8&gt;</pre>
 </div>
 
 </div>
@@ -1339,9 +1401,9 @@ Wall time: 7min 33s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.2553567588329315, 0.924221932888031]
-CPU times: user 3min 32s, sys: 3.27 s, total: 3min 35s
-Wall time: 3min 37s
+<pre>[0.24909608066082, 0.9282814860343933]
+CPU times: user 3min 30s, sys: 3.24 s, total: 3min 33s
+Wall time: 3min 35s
 </pre>
 </div>
 </div>
