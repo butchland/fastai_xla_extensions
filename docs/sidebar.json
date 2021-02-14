@@ -7,6 +7,7 @@
     "Miscellaneous Utilities": "misc_utils",
     "Multi Core XLA Base ": "multi_core.base",
     "Torch Compatible Utilities": "multi_core.torch_compat",
-    "Multi Core XLA Learner extensions": "multi_core.learner"
+    "Multi Core XLA Learner extensions": "multi_core.learner",
+    "Development Setup": "dev_setup"
   }
 }
