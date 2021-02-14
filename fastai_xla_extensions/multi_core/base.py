@@ -109,7 +109,7 @@ class TPUDistributedDL(TfmdDL):
         self.n = len(idxs)
         # we assumed n was dl.n but we really care about number of idxs
         # add extra samples to make it evenly divisible
-        self.n_padded = _round_to_multiple(self.n,self.world_size)
+        self.n_padded = round_to_multiple(self.n,self.world_size)
         idxs += (idxs * (self.n_padded//self.n))[:self.n_padded-self.n]
         # idx needs to be repeated when n_padded>>n
         # slice padded idxs so that each rank gets self.n_padded//self.world_size tensors

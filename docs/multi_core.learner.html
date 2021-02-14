@@ -31,6 +31,13 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/nbs/03b_multi_core.learner.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p>Learner method patches to invoke multi-core <code>fit</code> and other operations prefixed by <code>xla_</code>.</p>
 <p>These provide an alternate way to run multi core operations with minimal changes to existing fastai notebooks.</p>
 </blockquote>
@@ -40,71 +47,201 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/nbs/03b_multi_core.learner.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<h2 id="Utility-methods-to-implement-XLA-fit-methods">Utility methods to implement XLA <code>fit</code> methods<a class="anchor-link" href="#Utility-methods-to-implement-XLA-fit-methods"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="make_xla_child_learner" class="doc_header"><code>make_xla_child_learner</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_xla_child_learner</code>(<strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>, <strong><code>learner_args</code></strong>, <strong><code>add_args</code></strong>, <strong><code>ctrl_args</code></strong>)</p>
+</blockquote>
+<p>create a learner using passed parameters</p>
+
+</div>
+
+</div>
 
 </div>
 </div>
+
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="xla_run_method" class="doc_header"><code>xla_run_method</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xla_run_method</code>(<strong><code>rank</code></strong>, <strong><code>fit_method</code></strong>, <strong><code>learner_args</code></strong>, <strong><code>add_args</code></strong>, <strong><code>fit_args</code></strong>, <strong><code>ctrl_args</code></strong>)</p>
+</blockquote>
+<p>run fit method on spawned process</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Learner.pack_learner_args" class="doc_header"><code>Learner.pack_learner_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pack_learner_args</code>()</p>
+</blockquote>
+<p>pack learner args into dict to pass to spawned process</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Learner.reload_child_model" class="doc_header"><code>Learner.reload_child_model</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L84" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.reload_child_model</code>()</p>
+</blockquote>
+<p>reload model built by spawned processes</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Learner.pre_xla_fit" class="doc_header"><code>Learner.pre_xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pre_xla_fit</code>(<strong><code>ctrl_args</code></strong>=<em><code>{}</code></em>)</p>
+</blockquote>
+<p>prepare learner for running spawned processes</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Learner.post_xla_fit" class="doc_header"><code>Learner.post_xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L106" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.post_xla_fit</code>(<strong><code>ctrl_args</code></strong>)</p>
+</blockquote>
+<p>clean up learner after running spawned processes</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-fastai">Install fastai<a class="anchor-link" href="#Install-fastai"> </a></h2><p>Use latest fastai and fastcore versions</p>
-
+<h2 id="XLA-fit-methods">XLA fit methods<a class="anchor-link" href="#XLA-fit-methods"> </a></h2>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !pip install -Uqq git+https://github.com/fastai/fastai.git </span>
-<span class="o">!</span>pip install -Uqq fastai --upgrade
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>     |████████████████████████████████| 194kB 4.5MB/s 
-     |████████████████████████████████| 61kB 3.7MB/s 
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Expose-xla-fit-methods-on-learner-to-simplify-usage">Expose xla fit methods on learner to simplify usage<a class="anchor-link" href="#Expose-xla-fit-methods-on-learner-to-simplify-usage"> </a></h2>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -116,76 +253,7 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.pack_learner_args" class="doc_header"><code>Learner.pack_learner_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pack_learner_args</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.reload_child_model" class="doc_header"><code>Learner.reload_child_model</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L82" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.reload_child_model</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.xla_fit" class="doc_header"><code>Learner.xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr</code></strong>=<em><code>None</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.xla_fit" class="doc_header"><code>Learner.xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr</code></strong>=<em><code>None</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>call fit in multicore tpu environment</p>
 
@@ -217,7 +285,7 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.xla_fit_one_cycle" class="doc_header"><code>Learner.xla_fit_one_cycle</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L131" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit_one_cycle</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr_max</code></strong>=<em><code>None</code></em>, <strong><code>div</code></strong>=<em><code>25.0</code></em>, <strong><code>div_final</code></strong>=<em><code>100000.0</code></em>, <strong><code>pct_start</code></strong>=<em><code>0.25</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>moms</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.xla_fit_one_cycle" class="doc_header"><code>Learner.xla_fit_one_cycle</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L136" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit_one_cycle</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr_max</code></strong>=<em><code>None</code></em>, <strong><code>div</code></strong>=<em><code>25.0</code></em>, <strong><code>div_final</code></strong>=<em><code>100000.0</code></em>, <strong><code>pct_start</code></strong>=<em><code>0.25</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>moms</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>call fit_one_cycle in multicore tpu environment</p>
 
@@ -238,6 +306,12 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example:-Train-MNIST">Example: Train MNIST<a class="anchor-link" href="#Example:-Train-MNIST"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -249,6 +323,21 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -313,6 +402,28 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet18-5c106cde.pth&#34; to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -359,38 +470,38 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.260042</td>
-      <td>0.369880</td>
-      <td>0.859375</td>
-      <td>00:10</td>
+      <td>0.213612</td>
+      <td>0.471034</td>
+      <td>0.819602</td>
+      <td>00:20</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.217790</td>
-      <td>0.358034</td>
-      <td>0.815341</td>
-      <td>00:04</td>
+      <td>0.176937</td>
+      <td>0.356570</td>
+      <td>0.842330</td>
+      <td>00:05</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.246004</td>
-      <td>0.309130</td>
-      <td>0.863636</td>
-      <td>00:04</td>
+      <td>0.185203</td>
+      <td>0.302910</td>
+      <td>0.879261</td>
+      <td>00:05</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.264196</td>
-      <td>0.254274</td>
-      <td>0.897727</td>
+      <td>0.200545</td>
+      <td>0.315121</td>
+      <td>0.873580</td>
       <td>00:05</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.260114</td>
-      <td>0.251731</td>
-      <td>0.904830</td>
-      <td>00:04</td>
+      <td>0.215351</td>
+      <td>0.336673</td>
+      <td>0.857955</td>
+      <td>00:05</td>
     </tr>
   </tbody>
 </table>
@@ -401,8 +512,8 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 103 ms, sys: 167 ms, total: 271 ms
-Wall time: 40.6 s
+<pre>CPU times: user 116 ms, sys: 166 ms, total: 282 ms
+Wall time: 1min 2s
 </pre>
 </div>
 </div>
@@ -443,7 +554,7 @@ Wall time: 40.6 s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>TensorBase(0.9142)
+<pre>TensorBase(0.8627)
 </pre>
 </div>
 </div>
@@ -513,37 +624,37 @@ Wall time: 40.6 s
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.034839</td>
-      <td>8.152468</td>
-      <td>0.501420</td>
-      <td>00:11</td>
+      <td>0.121027</td>
+      <td>11.478638</td>
+      <td>0.504261</td>
+      <td>00:20</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.068827</td>
-      <td>13.967968</td>
-      <td>0.501420</td>
+      <td>0.075965</td>
+      <td>2.694753</td>
+      <td>0.772727</td>
       <td>00:05</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.062496</td>
-      <td>5.844288</td>
-      <td>0.548295</td>
-      <td>00:04</td>
+      <td>0.085595</td>
+      <td>0.126528</td>
+      <td>0.981534</td>
+      <td>00:05</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.057507</td>
-      <td>0.559366</td>
-      <td>0.869318</td>
+      <td>0.084676</td>
+      <td>0.206319</td>
+      <td>0.934659</td>
       <td>00:05</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.053197</td>
-      <td>0.166154</td>
-      <td>0.960227</td>
+      <td>0.082818</td>
+      <td>0.065421</td>
+      <td>0.984375</td>
       <td>00:05</td>
     </tr>
   </tbody>
@@ -589,7 +700,7 @@ Wall time: 40.6 s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(#2) [0.17965953052043915,0.9585121870040894]</pre>
+<pre>(#2) [0.0529780350625515,0.9856938719749451]</pre>
 </div>
 
 </div>

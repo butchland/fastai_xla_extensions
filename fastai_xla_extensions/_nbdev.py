@@ -59,8 +59,12 @@ index = {"XLAOptimProxy": "00_core.ipynb",
          "to": "03a_multi_core.torch_compat.ipynb",
          "make_torch_dataloaders": "03a_multi_core.torch_compat.ipynb",
          "FileNamePatternLabeller": "03a_multi_core.torch_compat.ipynb",
+         "make_xla_child_learner": "03b_multi_core.learner.ipynb",
+         "xla_run_method": "03b_multi_core.learner.ipynb",
          "Learner.pack_learner_args": "03b_multi_core.learner.ipynb",
          "Learner.reload_child_model": "03b_multi_core.learner.ipynb",
+         "Learner.pre_xla_fit": "03b_multi_core.learner.ipynb",
+         "Learner.post_xla_fit": "03b_multi_core.learner.ipynb",
          "Learner.xla_fit": "03b_multi_core.learner.ipynb",
          "Learner.xla_fit_one_cycle": "03b_multi_core.learner.ipynb"}
 

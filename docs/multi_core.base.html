@@ -786,6 +786,64 @@ accordingly so it will display correctly in the progress callback</p>
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_mnist_model</span><span class="p">(</span><span class="n">rank</span><span class="p">):</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">xm</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span><span class="s1">&#39;start_train_mnist_model&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;xla </span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s1"> start train mnist model&#39;</span><span class="p">)</span>    
+    <span class="n">SYNC_VALID</span> <span class="o">=</span> <span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;sync_valid&#39;</span><span class="p">]</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">xm</span><span class="o">.</span><span class="n">xla_device</span><span class="p">()</span>
+
+    <span class="n">bs</span> <span class="o">=</span> <span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]</span>
+    <span class="n">world_size</span> <span class="o">=</span> <span class="n">xm</span><span class="o">.</span><span class="n">xrt_world_size</span><span class="p">()</span>
+
+    <span class="n">dls</span> <span class="o">=</span> <span class="n">make_fastai_dataloaders</span><span class="p">(</span>
+                            <span class="n">DATA2</span><span class="p">,</span> 
+                            <span class="n">PATH2</span><span class="p">,</span> 
+                            <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> 
+                            <span class="n">world_size</span><span class="o">=</span><span class="n">world_size</span><span class="p">,</span> 
+                            <span class="n">sync_valid</span><span class="o">=</span><span class="n">SYNC_VALID</span><span class="p">,</span>
+                            <span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">WRAPPED_MODEL2</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">moms</span> <span class="o">=</span><span class="p">(</span><span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">],</span><span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">],</span><span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">])</span>
+    <span class="n">wd</span> <span class="o">=</span> <span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">]</span>
+
+    <span class="n">xm</span><span class="o">.</span><span class="n">master_print</span><span class="p">(</span><span class="s1">&#39;build learner&#39;</span><span class="p">)</span>
+    <span class="n">learner</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> 
+                      <span class="n">loss_func</span><span class="o">=</span><span class="n">LOSS_FUNC</span><span class="p">,</span> 
+                      <span class="n">opt_func</span><span class="o">=</span><span class="n">OPT_FUNC</span><span class="p">,</span> 
+                      <span class="n">metrics</span><span class="o">=</span><span class="n">accuracy</span><span class="p">,</span> 
+                      <span class="n">wd</span><span class="o">=</span><span class="n">wd</span><span class="p">,</span>
+                      <span class="n">moms</span><span class="o">=</span><span class="n">moms</span><span class="p">)</span>
+                      
+    <span class="n">learner</span><span class="o">.</span><span class="n">to_multi_xla</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">xm</span><span class="o">.</span><span class="n">get_ordinal</span><span class="p">(),</span> <span class="n">sync_valid</span><span class="o">=</span><span class="n">SYNC_VALID</span><span class="p">)</span>
+    <span class="c1"># Scale learning rate to num cores</span>
+    <span class="n">learning_rate</span> <span class="o">=</span> <span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">xm</span><span class="o">.</span><span class="n">xrt_world_size</span><span class="p">()</span>
+                               
+    <span class="n">epochs</span> <span class="o">=</span> <span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;num_epochs&#39;</span><span class="p">]</span>
+    <span class="n">xm</span><span class="o">.</span><span class="n">master_print</span><span class="p">(</span><span class="s1">&#39;start running fit&#39;</span><span class="p">)</span>
+    <span class="n">learner</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">()</span>
+
+    <span class="n">learner</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr_max</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span>
+
+    <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;mnist-stage-1&#39;</span><span class="p">)</span>
+    <span class="n">xm</span><span class="o">.</span><span class="n">mark_step</span><span class="p">()</span>  
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is the main method that runs the training.</p>
@@ -829,6 +887,27 @@ accordingly so it will display correctly in the progress callback</p>
     <span class="k">global</span> <span class="n">FLAGS</span>
     <span class="n">FLAGS</span> <span class="o">=</span> <span class="n">flags</span>
     <span class="n">run_dataloader_loop</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Start training processes</span>
+<span class="k">def</span> <span class="nf">_mp_fn3</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">FLAGS2</span>
+    <span class="n">FLAGS2</span> <span class="o">=</span> <span class="n">flags</span>
+    <span class="n">train_mnist_model</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -947,7 +1026,7 @@ accordingly so it will display correctly in the progress callback</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.learner</span> <span class="kn">import</span> <span class="n">create_cnn_model</span>
-<span class="kn">from</span> <span class="nn">fastai.vision.models</span> <span class="kn">import</span> <span class="n">resnet34</span>
+<span class="kn">from</span> <span class="nn">fastai.vision.models</span> <span class="kn">import</span> <span class="n">resnet34</span><span class="p">,</span> <span class="n">resnet18</span>
 </pre></div>
 
     </div>
@@ -996,6 +1075,37 @@ accordingly so it will display correctly in the progress callback</p>
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># Define Parameters</span>
+<span class="n">FLAGS2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;sync_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># FLAGS2[&#39;batch_size&#39;] = 64</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;num_workers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;image_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">28</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.85</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2e-3</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;num_epochs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;TPU_NAME&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+<span class="c1"># FLAGS[&#39;num_cores&#39;] = 1 </span>
+<span class="n">ARCH2</span> <span class="o">=</span> <span class="n">resnet18</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">fastcore.xtras</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">torch_xla.distributed.xla_multiprocessing</span> <span class="k">as</span> <span class="nn">xmp</span>
@@ -1016,11 +1126,35 @@ accordingly so it will display correctly in the progress callback</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">PATH</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">PETS</span><span class="p">)</span><span class="o">/</span><span class="s1">&#39;images&#39;</span>
-<span class="c1"># PATH = untar_data(URLs.MNIST)</span>
+<span class="n">PATH2</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">MNIST</span><span class="p">)</span>
 <span class="c1"># PATH = untar_data(URLs.MNIST_TINY)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1063,7 +1197,34 @@ accordingly so it will display correctly in the progress callback</p>
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DATA2</span> <span class="o">=</span> <span class="n">DataBlock</span><span class="p">(</span>
+    <span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">ImageBlock</span><span class="p">,</span> <span class="n">CategoryBlock</span><span class="p">),</span>
+    <span class="n">get_items</span><span class="o">=</span><span class="n">get_image_files</span><span class="p">,</span>
+    <span class="n">get_y</span><span class="o">=</span><span class="n">parent_label</span><span class="p">,</span>
+    <span class="n">splitter</span><span class="o">=</span><span class="n">GrandparentSplitter</span><span class="p">(</span><span class="n">train_name</span><span class="o">=</span><span class="s1">&#39;training&#39;</span><span class="p">,</span><span class="n">valid_name</span><span class="o">=</span><span class="s1">&#39;testing&#39;</span><span class="p">),</span>
+    <span class="n">item_tfms</span><span class="o">=</span><span class="p">[</span><span class="n">Resize</span><span class="p">(</span><span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;image_size&#39;</span><span class="p">]),],</span>
+    <span class="n">batch_tfms</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span>
+<span class="n">vocab2</span> <span class="o">=</span> <span class="n">CategoryMap</span><span class="p">(</span><span class="n">get_image_files</span><span class="p">(</span><span class="n">PATH2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parent_label</span><span class="p">))</span>
+<span class="n">N_OUT2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">N_OUT</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">N_OUT</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;N_OUT </span><span class="si">{</span><span class="n">N_OUT</span><span class="si">}</span><span class="s1"> should be &gt; 0&#39;</span>
+<span class="k">assert</span> <span class="n">N_OUT2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">N_OUT2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;N_OUT2 </span><span class="si">{</span><span class="n">N_OUT2</span><span class="si">}</span><span class="s1"> should be &gt; 0&#39;</span>
 </pre></div>
 
     </div>
@@ -1096,6 +1257,69 @@ accordingly so it will display correctly in the progress callback</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet34-333f7ec4.pth&#34; to /root/.cache/torch/hub/checkpoints/resnet34-333f7ec4.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">custom_model2</span> <span class="o">=</span> <span class="n">create_cnn_model</span><span class="p">(</span><span class="n">ARCH2</span><span class="p">,</span> <span class="n">N_OUT2</span><span class="p">,</span> 
+                                <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">concat_pool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet18-5c106cde.pth&#34; to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1108,6 +1332,23 @@ accordingly so it will display correctly in the progress callback</p>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Only instantiate model weights once in memory.</span>
 <span class="n">WRAPPED_MODEL</span> <span class="o">=</span> <span class="n">xmp</span><span class="o">.</span><span class="n">MpModelWrapper</span><span class="p">(</span><span class="n">custom_model</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">WRAPPED_MODEL2</span> <span class="o">=</span> <span class="n">xmp</span><span class="o">.</span><span class="n">MpModelWrapper</span><span class="p">(</span><span class="n">custom_model2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1161,13 +1402,13 @@ accordingly so it will display correctly in the progress callback</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>xla 0 start train model
-xla 5 start train model
-xla 3 start train model
 xla 2 start train model
 xla 1 start train model
-xla 7 start train model
-xla 6 start train model
+xla 3 start train model
 xla 4 start train model
+xla 5 start train model
+xla 6 start train model
+xla 7 start train model
 build learner
 start running fit
 start fit
@@ -1192,38 +1433,38 @@ start fit
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.759310</td>
-      <td>1.098083</td>
-      <td>0.662162</td>
-      <td>01:55</td>
+      <td>0.805801</td>
+      <td>1.191257</td>
+      <td>0.655405</td>
+      <td>01:44</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.637405</td>
-      <td>1.350417</td>
-      <td>0.690540</td>
-      <td>01:30</td>
+      <td>0.672083</td>
+      <td>1.817104</td>
+      <td>0.568243</td>
+      <td>01:23</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.578879</td>
-      <td>0.578579</td>
-      <td>0.842568</td>
-      <td>01:19</td>
+      <td>0.610179</td>
+      <td>0.494964</td>
+      <td>0.845270</td>
+      <td>01:23</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.505099</td>
-      <td>0.347587</td>
-      <td>0.893243</td>
-      <td>01:20</td>
+      <td>0.523002</td>
+      <td>0.324252</td>
+      <td>0.908108</td>
+      <td>01:21</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.429199</td>
-      <td>0.248740</td>
-      <td>0.926351</td>
-      <td>01:20</td>
+      <td>0.447258</td>
+      <td>0.273349</td>
+      <td>0.920270</td>
+      <td>01:37</td>
     </tr>
   </tbody>
 </table>
@@ -1234,8 +1475,116 @@ start fit
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 122 ms, sys: 122 ms, total: 244 ms
-Wall time: 7min 51s
+<pre>CPU times: user 139 ms, sys: 192 ms, total: 331 ms
+Wall time: 8min 14s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">xmp</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">_mp_fn3</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">FLAGS2</span><span class="p">,),</span> <span class="n">nprocs</span><span class="o">=</span><span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">],</span>
+        <span class="n">start_method</span><span class="o">=</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>xla 2 start train mnist model
+xla 1 start train mnist model
+xla 6 start train mnist model
+xla 3 start train mnist model
+xla 0 start train mnist model
+xla 4 start train mnist model
+xla 7 start train mnist model
+xla 5 start train mnist model
+build learner
+start running fit
+start fit
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>accuracy</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.461098</td>
+      <td>1.453223</td>
+      <td>0.517200</td>
+      <td>02:03</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.316083</td>
+      <td>0.747341</td>
+      <td>0.829800</td>
+      <td>01:44</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.273492</td>
+      <td>0.234156</td>
+      <td>0.941900</td>
+      <td>01:44</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.243033</td>
+      <td>0.078096</td>
+      <td>0.975900</td>
+      <td>01:44</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.217187</td>
+      <td>0.055165</td>
+      <td>0.982700</td>
+      <td>01:54</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 106 ms, sys: 154 ms, total: 260 ms
+Wall time: 10min 17s
 </pre>
 </div>
 </div>
@@ -1292,7 +1641,7 @@ Wall time: 7min 51s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;fastai.learner.Learner at 0x7ff01f35aba8&gt;</pre>
+<pre>&lt;fastai.learner.Learner at 0x7f8a927b5d30&gt;</pre>
 </div>
 
 </div>
@@ -1416,8 +1765,8 @@ Wall time: 7min 51s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.24909608066082, 0.9282814860343933]
-CPU times: user 3min 30s, sys: 3.24 s, total: 3min 33s
+<pre>[0.281120628118515, 0.9181326031684875]
+CPU times: user 3min 29s, sys: 3.84 s, total: 3min 33s
 Wall time: 3min 35s
 </pre>
 </div>
