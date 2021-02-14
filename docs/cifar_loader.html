@@ -687,7 +687,7 @@ encodes: (object,object) -&gt; Composedecodes: </pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(#8) [Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_2&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_3&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/batches.meta&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_4&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_5&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_1&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/readme.html&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/test_batch&#39;)]</pre>
+<pre>(#8) [Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_1&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_2&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/readme.html&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/batches.meta&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/test_batch&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_4&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_5&#39;),Path(&#39;/root/.fastai/data/cifar/cifar-10-batches-py/data_batch_3&#39;)]</pre>
 </div>
 
 </div>
@@ -1188,7 +1188,7 @@ encodes: (object,object) -&gt; Composedecodes: </pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.learner</span> <span class="kn">import</span> <span class="n">cnn_learner</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">fastai.callback.progress</span>
 </pre></div>
 
@@ -1444,7 +1444,7 @@ Total params: 11,708,992
 Total trainable params: 11,708,992
 Total non-trainable params: 0
 
-Optimizer used: &lt;function Adam at 0x7fc747fb2ea0&gt;
+Optimizer used: &lt;function Adam at 0x7fd7bc7e2e18&gt;
 Loss function: CrossEntropyLoss()
 
 Callbacks:
@@ -1469,7 +1469,7 @@ Callbacks:
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">learner</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1496,143 +1496,38 @@ Callbacks:
   <tbody>
     <tr>
       <td>0</td>
-      <td>1.406341</td>
-      <td>1.345944</td>
-      <td>0.513700</td>
-      <td>00:55</td>
+      <td>1.889744</td>
+      <td>1.896039</td>
+      <td>0.365500</td>
+      <td>00:51</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>1.237446</td>
-      <td>1.224872</td>
-      <td>0.593300</td>
-      <td>00:54</td>
+      <td>1.525709</td>
+      <td>1.402483</td>
+      <td>0.493500</td>
+      <td>00:52</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>1.048813</td>
-      <td>0.988133</td>
-      <td>0.656600</td>
-      <td>00:55</td>
+      <td>1.160433</td>
+      <td>1.045405</td>
+      <td>0.641900</td>
+      <td>00:51</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.964685</td>
-      <td>0.861556</td>
-      <td>0.701000</td>
-      <td>00:54</td>
+      <td>1.002535</td>
+      <td>0.890528</td>
+      <td>0.687900</td>
+      <td>00:51</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.920350</td>
-      <td>0.840908</td>
-      <td>0.708700</td>
-      <td>00:54</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>0.851027</td>
-      <td>0.804295</td>
-      <td>0.720400</td>
-      <td>00:54</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>0.776218</td>
-      <td>0.746521</td>
-      <td>0.745400</td>
-      <td>00:54</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>0.782043</td>
-      <td>0.724211</td>
-      <td>0.748500</td>
-      <td>00:55</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>0.729465</td>
-      <td>0.702555</td>
-      <td>0.757500</td>
-      <td>00:54</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>0.701709</td>
-      <td>0.649981</td>
-      <td>0.777100</td>
-      <td>00:55</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>0.691481</td>
-      <td>0.661470</td>
-      <td>0.777100</td>
-      <td>00:54</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>0.634681</td>
-      <td>0.666993</td>
-      <td>0.767400</td>
-      <td>00:54</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>0.616839</td>
-      <td>0.601844</td>
-      <td>0.796900</td>
-      <td>00:55</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>0.581362</td>
-      <td>0.625590</td>
-      <td>0.791400</td>
-      <td>00:56</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td>0.579249</td>
-      <td>0.598029</td>
-      <td>0.798500</td>
-      <td>00:57</td>
-    </tr>
-    <tr>
-      <td>15</td>
-      <td>0.579059</td>
-      <td>0.597557</td>
-      <td>0.799700</td>
-      <td>00:55</td>
-    </tr>
-    <tr>
-      <td>16</td>
-      <td>0.550071</td>
-      <td>0.592885</td>
-      <td>0.797000</td>
-      <td>00:55</td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td>0.551932</td>
-      <td>0.553190</td>
-      <td>0.811900</td>
-      <td>00:56</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>0.524508</td>
-      <td>0.560319</td>
-      <td>0.810400</td>
-      <td>01:00</td>
-    </tr>
-    <tr>
-      <td>19</td>
-      <td>0.501730</td>
-      <td>0.536035</td>
-      <td>0.820200</td>
-      <td>00:55</td>
+      <td>0.874758</td>
+      <td>0.821122</td>
+      <td>0.709400</td>
+      <td>00:51</td>
     </tr>
   </tbody>
 </table>
@@ -1643,8 +1538,8 @@ Callbacks:
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 12min 6s, sys: 16.1 s, total: 12min 22s
-Wall time: 18min 31s
+<pre>CPU times: user 2min 38s, sys: 3.3 s, total: 2min 42s
+Wall time: 4min 18s
 </pre>
 </div>
 </div>

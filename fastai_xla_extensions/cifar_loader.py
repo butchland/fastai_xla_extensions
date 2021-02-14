@@ -185,7 +185,7 @@ from fastcore.foundation import L
 
 # Cell
 def make_cifar_tls(file_list, path, item_tfm, check=True):
-    data, targets = load_cifar_items(file_list, path, check=check)
+    data, targets = load_torch_items(file_list, path, check=check)
     item_tuples = L(data,targets).zip()
     tls = TfmdLists(item_tuples,[item_tfm])
     return tls
