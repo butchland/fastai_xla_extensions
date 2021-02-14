@@ -190,7 +190,7 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.pre_xla_fit" class="doc_header"><code>Learner.pre_xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pre_xla_fit</code>(<strong><code>ctrl_args</code></strong>=<em><code>{}</code></em>)</p>
+<h4 id="Learner.pre_xla_fit" class="doc_header"><code>Learner.pre_xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pre_xla_fit</code>(<strong><code>ctrl_args</code></strong>=<em><code>{}</code></em>)</p>
 </blockquote>
 <p>prepare learner for running spawned processes</p>
 
@@ -215,7 +215,7 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.post_xla_fit" class="doc_header"><code>Learner.post_xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L106" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.post_xla_fit</code>(<strong><code>ctrl_args</code></strong>)</p>
+<h4 id="Learner.post_xla_fit" class="doc_header"><code>Learner.post_xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L109" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.post_xla_fit</code>(<strong><code>ctrl_args</code></strong>)</p>
 </blockquote>
 <p>clean up learner after running spawned processes</p>
 
@@ -253,7 +253,7 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.xla_fit" class="doc_header"><code>Learner.xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr</code></strong>=<em><code>None</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.xla_fit" class="doc_header"><code>Learner.xla_fit</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr</code></strong>=<em><code>None</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>call fit in multicore tpu environment</p>
 
@@ -285,7 +285,7 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.xla_fit_one_cycle" class="doc_header"><code>Learner.xla_fit_one_cycle</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L136" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit_one_cycle</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr_max</code></strong>=<em><code>None</code></em>, <strong><code>div</code></strong>=<em><code>25.0</code></em>, <strong><code>div_final</code></strong>=<em><code>100000.0</code></em>, <strong><code>pct_start</code></strong>=<em><code>0.25</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>moms</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.xla_fit_one_cycle" class="doc_header"><code>Learner.xla_fit_one_cycle</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/learner.py#L139" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_fit_one_cycle</code>(<strong><code>n_epoch</code></strong>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>lr_max</code></strong>=<em><code>None</code></em>, <strong><code>div</code></strong>=<em><code>25.0</code></em>, <strong><code>div_final</code></strong>=<em><code>100000.0</code></em>, <strong><code>pct_start</code></strong>=<em><code>0.25</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>moms</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>reset_opt</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>call fit_one_cycle in multicore tpu environment</p>
 

@@ -93,6 +93,9 @@ def reload_child_model(self:Learner):
         self.create_opt()
 
 # Cell
+
+from fastcore.foundation import L
+
 @patch
 def pre_xla_fit(self:Learner, ctrl_args={}):
     "prepare learner for running spawned processes"
