@@ -38,10 +38,7 @@ nb_path: "nbs/02b_misc_utils.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Patch-the-fastai-_BaseOptimizer-to-be-Pickable">Patch the fastai <code>_BaseOptimizer</code> to be Pickable<a class="anchor-link" href="#Patch-the-fastai-_BaseOptimizer-to-be-Pickable"> </a></h2><p>Patch the <code>fastai.optimizer._BaseOptimizer</code> <code>__getstate__</code> and <code>__setstate__</code> methods which are used in pickling fastai optimizers.</p>
-<p>This should fix the bug where running the learner on multiple TPU cores on XLA triggers an error in which the method <code>_fetch_gradients(optimizer)</code> fails in the statement <code>for param_group in optimizer.__getstate__()['param_groups']:</code> in the  <code>torch_xla.core.xla_model</code> module.</p>
-<p>The patch modifies the copy constructor to include the param_groups and defaults.</p>
-
+<h2 id="_BaseOptimizer-patches"><code>_BaseOptimizer</code> patches<a class="anchor-link" href="#_BaseOptimizer-patches"> </a></h2>
 </div>
 </div>
 </div>
@@ -89,6 +86,15 @@ nb_path: "nbs/02b_misc_utils.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Patch the <code>fastai.optimizer._BaseOptimizer</code> <code>__getstate__</code> and <code>__setstate__</code> methods which are used in pickling fastai optimizers.</p>
+<p>This should fix the bug where running the learner on multiple TPU cores on XLA triggers an error in which the method <code>_fetch_gradients(optimizer)</code> fails in the statement <code>for param_group in optimizer.__getstate__()['param_groups']:</code> in the  <code>torch_xla.core.xla_model</code> module.</p>
+<p>The patch modifies the copy constructor to include the param_groups and defaults.</p>
+
+</div>
+</div>
+</div>
 </div>
  
 

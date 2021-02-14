@@ -2,6 +2,8 @@
 > The FastAI XLA Extensions library package allows your fastai/Pytorch models to run on TPUs using the Pytorch-XLA library.
 
 
+<a href="https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/nbs/index.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## Documentation Site
 
 You can view the documentation here: https://butchland.github.io/fastai_xla_extensions 
@@ -162,7 +164,7 @@ dls.show_batch()
 ```
 
 
-![png](docs/images/output_22_0.png)
+![png](docs/images/output_23_0.png)
 
 
 Create a Fastai CNN Learner
@@ -377,7 +379,7 @@ learner.lr_find()
 
 
 
-![png](docs/images/output_29_2.png)
+![png](docs/images/output_30_2.png)
 
 
 Run one cycle training.
@@ -519,7 +521,7 @@ learner.recorder.plot_loss()
 ```
 
 
-![png](docs/images/output_37_0.png)
+![png](docs/images/output_38_0.png)
 
 
 # Performance troubleshooting
