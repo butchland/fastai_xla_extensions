@@ -23,7 +23,7 @@ Nominally, Pytorch XLA also supports  GPUs so please see the [Pytorch XLA site f
 If running on Colab, make sure the Runtime Type is set to TPU.
 
 
-## Install fastai
+### Install fastai
 
 Use the latest fastai and fastcore versions
 
@@ -34,7 +34,7 @@ Use the latest fastai and fastcore versions
 !pip install -Uqq fastai --upgrade
 ```
 
-## Install Pytorch XLA
+### Install Pytorch XLA
 
 
 This is the official way to install Pytorch-XLA 1.7 as per the [instructions here](https://colab.research.google.com/github/pytorch/xla/blob/master/contrib/colab/getting-started.ipynb#scrollTo=CHzziBW5AoZH)
@@ -45,7 +45,20 @@ This is the official way to install Pytorch-XLA 1.7 as per the [instructions her
 !pip install -Uqq cloud-tpu-client==0.10 https://storage.googleapis.com/tpu-pytorch/wheels/torch_xla-1.7-cp36-cp36m-linux_x86_64.whl
 ```
 
-## Check if XLA is available
+### Check if XLA is available
+
+```
+#colab
+import warnings
+try:
+    import torch_xla
+except ImportError as e:
+    if DEBUG: warnings.warn('TPU environment not available')
+    
+```
+
+    WARNING:root:TPU has started up successfully with version pytorch-1.7
+
 
 ### Import the libraries
 Import the fastai and fastai_xla_extensions libraries
@@ -164,7 +177,7 @@ dls.show_batch()
 ```
 
 
-![png](docs/images/output_23_0.png)
+![png](docs/images/output_24_0.png)
 
 
 Create a Fastai CNN Learner
@@ -345,7 +358,7 @@ learner.summary()
 
 
 
-### Set Learner to XLA mode
+Set Learner to XLA mode
 This will setup the learner to use the XLA Device
 
 ```
@@ -379,7 +392,7 @@ learner.lr_find()
 
 
 
-![png](docs/images/output_30_2.png)
+![png](docs/images/output_31_2.png)
 
 
 Run one cycle training.
@@ -521,10 +534,10 @@ learner.recorder.plot_loss()
 ```
 
 
-![png](docs/images/output_38_0.png)
+![png](docs/images/output_39_0.png)
 
 
-# Performance troubleshooting
+## Performance troubleshooting
 
 To check if your model is hiting an `aten operation` (an operation that is not handled by accelerator device and returned to CPU for default implementation) you can check it with ands then you can report to pytorch xla team.
 
@@ -557,3 +570,7 @@ If you wish to contribute to the project, fork it and make pull request.
 
 This project uses [nbdev](https://nbdev.fast.ai/) -- a jupyter notebook first development environment and is being developed on [Colab](https://colab.research.google.com).
 
+
+## Development Setup
+
+see [this note on how to setup your environment for development](https://butchland.github.io/fastai_xla_extensions/dev_setup)

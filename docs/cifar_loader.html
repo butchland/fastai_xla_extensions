@@ -31,118 +31,18 @@ nb_path: "nbs/02_cifar_loader.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>These are utilities</p>
+<p>STATUS: SUPER EARLY ALPHA</p>
+<p>This package is NOT yet ready for PUBLIC CONSUMPTION. Use at your own RISK!!!!</p>
+<p>Everything, including the API (and even
+the existence of this module) are subject
+to breaking change...</p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -Uqq git+https://github.com/fastai/fastai.git
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>     |████████████████████████████████| 61kB 5.6MB/s 
-  Building wheel for fastai (setup.py) ... done
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>curl -s https://course19.fast.ai/setup/colab <span class="p">|</span> bash
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Updating fastai...
-Done.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip freeze <span class="p">|</span> grep torch
-<span class="o">!</span>pip freeze <span class="p">|</span> grep fast
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>torch==1.7.0+cu101
-torchsummary==1.5.1
-torchtext==0.3.1
-torchvision==0.8.1+cu101
-fastai==2.2.3
-fastcore==1.3.18
-fastdtw==0.3.4
-fastprogress==1.0.0
-fastrlock==0.5
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Start of kernel</p>
+<p>These are utilities for adapting Pytorch/torchvision Datasets to be used in fastai TPU training.</p>
 
 </div>
 </div>
@@ -158,7 +58,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="download_cifar10_dsets" class="doc_header"><code>download_cifar10_dsets</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download_cifar10_dsets</code>(<strong><code>path</code></strong>)</p>
+<h4 id="download_torch_dsets" class="doc_header"><code>download_torch_dsets</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download_torch_dsets</code>(<strong><code>path</code></strong>, <strong><code>torch_dset</code></strong>)</p>
 </blockquote>
 <p>Download cifar10 datasets using torchvision utils</p>
 <p>Arguments:
@@ -192,7 +92,7 @@ fastrlock==0.5
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_cifar_items" class="doc_header"><code>load_cifar_items</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L35" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_cifar_items</code>(<strong><code>downloaded_list</code></strong>, <strong><code>path</code></strong>, <strong><code>check</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="load_torch_items" class="doc_header"><code>load_torch_items</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/cifar_loader.py#L35" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_torch_items</code>(<strong><code>downloaded_list</code></strong>, <strong><code>path</code></strong>, <strong><code>check</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>loads cifar test/train items into tuple(data, target)</p>
 <p>scrobbled together from torch.data.utils.datasets.CIFAR10 code

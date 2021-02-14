@@ -73,7 +73,7 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-fastai">Install fastai<a class="anchor-link" href="#Install-fastai"> </a></h2><p>Use the latest fastai and fastcore versions</p>
+<h3 id="Install-fastai">Install fastai<a class="anchor-link" href="#Install-fastai"> </a></h3><p>Use the latest fastai and fastcore versions</p>
 
 </div>
 </div>
@@ -99,7 +99,7 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-Pytorch-XLA">Install Pytorch XLA<a class="anchor-link" href="#Install-Pytorch-XLA"> </a></h2>
+<h3 id="Install-Pytorch-XLA">Install Pytorch XLA<a class="anchor-link" href="#Install-Pytorch-XLA"> </a></h3>
 </div>
 </div>
 </div>
@@ -130,10 +130,46 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Check-if-XLA-is-available">Check if XLA is available<a class="anchor-link" href="#Check-if-XLA-is-available"> </a></h2>
+<h3 id="Check-if-XLA-is-available">Check if XLA is available<a class="anchor-link" href="#Check-if-XLA-is-available"> </a></h3>
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">torch_xla</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;TPU environment not available&#39;</span><span class="p">)</span>
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>WARNING:root:TPU has started up successfully with version pytorch-1.7
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Import-the-libraries">Import the libraries<a class="anchor-link" href="#Import-the-libraries"> </a></h3><p>Import the fastai and fastai_xla_extensions libraries</p>
@@ -611,7 +647,8 @@ Callbacks:
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Set-Learner-to-XLA-mode">Set Learner to XLA mode<a class="anchor-link" href="#Set-Learner-to-XLA-mode"> </a></h3><p>This will setup the learner to use the XLA Device</p>
+<p>Set Learner to XLA mode
+This will setup the learner to use the XLA Device</p>
 
 </div>
 </div>
@@ -966,7 +1003,7 @@ Callbacks:
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Performance-troubleshooting">Performance troubleshooting<a class="anchor-link" href="#Performance-troubleshooting"> </a></h1><p>To check if your model is hiting an <code>aten operation</code> (an operation that is not handled by accelerator device and returned to CPU for default implementation) you can check it with ands then you can report to pytorch xla team.</p>
+<h2 id="Performance-troubleshooting">Performance troubleshooting<a class="anchor-link" href="#Performance-troubleshooting"> </a></h2><p>To check if your model is hiting an <code>aten operation</code> (an operation that is not handled by accelerator device and returned to CPU for default implementation) you can check it with ands then you can report to pytorch xla team.</p>
 
 </div>
 </div>
@@ -1012,6 +1049,13 @@ Callbacks:
 <p>Use it at your own risk.</p>
 <p>If you wish to contribute to the project, fork it and make pull request.</p>
 <p>This project uses <a href="https://nbdev.fast.ai/">nbdev</a> -- a jupyter notebook first development environment and is being developed on <a href="https://colab.research.google.com">Colab</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Development-Setup">Development Setup<a class="anchor-link" href="#Development-Setup"> </a></h2><p>see <a href="https://butchland.github.io/fastai_xla_extensions/dev_setup">this note on how to setup your environment for development</a></p>
 
 </div>
 </div>
