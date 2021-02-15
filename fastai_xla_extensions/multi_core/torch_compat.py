@@ -7,7 +7,7 @@ __all__ = ['TfmdTorchDS', 'to_list', 'has_setup', 'run_setups', 'TorchDatasetBui
 from ..utils import xla_imported
 from .base import *
 from ..misc_utils import *
-from nbdev.showdoc import *
+
 
 # Internal Cell
 try:
