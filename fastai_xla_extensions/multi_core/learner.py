@@ -81,6 +81,8 @@ def pack_learner_args(self:Learner):
     return learner_args, add_args
 
 # Cell
+import os
+
 @patch
 def reload_child_model(self:Learner):
     "reload model built by spawned processes"
