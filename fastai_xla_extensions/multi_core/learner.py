@@ -68,11 +68,12 @@ def pack_learner_args(self:Learner):
     learner_args = {**self.__stored_args__}
     learner_args['wrapped_model'] =  xmp.MpModelWrapper(self.model)
     learner_args['base_dls'] = self.dls
-   # fetch only cbs not in defaults
+    # fetch only cbs not in defaults
     if ProgressCallback not in defaults.callbacks:
         defaults.callbacks.append(ProgressCallback)
+    default_cbs = [cls() for cls in defaults.callbacks]
     learner_args['cbs'] = [cb for cb in self.cbs
-                      if cb.name not in L(defaults.callbacks).attrgot('name')]
+                      if cb.name not in L(default_cbs).attrgot('name')]
 
     add_args = {}
     for arg in _extra_args:
