@@ -25,7 +25,6 @@ if xla_imported():
     import torch_xla.core.xla_model as xm
     import torch_xla.distributed.xla_multiprocessing as xmp
 
-
 # Cell
 
 from fastai.callback.progress import ProgressCallback
