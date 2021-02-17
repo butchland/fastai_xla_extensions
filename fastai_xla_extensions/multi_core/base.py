@@ -317,7 +317,7 @@ class SyncRecorderCallback(Callback):
             for m in self.recorder._valid_mets:
                 self.sync_log += _maybe_item(m)
 
-            self.learn.final_record = self.sync_log[:1].copy()
+            self.learn.final_record = self.sync_log[1:].copy()
             del self.recorder.values[-1] # remove last entry added by recorder
             self.recorder.values.append(self.learn.final_record) # add updated metrics
             if self.recorder.add_time:
