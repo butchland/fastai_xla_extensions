@@ -543,6 +543,59 @@ accordingly so it will display correctly in the progress callback</p>
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="xm_save" class="doc_header"><code>xm_save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L347" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xm_save</code>(<strong><code>data</code></strong>, <strong><code>file_or_path</code></strong>, <strong><code>master_only</code></strong>=<em><code>True</code></em>, <strong><code>global_master</code></strong>=<em><code>False</code></em>, <strong><code>rendezvous</code></strong>=<em><code>True</code></em>)</p>
+</blockquote>
+<p>Saves the input data into a file.</p>
+<p>The saved data is transferred to PyTorch CPU device before being saved, so a
+following <code>torch.load()</code> will load CPU data.
+Care must be taken when working with views. Instead of saving views it's
+recommended that you recreate them after the tensors have been loaded and
+moved to their destination device(s).</p>
+<p>Args:
+data: The input data to be saved. Any nested combination of Python objects
+    (list, tuples, sets, dicts, ...).
+file_or_path: The destination for the data saving operation. Either a file
+    path or a Python file object. If <code>master_only</code> is <code>False</code> the path or
+    file objects must point to different destinations as otherwise all the
+    writes from the same host will override each other.
+master_only (bool, optional): Whether only the master device should save the
+    data. If False, the <code>file_or_path</code> argument should be a different file or
+    path for each of the ordinals taking part to the replication, otherwise
+    all the replicas on the same host will be writing to the same location.
+    Default: True
+global_master (bool, optional): When <code>master_only</code> is <code>True</code> this flag
+    controls whether every host's master (if <code>global_master</code> is <code>False</code>)
+    saves the content, or only the global master (ordinal 0).
+    Default: False</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 </div>
     {% endraw %}
 
@@ -557,7 +610,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L345" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L385" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 
 </div>
@@ -595,7 +648,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L359" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L399" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Sets up the learner on the spawned process for multi core TPU training</p>
 
@@ -620,7 +673,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L384" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L424" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>test one loop for a tpu distributed dataloader</p>
 
@@ -771,11 +824,11 @@ accordingly so it will display correctly in the progress callback</p>
         <span class="n">end_record</span><span class="p">(</span><span class="n">rec_name3</span><span class="p">)</span>
         <span class="n">print_prof_data</span><span class="p">(</span><span class="n">rec_name3</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;finished </span><span class="si">{</span><span class="n">rec_name3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
+    <span class="n">xm</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span><span class="s1">&#39;end_train_model&#39;</span><span class="p">)</span>
     <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;stage-1&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">IS_PROFILING</span> <span class="p">:</span>
         <span class="n">learner</span><span class="o">.</span><span class="n">my_profile</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
-    <span class="n">xm</span><span class="o">.</span><span class="n">mark_step</span><span class="p">()</span>  
+
     
 </pre></div>
 
@@ -831,7 +884,7 @@ accordingly so it will display correctly in the progress callback</p>
     <span class="n">learner</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">()</span>
 
     <span class="n">learner</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr_max</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span>
-
+    <span class="n">xm</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span><span class="s1">&#39;end_train_mnist_model&#39;</span><span class="p">)</span>
     <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;mnist-stage-1&#39;</span><span class="p">)</span>
     <span class="n">xm</span><span class="o">.</span><span class="n">mark_step</span><span class="p">()</span>  
     
@@ -1401,14 +1454,14 @@ accordingly so it will display correctly in the progress callback</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>xla 0 start train model
-xla 2 start train model
-xla 1 start train model
-xla 3 start train model
-xla 4 start train model
-xla 5 start train model
-xla 6 start train model
+<pre>xla 6 start train model
 xla 7 start train model
+xla 3 start train model
+xla 0 start train model
+xla 4 start train model
+xla 2 start train model
+xla 5 start train model
+xla 1 start train model
 build learner
 start running fit
 start fit
@@ -1433,38 +1486,38 @@ start fit
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.805801</td>
-      <td>1.191257</td>
-      <td>0.655405</td>
-      <td>01:44</td>
+      <td>0.761761</td>
+      <td>1.328406</td>
+      <td>0.626351</td>
+      <td>01:49</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.672083</td>
-      <td>1.817104</td>
-      <td>0.568243</td>
-      <td>01:23</td>
+      <td>0.645138</td>
+      <td>0.933653</td>
+      <td>0.735811</td>
+      <td>01:24</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.610179</td>
-      <td>0.494964</td>
-      <td>0.845270</td>
-      <td>01:23</td>
+      <td>0.591257</td>
+      <td>0.491040</td>
+      <td>0.856757</td>
+      <td>01:19</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.523002</td>
-      <td>0.324252</td>
-      <td>0.908108</td>
-      <td>01:21</td>
+      <td>0.515896</td>
+      <td>0.323732</td>
+      <td>0.909459</td>
+      <td>01:18</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.447258</td>
-      <td>0.273349</td>
-      <td>0.920270</td>
-      <td>01:37</td>
+      <td>0.449339</td>
+      <td>0.266388</td>
+      <td>0.925676</td>
+      <td>01:27</td>
     </tr>
   </tbody>
 </table>
@@ -1475,8 +1528,8 @@ start fit
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 139 ms, sys: 192 ms, total: 331 ms
-Wall time: 8min 14s
+<pre>CPU times: user 122 ms, sys: 136 ms, total: 258 ms
+Wall time: 7min 48s
 </pre>
 </div>
 </div>
@@ -1509,14 +1562,14 @@ Wall time: 8min 14s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>xla 2 start train mnist model
-xla 1 start train mnist model
-xla 6 start train mnist model
-xla 3 start train mnist model
+<pre>xla 6 start train mnist model
 xla 0 start train mnist model
+xla 2 start train mnist model
+xla 5 start train mnist model
+xla 3 start train mnist model
 xla 4 start train mnist model
 xla 7 start train mnist model
-xla 5 start train mnist model
+xla 1 start train mnist model
 build learner
 start running fit
 start fit
@@ -1541,38 +1594,38 @@ start fit
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.461098</td>
-      <td>1.453223</td>
-      <td>0.517200</td>
-      <td>02:03</td>
+      <td>0.497664</td>
+      <td>1.390258</td>
+      <td>0.558600</td>
+      <td>01:59</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.316083</td>
-      <td>0.747341</td>
-      <td>0.829800</td>
-      <td>01:44</td>
+      <td>0.338276</td>
+      <td>0.573338</td>
+      <td>0.868800</td>
+      <td>01:46</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.273492</td>
-      <td>0.234156</td>
-      <td>0.941900</td>
-      <td>01:44</td>
+      <td>0.292214</td>
+      <td>0.196778</td>
+      <td>0.951800</td>
+      <td>01:50</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.243033</td>
-      <td>0.078096</td>
-      <td>0.975900</td>
-      <td>01:44</td>
+      <td>0.259126</td>
+      <td>0.080810</td>
+      <td>0.977700</td>
+      <td>01:48</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.217187</td>
-      <td>0.055165</td>
-      <td>0.982700</td>
-      <td>01:54</td>
+      <td>0.230526</td>
+      <td>0.054711</td>
+      <td>0.983300</td>
+      <td>02:01</td>
     </tr>
   </tbody>
 </table>
@@ -1583,8 +1636,8 @@ start fit
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 106 ms, sys: 154 ms, total: 260 ms
-Wall time: 10min 17s
+<pre>CPU times: user 111 ms, sys: 122 ms, total: 233 ms
+Wall time: 10min 36s
 </pre>
 </div>
 </div>
@@ -1641,7 +1694,7 @@ Wall time: 10min 17s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;fastai.learner.Learner at 0x7f8a927b5d30&gt;</pre>
+<pre>&lt;fastai.learner.Learner at 0x7f18832b6ef0&gt;</pre>
 </div>
 
 </div>
@@ -1765,9 +1818,9 @@ Wall time: 10min 17s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.281120628118515, 0.9181326031684875]
-CPU times: user 3min 29s, sys: 3.84 s, total: 3min 33s
-Wall time: 3min 35s
+<pre>[0.267182320356369, 0.924221932888031]
+CPU times: user 3min 31s, sys: 3.73 s, total: 3min 35s
+Wall time: 3min 41s
 </pre>
 </div>
 </div>

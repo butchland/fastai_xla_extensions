@@ -2,7 +2,7 @@
 
 __all__ = ['revert_tensor', 'recast2tensor', 'round_to_multiple', 'TPUDistributedDL', 'build_distributed_dataloaders',
            'make_fastai_dataloaders', 'wrap_parallel_loader', 'XLATrainingCallback', 'pack_metric', 'make_tensor',
-           'pack_metrics', 'restore_metrics', 'SyncRecorderCallback', 'do_one_loop']
+           'pack_metrics', 'restore_metrics', 'SyncRecorderCallback', 'xm_save', 'do_one_loop']
 
 # Internal Cell
 
@@ -342,6 +342,46 @@ from fastcore.xtras import join_path_file
 
 # Cell
 
+#copied from `torch_xla.core.xla_model.save` with the addition of rendezvous as a param
+
+def xm_save(data, file_or_path, master_only=True, global_master=False, rendezvous=True):
+    """Saves the input data into a file.
+
+    The saved data is transferred to PyTorch CPU device before being saved, so a
+    following `torch.load()` will load CPU data.
+    Care must be taken when working with views. Instead of saving views it's
+    recommended that you recreate them after the tensors have been loaded and
+    moved to their destination device(s).
+
+    Args:
+    data: The input data to be saved. Any nested combination of Python objects
+        (list, tuples, sets, dicts, ...).
+    file_or_path: The destination for the data saving operation. Either a file
+        path or a Python file object. If `master_only` is ``False`` the path or
+        file objects must point to different destinations as otherwise all the
+        writes from the same host will override each other.
+    master_only (bool, optional): Whether only the master device should save the
+        data. If False, the `file_or_path` argument should be a different file or
+        path for each of the ordinals taking part to the replication, otherwise
+        all the replicas on the same host will be writing to the same location.
+        Default: True
+    global_master (bool, optional): When ``master_only`` is ``True`` this flag
+        controls whether every host's master (if ``global_master`` is ``False``)
+        saves the content, or only the global master (ordinal 0).
+        Default: False
+    """
+    should_write_data = not master_only or xm.is_master_ordinal(
+        local=not global_master)
+
+    cpu_data = xm._maybe_convert_to_cpu(data, convert=should_write_data)
+    if should_write_data:
+        torch.save(cpu_data, file_or_path)
+    if rendezvous:
+        xm.rendezvous('torch_xla.core.xla_model.save')
+
+
+# Cell
+
 @patch
 @delegates(Learner.save)
 def save(self:Learner, file, **kwargs):
@@ -352,7 +392,7 @@ def save(self:Learner, file, **kwargs):
         # add opt state to state to be saved
         opt_state = self.opt.state_dict()
         state = {'model': state, 'opt':opt_state}
-    xm.save(state, file) # use xm.save instead of torch.save
+    xm_save(state, file, **kwargs) # use xm.save instead of torch.save
     return file
 
 # Cell
