@@ -250,10 +250,3 @@ def xla_fit_one_cycle(self:Learner, n_epoch, num_cores=8,
 
     self.reload_child_model()
     self.post_xla_fit(ctrl_args)
-
-# Cell
-from fastai.callback.tracker import SaveModelCallback
-@patch
-def _save(self:SaveModelCallback, name):
-    self.last_saved_path = self.learn.save(name, with_opt=self.with_opt,
-                                           rendezvous=False)

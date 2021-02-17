@@ -381,6 +381,14 @@ def xm_save(data, file_or_path, master_only=True, global_master=False, rendezvou
 
 
 # Cell
+from fastai.callback.tracker import SaveModelCallback
+from fastcore.basics import patch
+@patch
+def _save(self:SaveModelCallback, name):
+    self.last_saved_path = self.learn.save(name, with_opt=self.with_opt,
+                                           rendezvous=False)
+
+# Cell
 @patch
 @delegates(Learner.save, but='rendezvous')
 def save(self:Learner, file, **kwargs):

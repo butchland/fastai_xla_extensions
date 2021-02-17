@@ -603,6 +603,13 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
     
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -610,7 +617,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L384" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L392" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 
 </div>
@@ -648,7 +655,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L404" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L412" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Sets up the learner on the spawned process for multi core TPU training</p>
 
@@ -673,7 +680,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L429" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L437" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>test one loop for a tpu distributed dataloader</p>
 
@@ -1419,9 +1426,9 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#colab</span>
-<span class="c1"># %%time</span>
-<span class="c1"># xmp.spawn(_mp_fn2, args=(FLAGS,), nprocs=FLAGS[&#39;num_cores&#39;],</span>
-<span class="c1">#         start_method=&#39;fork&#39;)</span>
+<span class="o">%%time</span>
+<span class="n">xmp</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">_mp_fn2</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">FLAGS</span><span class="p">,),</span> <span class="n">nprocs</span><span class="o">=</span><span class="n">FLAGS</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">],</span>
+        <span class="n">start_method</span><span class="o">=</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1439,12 +1446,92 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># %%time</span>
-<span class="c1"># FLAGS[&#39;is_profiling&#39;] = False</span>
-<span class="c1"># xmp.spawn(_mp_fn, args=(FLAGS,), nprocs=FLAGS[&#39;num_cores&#39;],</span>
-<span class="c1">#         start_method=&#39;fork&#39;)</span>
+<span class="n">FLAGS</span><span class="p">[</span><span class="s1">&#39;is_profiling&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">xmp</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">_mp_fn</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">FLAGS</span><span class="p">,),</span> <span class="n">nprocs</span><span class="o">=</span><span class="n">FLAGS</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">],</span>
+        <span class="n">start_method</span><span class="o">=</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>xla 0 start train model
+xla 7 start train model
+xla 1 start train model
+xla 5 start train model
+xla 6 start train model
+xla 4 start train model
+xla 3 start train model
+xla 2 start train model
+build learner
+start running fit
+start fit
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>accuracy</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.779555</td>
+      <td>1.332066</td>
+      <td>0.640540</td>
+      <td>01:50</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.646139</td>
+      <td>1.049680</td>
+      <td>0.724324</td>
+      <td>01:23</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.583156</td>
+      <td>0.508811</td>
+      <td>0.850676</td>
+      <td>01:27</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.506804</td>
+      <td>0.297314</td>
+      <td>0.908108</td>
+      <td>01:20</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.430627</td>
+      <td>0.245706</td>
+      <td>0.927703</td>
+      <td>01:19</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1459,11 +1546,91 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># %%time</span>
-<span class="c1"># xmp.spawn(_mp_fn3, args=(FLAGS2,), nprocs=FLAGS2[&#39;num_cores&#39;],</span>
-<span class="c1">#         start_method=&#39;fork&#39;)</span>
+<span class="n">xmp</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">_mp_fn3</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">FLAGS2</span><span class="p">,),</span> <span class="n">nprocs</span><span class="o">=</span><span class="n">FLAGS2</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">],</span>
+        <span class="n">start_method</span><span class="o">=</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>xla 0 start train mnist model
+xla 7 start train mnist model
+xla 3 start train mnist model
+xla 6 start train mnist model
+xla 1 start train mnist model
+xla 2 start train mnist model
+xla 5 start train mnist model
+xla 4 start train mnist model
+build learner
+start running fit
+start fit
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>accuracy</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.477569</td>
+      <td>1.522651</td>
+      <td>0.474000</td>
+      <td>02:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.325794</td>
+      <td>0.643197</td>
+      <td>0.836200</td>
+      <td>01:49</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.283186</td>
+      <td>0.174236</td>
+      <td>0.952100</td>
+      <td>01:59</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.250719</td>
+      <td>0.080230</td>
+      <td>0.976000</td>
+      <td>01:52</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.222686</td>
+      <td>0.053009</td>
+      <td>0.982400</td>
+      <td>01:52</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1501,10 +1668,26 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
                     <span class="n">wd</span><span class="o">=</span><span class="n">FLAGS</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">],</span>
                     <span class="n">moms</span><span class="o">=</span><span class="p">(</span><span class="n">FLAGS</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">],</span><span class="n">FLAGS</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">],</span><span class="n">FLAGS</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]))</span>
 <span class="c1"># load trained weights from multi core tpu training</span>
-<span class="c1"># mlearner.load(&#39;stage-1&#39;)</span>
+<span class="n">mlearner</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;stage-1&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;fastai.learner.Learner at 0x7f9e547d4898&gt;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1624,9 +1807,9 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[5.066139221191406, 0.016914749518036842]
-CPU times: user 3min 7s, sys: 1.68 s, total: 3min 9s
-Wall time: 3min 11s
+<pre>[0.24494041502475739, 0.9269282817840576]
+CPU times: user 3min 30s, sys: 3.48 s, total: 3min 34s
+Wall time: 3min 36s
 </pre>
 </div>
 </div>
