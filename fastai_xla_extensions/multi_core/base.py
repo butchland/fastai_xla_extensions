@@ -381,12 +381,17 @@ def xm_save(data, file_or_path, master_only=True, global_master=False, rendezvou
 
 
 # Cell
-
 @patch
-@delegates(Learner.save)
+@delegates(Learner.save, but='rendezvous')
 def save(self:Learner, file, **kwargs):
     file = join_path_file(file, self.path/self.model_dir, ext='.pth')
-    with_opt = self.opt is not None
+    if 'with_opt' in kwargs:
+        with_opt = kwargs.pop('with_opt')
+    else:
+        with_opt = self.opt is not None
+    if 'pickle_protocol' in kwargs:
+        kwargs.pop('pickle_protocol')
+
     state = self.model.state_dict()
     if with_opt:
         # add opt state to state to be saved
