@@ -87,8 +87,8 @@ def remove_master_cbs(self:Learner, cbs):
 # Cell
 
 from fastai.callback.progress import ProgressCallback
-
 from fastai.learner import Learner
+
 def make_xla_child_learner(rank, sync_valid,learner_args, add_args, ctrl_args):
     "create a learner using passed parameters"
     device = xm.xla_device()
@@ -157,7 +157,7 @@ def pack_learner_args(self:Learner):
     learner_args['cbs'] = [cb for cb in self.cbs
                       if cb.name not in L(default_cbs).attrgot('name')]
 
-    learner_args['master_cbs'] = learner.master_cbs
+    learner_args['master_cbs'] = self.master_cbs
 
     # remove extra args from learner args (in __stored_args__ but not in init args)
     add_args = {}
