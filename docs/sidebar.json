@@ -8,6 +8,8 @@
     "Multi Core XLA Base ": "multi_core.base",
     "Torch Compatible Utilities": "multi_core.torch_compat",
     "Multi Core XLA Learner extensions": "multi_core.learner",
+    "Multi Core Callback XLA Extensions": "multi_core.callback",
+    "Multi Core LR Find XLA Extensions": "multicore.lr_find",
     "Development Setup": "dev_setup"
   }
 }

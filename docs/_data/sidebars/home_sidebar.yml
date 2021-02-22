@@ -31,6 +31,12 @@ entries:
       title: Multi Core XLA Learner extensions
       url: multi_core.learner
     - output: web,pdf
+      title: Multi Core Callback XLA Extensions
+      url: multi_core.callback
+    - output: web,pdf
+      title: Multi Core LR Find XLA Extensions
+      url: multicore.lr_find
+    - output: web,pdf
       title: Development Setup
       url: dev_setup
     output: web

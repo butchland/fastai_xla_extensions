@@ -75,7 +75,20 @@ index = {"XLAOptimProxy": "00_core.ipynb",
          "Learner.post_xla_fit": "03b_multi_core.learner.ipynb",
          "prep_fit_args": "03b_multi_core.learner.ipynb",
          "Learner.xla_fit": "03b_multi_core.learner.ipynb",
-         "Learner.xla_fit_one_cycle": "03b_multi_core.learner.ipynb"}
+         "Learner.xla_fit_one_cycle": "03b_multi_core.learner.ipynb",
+         "maybe_item": "03c_multi_core.callback.ipynb",
+         "Recorder.get_extra_attrs": "03c_multi_core.callback.ipynb",
+         "Recorder.dump_attrs": "03c_multi_core.callback.ipynb",
+         "Recorder.reload_attrs": "03c_multi_core.callback.ipynb",
+         "Recorder.after_fit": "03c_multi_core.callback.ipynb",
+         "ParamScheduler.dump_hps": "03c_multi_core.callback.ipynb",
+         "Recorder.reload_hps": "03c_multi_core.callback.ipynb",
+         "ParamScheduler.after_fit": "03c_multi_core.callback.ipynb",
+         "SkipValidationCallback": "03d_multicore.lr_find.ipynb",
+         "XLALRFinder": "03d_multicore.lr_find.ipynb",
+         "xla_run_lr_find": "03d_multicore.lr_find.ipynb",
+         "Learner.get_suggested_lrs": "03d_multicore.lr_find.ipynb",
+         "Learner.xla_lr_find": "03d_multicore.lr_find.ipynb"}
 
 modules = ["core.py",
            "utils.py",
@@ -83,7 +96,9 @@ modules = ["core.py",
            "misc_utils.py",
            "multi_core/base.py",
            "multi_core/torch_compat.py",
-           "multi_core/learner.py"]
+           "multi_core/learner.py",
+           "multi_core/callback.py",
+           "multi_core/lr_find.py"]
 
 doc_url = "https://butchland.github.io/fastai_xla_extensions/"
 
