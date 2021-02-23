@@ -37,7 +37,8 @@ class SkipValidationCallback(Callback):
         raise CancelValidException()
 
     def after_cancel_validate(self):
-        xm.mark_step()
+        if getattr(self.learn,'inner_xla', False):
+            xm.mark_step()
 
 
 # Cell
@@ -64,7 +65,8 @@ class XLALRFinder(ParamScheduler):
         # dont report losses while running lrfind (override sync_recorder)
         # run after sync_recorder.before_fit (sync_recorder.order == 55)
         # while param scheduler order == 60
-        if xm.is_master_ordinal() and hasattr(self.learn, 'sync_recorder'):
+        if getattr(self.learn,'inner_xla',False) \
+        and xm.is_master_ordinal() and hasattr(self.learn, 'sync_recorder'):
             self.learn.logger = noop
             self.learn.sync_recorder._sync_stats_log = noop
 
@@ -100,6 +102,9 @@ class XLALRFinder(ParamScheduler):
         # if tmp_f.exists():
         #     self.learn.load('_tmp', with_opt=True)
         #     os.remove(tmp_f)
+        if not getattr(self.learn,'inner_xla', False):
+            return # skip if not on spawned process
+
         if not xm.is_master_ordinal(): return
 
         if not self.skip_batch: # completed w/o copying lrs and losses from recorder to plot_data
@@ -189,10 +194,11 @@ def xla_lr_find(self:Learner, num_cores=8, start_method='fork', **kwargs):
               nprocs=num_cores,
               start_method=start_method)
 
-    self.recorder.reload_attrs()
-    self.recorder.reload_hps()
-    if has_progress and 'progress' not in L(self.cbs).attrgot('name'):
-        self.add_cbs([ProgressCallback])
+    # self.recorder.reload_attrs()
+    # self.recorder.reload_hps()
+    # if has_progress and 'progress' not in L(self.cbs).attrgot('name'):
+    #     self.add_cbs([ProgressCallback])
+    self.post_xla_fit(ctrl_args)
     if show_plot:
         self.recorder.plot_lr_find()
     if suggestions:

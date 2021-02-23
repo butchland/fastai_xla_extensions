@@ -6,7 +6,7 @@ __all__ = ['maybe_item']
 from ..utils import xla_imported
 from ..misc_utils import *
 from .base import *
-from .learner import *
+# from fastai_xla_extensions.multi_core.learner import *
 
 # Internal Cell
 try:
@@ -96,7 +96,7 @@ from fastcore.basics import patch
 @patch
 def after_fit(self: Recorder):
     'after fit dump extra attrs to file'
-    if xm.is_master_ordinal():
+    if getattr(self.learn,'inner_xla',False) and self.learn.xla_rank == 0:
         self.dump_attrs()
 
 
@@ -108,6 +108,7 @@ import pickle
 
 @patch
 def dump_hps(self:ParamScheduler, fn='_paramsched_hps.pkl'):
+    'dump `hps` to a file `fn`'
     if not hasattr(self, 'hps'):
         return
 
@@ -148,5 +149,5 @@ def after_fit(self:ParamScheduler):
     if hasattr(self.learn, 'recorder'):
         self.recorder.hps = self.hps
 
-    if xm.is_master_ordinal():
+    if getattr(self.learn,'inner_xla',False) and self.learn.xla_rank == 0:
         self.dump_hps()

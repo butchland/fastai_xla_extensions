@@ -202,11 +202,16 @@ class XLATrainingCallback(Callback):
         self.sync_valid = sync_valid
 
     def before_fit(self):
-       xm.master_print('start fit')
+        if not getattr(self.learn,'inner_xla', False):
+            return # skip if not spawned
+        xm.master_print('start fit')
 
     def before_epoch(self):
         # set the epoch on train only to make sure shuffle produces same seq
         # across all ranks
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
         if hasattr(self.learn.dls.train,'sampler'):
             if hasattr(self.learn.dls.train.sampler,'set_epoch'):
                 self.learn.dls.train.sampler.set_epoch(self.learn.epoch)
@@ -221,10 +226,16 @@ class XLATrainingCallback(Callback):
                 self.learn.dls.valid.set_epoch(self.learn.epoch)
 
     def before_train(self):
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
         self.learn.dl = wrap_parallel_loader(self.dls.train, self.pdevice)
 
     def before_validate(self):
         "Set the model in validation mode"
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
         if self.rank != 0 and not self.sync_valid:
         # no need to compute valid loss/ metric if not master if not sync valid
             raise CancelValidException()
@@ -283,17 +294,27 @@ class SyncRecorderCallback(Callback):
     order  = 55 # after Recorder, before ProgressCallback
 
     def before_fit(self):
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
         if not xm.is_master_ordinal():
             return
+
         if 'progress' in self.learn.cbs.attrgot('name',None):
             self._sync_stats_log = self.progress._write_stats
         else:
             self._sync_stats_log = self.learn.logger
 
     def before_epoch(self):
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
         self.sync_log = copy.copy(self.recorder.log)
 
     def after_epoch(self):
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
         if 'recorder' not in self.learn.cbs.attrgot('name'):
             all_metrics = {
                 'train_mets': L([]),
@@ -328,6 +349,9 @@ class SyncRecorderCallback(Callback):
             self.learn.logger = self.orig_logger # restore orig logger after skipping recorder.logger(log)
 
     def after_validate(self):
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
         if xm.is_master_ordinal():
             self.orig_logger = self.learn.logger
             self.learn.logger = noop # write to logger disabled so calling recorder.logger(log) wont print
@@ -385,33 +409,39 @@ from fastai.callback.tracker import SaveModelCallback
 from fastcore.basics import patch
 @patch
 def _save(self:SaveModelCallback, name):
-    self.last_saved_path = self.learn.save(name, with_opt=self.with_opt,
+    if getattr(self.learn,'inner_xla', False):
+        self.last_saved_path = self.learn.save(name, with_opt=self.with_opt,
                                            rendezvous=False)
+    else:
+        self.last_saved_path = self.learn.save(name, with_opt=self.with_opt)
 
 # Cell
 @patch
 @delegates(Learner.save, but='rendezvous')
 def save(self:Learner, file, **kwargs):
     file = join_path_file(file, self.path/self.model_dir, ext='.pth')
-    if 'with_opt' in kwargs:
-        with_opt = kwargs.pop('with_opt')
-    else:
-        with_opt = self.opt is not None
-    if 'pickle_protocol' in kwargs:
-        kwargs.pop('pickle_protocol')
+    with_opt = kwargs.pop('with_opt', self.opt is not None)
+    pickle_protocol = kwargs.pop('pickle_protocol', 2)
 
     state = self.model.state_dict()
     if with_opt:
         # add opt state to state to be saved
         opt_state = self.opt.state_dict()
         state = {'model': state, 'opt':opt_state}
-    xm_save(state, file, **kwargs) # use xm.save instead of torch.save
+    if getattr(self,'inner_xla',False):
+        xm_save(state, file, **kwargs) # use xm_save instead of torch.save
+    else:
+        # use default if not spawned
+        torch.save(state,file,pickle_protocol=pickle_protocol)
     return file
 
 # Cell
 @patch
 def to_multi_xla(self:Learner,device, rank, sync_valid=False):
     "Sets up the learner on the spawned process for multi core TPU training"
+    # add xla info on learner
+    self.inner_xla = True
+    self.xla_rank = rank
     if 'xla_training' not in self.cbs.attrgot('name'):
         self.dls.device = None
         self.add_cbs([XLATrainingCallback(device, rank, sync_valid=sync_valid),
