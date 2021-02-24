@@ -86,11 +86,12 @@ index = {"XLAOptimProxy": "00_core.ipynb",
          "ParamScheduler.dump_hps": "03c_multi_core.callback.ipynb",
          "Recorder.reload_hps": "03c_multi_core.callback.ipynb",
          "ParamScheduler.after_fit": "03c_multi_core.callback.ipynb",
-         "SkipValidationCallback": "03d_multicore.lr_find.ipynb",
-         "XLALRFinder": "03d_multicore.lr_find.ipynb",
-         "xla_run_lr_find": "03d_multicore.lr_find.ipynb",
-         "Learner.get_suggested_lrs": "03d_multicore.lr_find.ipynb",
-         "Learner.xla_lr_find": "03d_multicore.lr_find.ipynb"}
+         "SkipValidationCallback": "03d_multi_core.lr_find.ipynb",
+         "XLALRFinder": "03d_multi_core.lr_find.ipynb",
+         "Learner.get_suggested_lrs": "03d_multi_core.lr_find.ipynb",
+         "Recorder.reload_lr_find_attrs": "03d_multi_core.lr_find.ipynb",
+         "xla_run_lr_find": "03d_multi_core.lr_find.ipynb",
+         "Learner.xla_lr_find": "03d_multi_core.lr_find.ipynb"}
 
 modules = ["core.py",
            "utils.py",
