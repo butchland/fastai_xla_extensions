@@ -41,7 +41,8 @@ class SkipValidationCallback(Callback):
 # Cell
 
 from fastai.callback.schedule import ParamScheduler, SchedExp
-
+from fastcore.xtras import is_listy
+from fastcore.imports import noop
 class XLALRFinder(ParamScheduler):
     "Training with exponentially growing learning rate"
     def __init__(self, start_lr=1e-7, end_lr=10, num_it=100, stop_div=True):
