@@ -87,7 +87,7 @@ def reload_attrs(self:Recorder, fn='_rec_attr.pkl'):
         d = pickle.load(f)
         for k,v in d.items():
             setattr(self,k,v)
-
+    fn.unlink()
 
 # Cell
 from fastai.learner import Recorder
@@ -135,6 +135,7 @@ def reload_hps(self:Recorder, fn='_paramsched_hps.pkl'):
     with open(fn,'rb') as f:
         d = pickle.load(f)
         setattr(self,'hps',d)
+    fn.unlink()
 
 # Cell
 from fastai.callback.schedule import ParamScheduler
