@@ -65,7 +65,7 @@ nb_path: "nbs/03_multi_core.base.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="revert_tensor" class="doc_header"><code>revert_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>revert_tensor</code>(<strong><code>o</code></strong>)</p>
+<h4 id="revert_tensor" class="doc_header"><code>revert_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>revert_tensor</code>(<strong><code>o</code></strong>)</p>
 </blockquote>
 <p>Remove tensor subclass and revert to <code>torch.Tensor</code></p>
 
@@ -90,7 +90,7 @@ nb_path: "nbs/03_multi_core.base.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="recast2tensor" class="doc_header"><code>recast2tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>recast2tensor</code>(<strong><code>o</code></strong>)</p>
+<h4 id="recast2tensor" class="doc_header"><code>recast2tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>recast2tensor</code>(<strong><code>o</code></strong>)</p>
 </blockquote>
 <p>Recast <code>fastai.torch_core.TensorBase</code> subclassed tensors to torch.Tensors</p>
 
@@ -115,7 +115,7 @@ nb_path: "nbs/03_multi_core.base.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="round_to_multiple" class="doc_header"><code>round_to_multiple</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>round_to_multiple</code>(<strong><code>number</code></strong>, <strong><code>multiple</code></strong>)</p>
+<h4 id="round_to_multiple" class="doc_header"><code>round_to_multiple</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L62" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>round_to_multiple</code>(<strong><code>number</code></strong>, <strong><code>multiple</code></strong>)</p>
 </blockquote>
 <p>round up batch samples to fill number of cores</p>
 
@@ -250,6 +250,94 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Torch-Dataloader-Patches">Torch Dataloader Patches<a class="anchor-link" href="#Torch-Dataloader-Patches"> </a></h2><p>These patches to the torch dataloader make torch dataloaders
+more compatible with fastai dataloaders (enabling them to run
+inside the fastai Learning and use fastai training calls)</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.__setattr__" class="doc_header"><code>DataLoader.__setattr__</code><a href="__main__.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.__setattr__</code>(<strong><code>attr</code></strong>, <strong><code>val</code></strong>)</p>
+</blockquote>
+<p>remove sampler,batch_sampler from list of attrs which should not be set after init</p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.after_batch" class="doc_header"><code>DataLoader.after_batch</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return empty pipeline when fastai learner looks for after_batch</p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.bs" class="doc_header"><code>DataLoader.bs</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return fastai synonym for torch batch size</p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.device" class="doc_header"><code>DataLoader.device</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return null device</p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.to" class="doc_header"><code>DataLoader.to</code><a href="__main__.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.to</code>(<strong><code>device</code></strong>)</p>
+</blockquote>
+<p>add impl for to(device)</p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.set_distributed_sampler" class="doc_header"><code>DataLoader.set_distributed_sampler</code><a href="__main__.py#L46" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.set_distributed_sampler</code>(<strong><code>rank</code></strong>, <strong><code>world_size</code></strong>)</p>
+</blockquote>
+<p>replace sampler with torch distributed sampler</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -268,7 +356,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="build_distributed_dataloaders" class="doc_header"><code>build_distributed_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>build_distributed_dataloaders</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="build_distributed_dataloaders" class="doc_header"><code>build_distributed_dataloaders</code><a href="__main__.py#L4" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>build_distributed_dataloaders</code>(<strong><code>dls</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Wrap dataloaders with distributed TPU aware dataloader</p>
 
@@ -332,7 +420,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L180" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L248" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>wraps a tpu distributed loader or a torch dataloader (with distributed sampler) with xla parallel loader</p>
 
@@ -357,7 +445,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L194" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
+<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L262" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A callback for training as a spawned process on multi-core TPUs</p>
 
@@ -403,7 +491,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pack_metric" class="doc_header"><code>pack_metric</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L251" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metric</code>(<strong><code>metrics</code></strong>)</p>
+<h4 id="pack_metric" class="doc_header"><code>pack_metric</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L319" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metric</code>(<strong><code>metrics</code></strong>)</p>
 </blockquote>
 <p>extract counts and totals from avg metrics and avg losses into a list</p>
 
@@ -428,7 +516,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_tensor" class="doc_header"><code>make_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L258" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_tensor</code>(<strong><code>o</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="make_tensor" class="doc_header"><code>make_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L326" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_tensor</code>(<strong><code>o</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>convert a scalar or tensor into a float tensor and move them to <code>device</code></p>
 
@@ -453,7 +541,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pack_metrics" class="doc_header"><code>pack_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L264" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metrics</code>(<strong><code>all_metrics</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="pack_metrics" class="doc_header"><code>pack_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L332" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metrics</code>(<strong><code>all_metrics</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>pack train and valid metrics into a list of float tensors and move them to <code>device</code></p>
 
@@ -478,7 +566,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="restore_metrics" class="doc_header"><code>restore_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L269" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>restore_metrics</code>(<strong><code>reduced_metrics</code></strong>, <strong><code>all_metrics</code></strong>)</p>
+<h4 id="restore_metrics" class="doc_header"><code>restore_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L337" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>restore_metrics</code>(<strong><code>reduced_metrics</code></strong>, <strong><code>all_metrics</code></strong>)</p>
 </blockquote>
 <p>restore list of float tensors (count and values) back into train and valid metrics</p>
 
@@ -510,7 +598,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L290" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L358" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A <code>Callback</code> to sync the metrics from each rank and update statistics
 accordingly so it will display correctly in the progress callback</p>
@@ -550,7 +638,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="xm_save" class="doc_header"><code>xm_save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L371" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xm_save</code>(<strong><code>data</code></strong>, <strong><code>file_or_path</code></strong>, <strong><code>master_only</code></strong>=<em><code>True</code></em>, <strong><code>global_master</code></strong>=<em><code>False</code></em>, <strong><code>rendezvous</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="xm_save" class="doc_header"><code>xm_save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L439" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xm_save</code>(<strong><code>data</code></strong>, <strong><code>file_or_path</code></strong>, <strong><code>master_only</code></strong>=<em><code>True</code></em>, <strong><code>global_master</code></strong>=<em><code>False</code></em>, <strong><code>rendezvous</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Saves the input data into a file.</p>
 <p>The saved data is transferred to PyTorch CPU device before being saved, so a
@@ -617,7 +705,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L419" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L487" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 
 </div>
@@ -655,7 +743,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L439" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L507" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Sets up the learner on the spawned process for multi core TPU training</p>
 
@@ -680,7 +768,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L467" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L535" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>test one loop for a tpu distributed dataloader</p>
 
@@ -832,7 +920,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
         <span class="n">print_prof_data</span><span class="p">(</span><span class="n">rec_name3</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;finished </span><span class="si">{</span><span class="n">rec_name3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">xm</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span><span class="s1">&#39;end_train_model&#39;</span><span class="p">)</span>
-    <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;stage-1&#39;</span><span class="p">)</span>
+    <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;stage-1&#39;</span><span class="p">,</span> <span class="n">rendezvous</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">IS_PROFILING</span> <span class="p">:</span>
         <span class="n">learner</span><span class="o">.</span><span class="n">my_profile</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
 
@@ -892,7 +980,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
     <span class="n">learner</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr_max</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span>
     <span class="n">xm</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span><span class="s1">&#39;end_train_mnist_model&#39;</span><span class="p">)</span>
-    <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;mnist-stage-1&#39;</span><span class="p">)</span>
+    <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;mnist-stage-1&#39;</span><span class="p">,</span> <span class="n">rendezvous</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">xm</span><span class="o">.</span><span class="n">mark_step</span><span class="p">()</span>  
     
 </pre></div>
@@ -1194,6 +1282,30 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1293,6 +1405,28 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet34-333f7ec4.pth&#34; to /root/.cache/torch/hub/checkpoints/resnet34-333f7ec4.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1309,6 +1443,28 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet18-5c106cde.pth&#34; to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1394,13 +1550,13 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>xla 2 start train model
-xla 0 start train model
-xla 5 start train model
-xla 3 start train model
-xla 7 start train model
-xla 6 start train model
-xla 4 start train model
 xla 1 start train model
+xla 0 start train model
+xla 4 start train model
+xla 5 start train model
+xla 7 start train model
+xla 3 start train model
+xla 6 start train model
 build learner
 start running fit
 start fit
@@ -1425,38 +1581,38 @@ start fit
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.764375</td>
-      <td>1.972134</td>
-      <td>0.502027</td>
-      <td>01:47</td>
+      <td>0.774123</td>
+      <td>1.111458</td>
+      <td>0.665541</td>
+      <td>01:43</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.645831</td>
-      <td>0.934935</td>
-      <td>0.743919</td>
-      <td>01:23</td>
+      <td>0.655425</td>
+      <td>0.869814</td>
+      <td>0.756757</td>
+      <td>01:33</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.584898</td>
-      <td>0.671082</td>
-      <td>0.802027</td>
-      <td>01:19</td>
+      <td>0.600353</td>
+      <td>0.416691</td>
+      <td>0.866216</td>
+      <td>01:25</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.520407</td>
-      <td>0.263578</td>
-      <td>0.912838</td>
-      <td>01:18</td>
+      <td>0.528863</td>
+      <td>0.277759</td>
+      <td>0.910135</td>
+      <td>01:21</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.447057</td>
-      <td>0.225782</td>
-      <td>0.925000</td>
-      <td>01:25</td>
+      <td>0.446763</td>
+      <td>0.250018</td>
+      <td>0.921622</td>
+      <td>01:22</td>
     </tr>
   </tbody>
 </table>
@@ -1467,8 +1623,8 @@ start fit
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 128 ms, sys: 210 ms, total: 338 ms
-Wall time: 7min 57s
+<pre>CPU times: user 139 ms, sys: 138 ms, total: 278 ms
+Wall time: 7min 59s
 </pre>
 </div>
 </div>
@@ -1502,13 +1658,13 @@ Wall time: 7min 57s
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>xla 1 start train mnist model
+xla 5 start train mnist model
+xla 4 start train mnist model
+xla 0 start train mnist model
+xla 7 start train mnist model
 xla 2 start train mnist model
 xla 6 start train mnist model
 xla 3 start train mnist model
-xla 0 start train mnist model
-xla 7 start train mnist model
-xla 4 start train mnist model
-xla 5 start train mnist model
 build learner
 start running fit
 start fit
@@ -1533,38 +1689,38 @@ start fit
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.443384</td>
-      <td>1.681226</td>
-      <td>0.461300</td>
-      <td>01:44</td>
+      <td>0.475710</td>
+      <td>1.426826</td>
+      <td>0.595500</td>
+      <td>02:03</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.302194</td>
-      <td>0.925730</td>
-      <td>0.808100</td>
-      <td>01:44</td>
+      <td>0.321641</td>
+      <td>0.655745</td>
+      <td>0.877400</td>
+      <td>01:58</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.262492</td>
-      <td>0.177510</td>
-      <td>0.959100</td>
-      <td>01:44</td>
+      <td>0.278622</td>
+      <td>0.205498</td>
+      <td>0.956500</td>
+      <td>01:50</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.233190</td>
-      <td>0.075639</td>
-      <td>0.978500</td>
-      <td>01:45</td>
+      <td>0.248008</td>
+      <td>0.090122</td>
+      <td>0.974500</td>
+      <td>01:49</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.207630</td>
-      <td>0.058846</td>
-      <td>0.982000</td>
-      <td>01:45</td>
+      <td>0.220691</td>
+      <td>0.067845</td>
+      <td>0.978300</td>
+      <td>01:50</td>
     </tr>
   </tbody>
 </table>
@@ -1733,9 +1889,454 @@ start fit
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.22963683307170868, 0.924221932888031]
-CPU times: user 3min 27s, sys: 3.25 s, total: 3min 31s
-Wall time: 3min 33s
+<pre>[0.24588747322559357, 0.9194858074188232]
+CPU times: user 3min 40s, sys: 3.53 s, total: 3min 43s
+Wall time: 3min 46s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">FLAGS3</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mi">64</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;num_workers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/content/data/cifar&#39;</span><span class="p">)</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;sync_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;image_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">28</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.85</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2e-3</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;num_epochs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;TPU_NAME&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+<span class="c1"># FLAGS[&#39;num_cores&#39;] = 1 </span>
+<span class="n">ARCH3</span> <span class="o">=</span> <span class="n">resnet18</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_dataset</span><span class="p">():</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span>
+        <span class="n">mean</span><span class="o">=</span><span class="p">(</span><span class="mf">0.4914</span><span class="p">,</span> <span class="mf">0.4822</span><span class="p">,</span> <span class="mf">0.4465</span><span class="p">),</span> <span class="n">std</span><span class="o">=</span><span class="p">(</span><span class="mf">0.2023</span><span class="p">,</span> <span class="mf">0.1994</span><span class="p">,</span> <span class="mf">0.2010</span><span class="p">))</span>
+    <span class="n">transform_train</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomCrop</span><span class="p">(</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;image_size&#39;</span><span class="p">],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">norm</span><span class="p">,</span>
+    <span class="p">])</span>
+    <span class="n">transform_test</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;image_size&#39;</span><span class="p">],</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;image_size&#39;</span><span class="p">])),</span>                                 
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">norm</span><span class="p">,</span>
+    <span class="p">])</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
+        <span class="n">root</span><span class="o">=</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span>
+        <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">transform_train</span><span class="p">)</span>
+    <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
+        <span class="n">root</span><span class="o">=</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">],</span>
+        <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">transform_test</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">get_dataset</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Files already downloaded and verified
+Files already downloaded and verified
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">train_dataset</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">],</span>
+<span class="c1">#   sampler=train_sampler,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;num_workers&#39;</span><span class="p">],</span>
+    <span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">test_dataset</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">],</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;num_workers&#39;</span><span class="p">],</span>
+    <span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># fastai dls using torch dataloaders</span>
+<span class="n">CIFAR_DLS</span> <span class="o">=</span> <span class="n">DataLoaders</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">N_OUT3</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># cifar10 has 10 labels</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">custom_model3</span> <span class="o">=</span> <span class="n">create_cnn_model</span><span class="p">(</span><span class="n">ARCH3</span><span class="p">,</span> <span class="n">N_OUT3</span><span class="p">,</span> 
+                                <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">concat_pool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">WRAPPED_MODEL3</span> <span class="o">=</span> <span class="n">xmp</span><span class="o">.</span><span class="n">MpModelWrapper</span><span class="p">(</span><span class="n">custom_model3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">PrintDevicesCallback</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="o">-</span><span class="mi">6</span> <span class="c1"># before XLATrainingCallback</span>
+    <span class="k">def</span> <span class="nf">before_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_device</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">before_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_device</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">print_device</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">epoch</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;train: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">training</span><span class="si">}</span><span class="s1"> xla </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">xla_rank</span><span class="si">}</span><span class="s1">: dl.type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">dl</span><span class="p">)</span><span class="si">}</span><span class="s1"> dl.device </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">dl</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s1"> model.device: </span><span class="si">{</span><span class="n">one_param</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_cifar_model</span><span class="p">(</span><span class="n">rank</span><span class="p">):</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">xm</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span><span class="s1">&#39;start_train_cifar_model&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;xla </span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s1"> start train cifar model&#39;</span><span class="p">)</span>    
+    <span class="n">SYNC_VALID</span> <span class="o">=</span> <span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;sync_valid&#39;</span><span class="p">]</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">xm</span><span class="o">.</span><span class="n">xla_device</span><span class="p">()</span>
+
+    <span class="n">bs</span> <span class="o">=</span> <span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">]</span>
+    <span class="n">world_size</span> <span class="o">=</span> <span class="n">xm</span><span class="o">.</span><span class="n">xrt_world_size</span><span class="p">()</span>
+
+    <span class="n">dls</span> <span class="o">=</span> <span class="n">build_distributed_dataloaders</span><span class="p">(</span><span class="n">CIFAR_DLS</span><span class="p">,</span> 
+                                        <span class="n">rank</span><span class="p">,</span> 
+                                        <span class="n">world_size</span><span class="p">,</span> 
+                                        <span class="n">sync_valid</span><span class="o">=</span><span class="n">SYNC_VALID</span><span class="p">)</span> 
+    <span class="n">model</span> <span class="o">=</span> <span class="n">WRAPPED_MODEL3</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">moms</span> <span class="o">=</span><span class="p">(</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">],</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">],</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;momentum&#39;</span><span class="p">])</span>
+    <span class="n">wd</span> <span class="o">=</span> <span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">]</span>
+
+    <span class="n">xm</span><span class="o">.</span><span class="n">master_print</span><span class="p">(</span><span class="s1">&#39;build learner&#39;</span><span class="p">)</span>
+    <span class="n">learner</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> 
+                      <span class="n">loss_func</span><span class="o">=</span><span class="n">LOSS_FUNC</span><span class="p">,</span> 
+                      <span class="n">opt_func</span><span class="o">=</span><span class="n">OPT_FUNC</span><span class="p">,</span> 
+                      <span class="n">metrics</span><span class="o">=</span><span class="n">accuracy</span><span class="p">,</span> 
+                      <span class="n">wd</span><span class="o">=</span><span class="n">wd</span><span class="p">,</span>
+                      <span class="n">moms</span><span class="o">=</span><span class="n">moms</span><span class="p">)</span>
+                      
+    <span class="n">learner</span><span class="o">.</span><span class="n">to_multi_xla</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">xm</span><span class="o">.</span><span class="n">get_ordinal</span><span class="p">(),</span> <span class="n">sync_valid</span><span class="o">=</span><span class="n">SYNC_VALID</span><span class="p">)</span>
+    <span class="c1"># Scale learning rate to num cores</span>
+    <span class="n">learning_rate</span> <span class="o">=</span> <span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">xm</span><span class="o">.</span><span class="n">xrt_world_size</span><span class="p">()</span>
+                               
+    <span class="n">epochs</span> <span class="o">=</span> <span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;num_epochs&#39;</span><span class="p">]</span>
+    <span class="n">xm</span><span class="o">.</span><span class="n">master_print</span><span class="p">(</span><span class="s1">&#39;start running fit&#39;</span><span class="p">)</span>
+    <span class="n">learner</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">()</span>
+    <span class="n">cbs</span> <span class="o">=</span> <span class="p">[</span><span class="n">PrintDevicesCallback</span><span class="p">()]</span>
+    <span class="n">learner</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr_max</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">/</span><span class="mi">10</span><span class="p">),</span> <span class="n">cbs</span><span class="o">=</span><span class="n">cbs</span><span class="p">)</span>
+    <span class="n">xm</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span><span class="s1">&#39;end_train_cifar_model&#39;</span><span class="p">)</span>
+    <span class="n">learner</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;cifar-stage-1&#39;</span><span class="p">,</span> <span class="n">rendezvous</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">xm</span><span class="o">.</span><span class="n">mark_step</span><span class="p">()</span>  
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Start training processes</span>
+<span class="k">def</span> <span class="nf">_mp_fn4</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">FLAGS3</span>
+    <span class="n">FLAGS3</span> <span class="o">=</span> <span class="n">flags</span>
+    <span class="n">train_cifar_model</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># %%time</span>
+<span class="n">xmp</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">_mp_fn4</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">FLAGS3</span><span class="p">,),</span> <span class="n">nprocs</span><span class="o">=</span><span class="n">FLAGS3</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">],</span>
+        <span class="n">start_method</span><span class="o">=</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>xla 5 start train cifar model
+xla 7 start train cifar model
+xla 4 start train cifar model
+xla 1 start train cifar model
+xla 6 start train cifar model
+xla 3 start train cifar model
+xla 2 start train cifar model
+xla 0 start train cifar model
+train: True xla 7: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: True xla 5: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: True xla 4: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: True xla 1: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: True xla 6: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: True xla 3: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: True xla 2: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+build learner
+start running fit
+start fit
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>accuracy</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1.792534</td>
+      <td>1.372622</td>
+      <td>0.564416</td>
+      <td>01:29</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1.284230</td>
+      <td>0.925351</td>
+      <td>0.677860</td>
+      <td>01:46</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.997232</td>
+      <td>0.829009</td>
+      <td>0.709948</td>
+      <td>01:33</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.845092</td>
+      <td>0.747602</td>
+      <td>0.742688</td>
+      <td>01:35</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.779502</td>
+      <td>0.711179</td>
+      <td>0.752679</td>
+      <td>01:28</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>train: True xla 0: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:1
+train: False xla 3: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: False xla 2: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: False xla 4: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: False xla 6: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: False xla 1: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: False xla 5: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: False xla 7: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:0
+train: False xla 0: dl.type: &lt;class &#39;torch.utils.data.dataloader.DataLoader&#39;&gt; dl.device None model.device: xla:1
 </pre>
 </div>
 </div>
