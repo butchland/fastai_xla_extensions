@@ -137,7 +137,7 @@ def xla_run_method(rank, fit_method, learner_args, add_args, fit_args, ctrl_args
     fit_args = setup_fit_cbs(rank, fit_args)
     fit_method(learner, **fit_args)
     xm.rendezvous('xla_run_method')
-    learner.save('_xla_tmp_model')
+    learner.save('_xla_tmp_model',rendezvous=False)
     xm.mark_step()
 
 

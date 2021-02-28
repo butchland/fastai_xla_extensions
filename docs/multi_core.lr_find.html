@@ -239,26 +239,11 @@ nb_path: "nbs/03d_multi_core.lr_find.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.all</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="c1"># path = untar_data(URLs.MNIST_TINY)</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">MNIST</span><span class="p">)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">MNIST_TINY</span><span class="p">)</span>
+<span class="c1"># path = untar_data(URLs.MNIST)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -276,8 +261,8 @@ nb_path: "nbs/03d_multi_core.lr_find.ipynb"
     <span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">ImageBlock</span><span class="p">,</span> <span class="n">CategoryBlock</span><span class="p">),</span>
     <span class="n">get_items</span><span class="o">=</span><span class="n">get_image_files</span><span class="p">,</span>
     <span class="n">get_y</span><span class="o">=</span><span class="n">parent_label</span><span class="p">,</span>
-    <span class="c1"># splitter=GrandparentSplitter(),</span>
-    <span class="n">splitter</span><span class="o">=</span><span class="n">GrandparentSplitter</span><span class="p">(</span><span class="n">train_name</span><span class="o">=</span><span class="s1">&#39;training&#39;</span><span class="p">,</span> <span class="n">valid_name</span><span class="o">=</span><span class="s1">&#39;testing&#39;</span><span class="p">),</span>
+    <span class="n">splitter</span><span class="o">=</span><span class="n">GrandparentSplitter</span><span class="p">(),</span>
+    <span class="c1"># splitter=GrandparentSplitter(train_name=&#39;training&#39;, valid_name=&#39;testing&#39;),</span>
     <span class="n">item_tfms</span><span class="o">=</span><span class="n">Resize</span><span class="p">(</span><span class="mi">28</span><span class="p">),</span>
     <span class="n">batch_tfms</span><span class="o">=</span><span class="p">[]</span>
 <span class="p">)</span>
@@ -297,8 +282,8 @@ nb_path: "nbs/03d_multi_core.lr_find.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dls = data.dataloaders(path, bs=8)</span>
-<span class="n">dls</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="c1"># dls = data.dataloaders(path, bs=64)</span>
 </pre></div>
 
     </div>
@@ -319,28 +304,6 @@ nb_path: "nbs/03d_multi_core.lr_find.ipynb"
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Downloading: &#34;https://download.pytorch.org/models/resnet18-5c106cde.pth&#34; to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -371,11 +334,27 @@ nb_path: "nbs/03d_multi_core.lr_find.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># %%time</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
 <span class="c1"># learner.xla_lr_find()</span>
+<span class="c1"># learner.xla_lr_find(num_it=117, stop_div=False)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 3 µs, sys: 0 ns, total: 3 µs
+Wall time: 7.63 µs
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
