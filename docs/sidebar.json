@@ -1,15 +1,15 @@
 {
   "fastai_xla_extensions": {
     "Overview": "/",
-    "Core XLA extensions": "core.html",
-    "Utils": "utils.html",
-    "CIFAR Loader": "cifar_loader.html",
-    "Miscellaneous Utilities": "misc_utils.html",
-    "Multi Core XLA Base ": "multi_core.base.html",
-    "Torch Compatible Utilities": "multi_core.torch_compat.html",
-    "Multi Core XLA Learner extensions": "multi_core.learner.html",
-    "Multi Core Callback XLA Extensions": "multi_core.callback.html",
-    "Multi Core LR Find XLA Extensions": "multi_core.lr_find.html",
-    "Development Setup": "dev_setup.html"
+    "Core XLA extensions": "core",
+    "Utils": "utils",
+    "CIFAR Loader": "cifar_loader",
+    "Miscellaneous Utilities": "misc_utils",
+    "Multi Core XLA Base ": "multi_core.base",
+    "Torch Compatible Utilities": "multi_core.torch_compat",
+    "Multi Core XLA Learner extensions": "multi_core.learner",
+    "Multi Core Callback XLA Extensions": "multi_core.callback",
+    "Multi Core LR Find XLA Extensions": "multi_core.lr_find",
+    "Development Setup": "dev_setup"
   }
 }

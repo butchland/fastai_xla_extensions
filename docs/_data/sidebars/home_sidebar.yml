@@ -11,34 +11,34 @@ entries:
       url: /
     - output: web,pdf
       title: Core XLA extensions
-      url: core.html
+      url: core
     - output: web,pdf
       title: Utils
-      url: utils.html
+      url: utils
     - output: web,pdf
       title: CIFAR Loader
-      url: cifar_loader.html
+      url: cifar_loader
     - output: web,pdf
       title: Miscellaneous Utilities
-      url: misc_utils.html
+      url: misc_utils
     - output: web,pdf
       title: 'Multi Core XLA Base '
-      url: multi_core.base.html
+      url: multi_core.base
     - output: web,pdf
       title: Torch Compatible Utilities
-      url: multi_core.torch_compat.html
+      url: multi_core.torch_compat
     - output: web,pdf
       title: Multi Core XLA Learner extensions
-      url: multi_core.learner.html
+      url: multi_core.learner
     - output: web,pdf
       title: Multi Core Callback XLA Extensions
-      url: multi_core.callback.html
+      url: multi_core.callback
     - output: web,pdf
       title: Multi Core LR Find XLA Extensions
-      url: multi_core.lr_find.html
+      url: multi_core.lr_find
     - output: web,pdf
       title: Development Setup
-      url: dev_setup.html
+      url: dev_setup
     output: web
     title: fastai_xla_extensions
   output: web
