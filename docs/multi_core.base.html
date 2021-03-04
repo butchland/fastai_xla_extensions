@@ -254,7 +254,7 @@ here: <a href="https://github.com/tmabraham/fastai_tpu/blob/master/fastai_v2/tpu
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Torch-Dataloader-Patches">Torch Dataloader Patches<a class="anchor-link" href="#Torch-Dataloader-Patches"> </a></h2><p>These patches to the torch dataloader make torch dataloaders
 more compatible with fastai dataloaders (enabling them to run
-inside the fastai Learning and use fastai training calls)</p>
+inside the fastai Learners and use fastai training calls)</p>
 
 </div>
 </div>
@@ -277,29 +277,10 @@ inside the fastai Learning and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="None" class="doc_header"><code>None</code><a href="" class="source_link" style="float:right">[source]</a></h4>
-</div>
+<h4 id="DataLoader.__setattr__" class="doc_header"><code>DataLoader.__setattr__</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L170" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.__setattr__</code>(<strong><code>attr</code></strong>, <strong><code>val</code></strong>)</p>
+</blockquote>
+<p>remove sampler,batch_sampler from list of attrs which should not be set after init</p>
 
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="None" class="doc_header"><code>None</code><a href="" class="source_link" style="float:right">[source]</a></h4>
 </div>
 
 </div>
@@ -321,7 +302,54 @@ inside the fastai Learning and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="None" class="doc_header"><code>None</code><a href="" class="source_link" style="float:right">[source]</a></h4>
+<h4 id="DataLoader.after_batch" class="doc_header"><code>DataLoader.after_batch</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return empty pipeline when fastai learner looks for after_batch</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.bs" class="doc_header"><code>DataLoader.bs</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return fastai synonym for torch batch size</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.device" class="doc_header"><code>DataLoader.device</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return null device</p>
+
 </div>
 
 </div>
@@ -385,85 +413,6 @@ inside the fastai Learning and use fastai training calls)</p>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.__setattr__" class="doc_header"><code>DataLoader.__setattr__</code><a href="__main__.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.__setattr__</code>(<strong><code>attr</code></strong>, <strong><code>val</code></strong>)</p>
-</blockquote>
-<p>remove sampler,batch_sampler from list of attrs which should not be set after init</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.after_batch" class="doc_header"><code>DataLoader.after_batch</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return empty pipeline when fastai learner looks for after_batch</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.bs" class="doc_header"><code>DataLoader.bs</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return fastai synonym for torch batch size</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.device" class="doc_header"><code>DataLoader.device</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return null device</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.to" class="doc_header"><code>DataLoader.to</code><a href="__main__.py#L41" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.to</code>(<strong><code>device</code></strong>)</p>
-</blockquote>
-<p>add impl for to(device)</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.set_distributed_sampler" class="doc_header"><code>DataLoader.set_distributed_sampler</code><a href="__main__.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.set_distributed_sampler</code>(<strong><code>rank</code></strong>, <strong><code>world_size</code></strong>)</p>
-</blockquote>
-<p>replace sampler with torch distributed sampler</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}
