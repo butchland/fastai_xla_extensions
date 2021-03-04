@@ -2,8 +2,8 @@
 
 __all__ = ['revert_tensor', 'recast2tensor', 'round_to_multiple', 'TPUDistributedDL', 'after_batch', 'bs', 'device',
            'build_distributed_dataloaders', 'make_fastai_dataloaders', 'wrap_parallel_loader', 'XLATrainingCallback',
-           'pack_metric', 'make_tensor', 'pack_metrics', 'restore_metrics', 'SyncRecorderCallback', 'xm_save',
-           'do_one_loop']
+           'pack_metric', 'make_tensor', 'pack_metrics', 'restore_metrics', 'SyncedAvgSmoothLoss',
+           'SyncRecorderCallback', 'xm_save', 'do_one_loop']
 
 # Internal Cell
 
@@ -357,6 +357,23 @@ def restore_metrics(reduced_metrics, all_metrics):
     return all_metrics
 
 # Cell
+
+from fastai.learner import AvgSmoothLoss
+
+class SyncedAvgSmoothLoss(AvgSmoothLoss):
+    "Smooth average of the losses (exponentially weighted with `beta`) synced across all ranks"
+    def __init__(self, beta=0.98):
+        super(SyncedAvgSmoothLoss, self).__init__(beta=beta)
+
+    def accumulate(self, learn):
+        self.count += 1
+        # get loss across all ranks
+        synced_loss = xm.all_reduce(xm.REDUCE_SUM, learn.loss.mean())
+        avg_synced_loss = synced_loss/xm.xrt_world_size()
+        self.val = torch.lerp(avg_synced_loss, self.val, self.beta)
+
+
+# Cell
 class SyncRecorderCallback(Callback):
     """A `Callback` to sync the metrics from each rank and update statistics
        accordingly so it will display correctly in the progress callback
@@ -366,6 +383,14 @@ class SyncRecorderCallback(Callback):
     def before_fit(self):
         if not getattr(self.learn,'inner_xla',False):
             return # skip if not spawned
+
+        # replace AvgSmoothLoss  with SyncedAvgSmoothLoss which
+        # uses mean loss across all ranks per batch to compute smooth loss
+        # instead of just using one rank's mean loss
+        if not isinstance(self.recorder.smooth_loss, SyncedAvgSmoothLoss):
+            orig_beta = self.recorder.smooth_loss.beta
+            self.recorder.smooth_loss = SyncedAvgSmoothLoss(beta=orig_beta)
+            self.recorder.smooth_loss.reset()
 
         if not xm.is_master_ordinal():
             return

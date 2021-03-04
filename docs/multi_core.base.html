@@ -689,7 +689,39 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L360" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SyncedAvgSmoothLoss" class="doc_header"><code>class</code> <code>SyncedAvgSmoothLoss</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L363" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncedAvgSmoothLoss</code>(<strong><code>beta</code></strong>=<em><code>0.98</code></em>) :: <code>AvgSmoothLoss</code></p>
+</blockquote>
+<p>Smooth average of the losses (exponentially weighted with <code>beta</code>) synced across all ranks</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L377" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A <code>Callback</code> to sync the metrics from each rank and update statistics
 accordingly so it will display correctly in the progress callback</p>
@@ -735,7 +767,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="xm_save" class="doc_header"><code>xm_save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L441" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xm_save</code>(<strong><code>data</code></strong>, <strong><code>file_or_path</code></strong>, <strong><code>master_only</code></strong>=<em><code>True</code></em>, <strong><code>global_master</code></strong>=<em><code>False</code></em>, <strong><code>rendezvous</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="xm_save" class="doc_header"><code>xm_save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L466" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xm_save</code>(<strong><code>data</code></strong>, <strong><code>file_or_path</code></strong>, <strong><code>master_only</code></strong>=<em><code>True</code></em>, <strong><code>global_master</code></strong>=<em><code>False</code></em>, <strong><code>rendezvous</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Saves the input data into a file.</p>
 <p>The saved data is transferred to PyTorch CPU device before being saved, so a
@@ -820,7 +852,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L490" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L515" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 
 </div>
@@ -851,7 +883,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L510" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L535" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Sets up the learner on the spawned process for multi core TPU training</p>
 
@@ -876,7 +908,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L538" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L563" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>test one loop for a tpu distributed dataloader</p>
 
