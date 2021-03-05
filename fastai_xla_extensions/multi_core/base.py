@@ -18,10 +18,9 @@ try:
 except ImportError:
     pass
 
-# Internal Cell
+# Cell
 
 if xla_imported():
-    pass
     import torch_xla.core.xla_model as xm
     import torch_xla.distributed.parallel_loader as pl
 
@@ -457,11 +456,13 @@ class SyncRecorderCallback(Callback):
 from fastcore.basics import patch
 # uncomment for notebook2html
 # import torch_xla.distributed.parallel_loader as pl
+# from fastai_xla_extensions.utils import xla_imported
 
-@patch
-def close(self:pl.PerDeviceLoader):
-    'close data loader queues on xla parallel loader'
-    self._loader.close() #
+if xla_imported():
+    @patch
+    def close(self:pl.PerDeviceLoader):
+        'close data loader queues on xla parallel loader'
+        self._loader.close() #
 
 # Cell
 

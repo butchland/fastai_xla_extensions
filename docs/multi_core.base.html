@@ -26,20 +26,6 @@ nb_path: "nbs/03_multi_core.base.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>WARNING:root:TPU has started up successfully with version pytorch-1.7
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -61,6 +47,13 @@ nb_path: "nbs/03_multi_core.base.ipynb"
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Utility-Conversion-Functions">Utility Conversion Functions<a class="anchor-link" href="#Utility-Conversion-Functions"> </a></h2><p>Functions for converting tensors and computing batches across ranks</p>
@@ -79,7 +72,7 @@ nb_path: "nbs/03_multi_core.base.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="revert_tensor" class="doc_header"><code>revert_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L45" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>revert_tensor</code>(<strong><code>o</code></strong>)</p>
+<h4 id="revert_tensor" class="doc_header"><code>revert_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>revert_tensor</code>(<strong><code>o</code></strong>)</p>
 </blockquote>
 <p>Remove tensor subclass and revert to <code>torch.Tensor</code></p>
 
@@ -104,7 +97,7 @@ nb_path: "nbs/03_multi_core.base.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="recast2tensor" class="doc_header"><code>recast2tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L53" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>recast2tensor</code>(<strong><code>o</code></strong>)</p>
+<h4 id="recast2tensor" class="doc_header"><code>recast2tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>recast2tensor</code>(<strong><code>o</code></strong>)</p>
 </blockquote>
 <p>Recast <code>fastai.torch_core.TensorBase</code> subclassed tensors to torch.Tensors</p>
 
@@ -129,7 +122,7 @@ nb_path: "nbs/03_multi_core.base.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="round_to_multiple" class="doc_header"><code>round_to_multiple</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>round_to_multiple</code>(<strong><code>number</code></strong>, <strong><code>multiple</code></strong>)</p>
+<h4 id="round_to_multiple" class="doc_header"><code>round_to_multiple</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L62" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>round_to_multiple</code>(<strong><code>number</code></strong>, <strong><code>multiple</code></strong>)</p>
 </blockquote>
 <p>round up batch samples to fill number of cores</p>
 
@@ -291,7 +284,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.__setattr__" class="doc_header"><code>DataLoader.__setattr__</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L171" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.__setattr__</code>(<strong><code>attr</code></strong>, <strong><code>val</code></strong>)</p>
+<h4 id="DataLoader.__setattr__" class="doc_header"><code>DataLoader.__setattr__</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L170" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.__setattr__</code>(<strong><code>attr</code></strong>, <strong><code>val</code></strong>)</p>
 </blockquote>
 <p>remove sampler,batch_sampler from list of attrs which should not be set after init</p>
 
@@ -316,9 +309,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.after_batch" class="doc_header"><code>DataLoader.after_batch</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L181" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.after_batch</code>()</p>
-</blockquote>
-<p>return empty pipeline when fastai learner looks for after_batch</p>
+<h4 id="DataLoader.after_batch" class="doc_header"><code>DataLoader.after_batch</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return empty pipeline when fastai learner looks for after_batch</p>
 
 </div>
 
@@ -341,9 +332,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.bs" class="doc_header"><code>DataLoader.bs</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L186" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.bs</code>()</p>
-</blockquote>
-<p>return fastai synonym for torch batch size</p>
+<h4 id="DataLoader.bs" class="doc_header"><code>DataLoader.bs</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return fastai synonym for torch batch size</p>
 
 </div>
 
@@ -366,9 +355,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.device" class="doc_header"><code>DataLoader.device</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.device</code>()</p>
-</blockquote>
-<p>return null device</p>
+<h4 id="DataLoader.device" class="doc_header"><code>DataLoader.device</code><a href="" class="source_link" style="float:right">[source]</a></h4><p>return null device</p>
 
 </div>
 
@@ -391,7 +378,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.to" class="doc_header"><code>DataLoader.to</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L197" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.to</code>(<strong><code>device</code></strong>)</p>
+<h4 id="DataLoader.to" class="doc_header"><code>DataLoader.to</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L196" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.to</code>(<strong><code>device</code></strong>)</p>
 </blockquote>
 <p>add impl for to(device)</p>
 
@@ -416,7 +403,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.set_distributed_sampler" class="doc_header"><code>DataLoader.set_distributed_sampler</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L203" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.set_distributed_sampler</code>(<strong><code>rank</code></strong>, <strong><code>world_size</code></strong>)</p>
+<h4 id="DataLoader.set_distributed_sampler" class="doc_header"><code>DataLoader.set_distributed_sampler</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L202" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.set_distributed_sampler</code>(<strong><code>rank</code></strong>, <strong><code>world_size</code></strong>)</p>
 </blockquote>
 <p>replace sampler with torch distributed sampler</p>
 
@@ -525,7 +512,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L251" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="wrap_parallel_loader" class="doc_header"><code>wrap_parallel_loader</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L250" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_parallel_loader</code>(<strong><code>loader</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>wraps a tpu distributed loader or a torch dataloader (with distributed sampler) with xla parallel loader</p>
 
@@ -550,7 +537,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L265" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
+<h2 id="XLATrainingCallback" class="doc_header"><code>class</code> <code>XLATrainingCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L264" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>XLATrainingCallback</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>=<em><code>0</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A callback for training as a spawned process on multi-core TPUs</p>
 
@@ -602,7 +589,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pack_metric" class="doc_header"><code>pack_metric</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L322" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metric</code>(<strong><code>metrics</code></strong>)</p>
+<h4 id="pack_metric" class="doc_header"><code>pack_metric</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L321" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metric</code>(<strong><code>metrics</code></strong>)</p>
 </blockquote>
 <p>extract counts and totals from avg metrics and avg losses into a list</p>
 
@@ -627,7 +614,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_tensor" class="doc_header"><code>make_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L329" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_tensor</code>(<strong><code>o</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="make_tensor" class="doc_header"><code>make_tensor</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L328" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_tensor</code>(<strong><code>o</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>convert a scalar or tensor into a float tensor and move them to <code>device</code></p>
 
@@ -652,7 +639,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pack_metrics" class="doc_header"><code>pack_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L335" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metrics</code>(<strong><code>all_metrics</code></strong>, <strong><code>device</code></strong>)</p>
+<h4 id="pack_metrics" class="doc_header"><code>pack_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L334" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pack_metrics</code>(<strong><code>all_metrics</code></strong>, <strong><code>device</code></strong>)</p>
 </blockquote>
 <p>pack train and valid metrics into a list of float tensors and move them to <code>device</code></p>
 
@@ -677,7 +664,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="restore_metrics" class="doc_header"><code>restore_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L340" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>restore_metrics</code>(<strong><code>reduced_metrics</code></strong>, <strong><code>all_metrics</code></strong>)</p>
+<h4 id="restore_metrics" class="doc_header"><code>restore_metrics</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L339" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>restore_metrics</code>(<strong><code>reduced_metrics</code></strong>, <strong><code>all_metrics</code></strong>)</p>
 </blockquote>
 <p>restore list of float tensors (count and values) back into train and valid metrics</p>
 
@@ -709,7 +696,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SyncedAvgSmoothLoss" class="doc_header"><code>class</code> <code>SyncedAvgSmoothLoss</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L364" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncedAvgSmoothLoss</code>(<strong><code>beta</code></strong>=<em><code>0.98</code></em>) :: <code>AvgSmoothLoss</code></p>
+<h2 id="SyncedAvgSmoothLoss" class="doc_header"><code>class</code> <code>SyncedAvgSmoothLoss</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L363" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncedAvgSmoothLoss</code>(<strong><code>beta</code></strong>=<em><code>0.98</code></em>) :: <code>AvgSmoothLoss</code></p>
 </blockquote>
 <p>Smooth average of the losses (exponentially weighted with <code>beta</code>) synced across all ranks</p>
 
@@ -741,7 +728,7 @@ inside the fastai Learners and use fastai training calls)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L378" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SyncRecorderCallback" class="doc_header"><code>class</code> <code>SyncRecorderCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L377" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncRecorderCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A <code>Callback</code> to sync the metrics from each rank and update statistics
 accordingly so it will display correctly in the progress callback</p>
@@ -781,7 +768,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="PerDeviceLoader.close" class="doc_header"><code>PerDeviceLoader.close</code><a href="__main__.py#L6" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>PerDeviceLoader.close</code>()</p>
+<h4 id="PerDeviceLoader.close" class="doc_header"><code>PerDeviceLoader.close</code><a href="__main__.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>PerDeviceLoader.close</code>()</p>
 </blockquote>
 <p>close data loader queues on xla parallel loader</p>
 
@@ -806,7 +793,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SyncedCancelCallback" class="doc_header"><code>class</code> <code>SyncedCancelCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L471" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncedCancelCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SyncedCancelCallback" class="doc_header"><code>class</code> <code>SyncedCancelCallback</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L473" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SyncedCancelCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>A Callback to cancel training in sync
 (closing data loaders queues across all ranks)</p>
@@ -852,7 +839,7 @@ accordingly so it will display correctly in the progress callback</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="xm_save" class="doc_header"><code>xm_save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L509" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xm_save</code>(<strong><code>data</code></strong>, <strong><code>file_or_path</code></strong>, <strong><code>master_only</code></strong>=<em><code>True</code></em>, <strong><code>global_master</code></strong>=<em><code>False</code></em>, <strong><code>rendezvous</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="xm_save" class="doc_header"><code>xm_save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L511" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xm_save</code>(<strong><code>data</code></strong>, <strong><code>file_or_path</code></strong>, <strong><code>master_only</code></strong>=<em><code>True</code></em>, <strong><code>global_master</code></strong>=<em><code>False</code></em>, <strong><code>rendezvous</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Saves the input data into a file.</p>
 <p>The saved data is transferred to PyTorch CPU device before being saved, so a
@@ -937,7 +924,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L558" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="Learner.save" class="doc_header"><code>Learner.save</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L560" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.save</code>(<strong><code>file</code></strong>, <strong><code>with_opt</code></strong>=<em><code>True</code></em>, <strong><code>pickle_protocol</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 
 </div>
@@ -968,7 +955,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L578" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="Learner.to_multi_xla" class="doc_header"><code>Learner.to_multi_xla</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L580" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.to_multi_xla</code>(<strong><code>device</code></strong>, <strong><code>rank</code></strong>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Sets up the learner on the spawned process for multi core TPU training</p>
 
@@ -993,7 +980,7 @@ global_master (bool, optional): When <code>master_only</code> is <code>True</cod
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L609" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="do_one_loop" class="doc_header"><code>do_one_loop</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/base.py#L611" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>do_one_loop</code>(<strong><code>dl</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>device</code></strong>, <strong><code>wrap_parallel</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>test one loop for a tpu distributed dataloader</p>
 
@@ -2946,7 +2933,8 @@ xla 5: end train partial batches
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export2html</span> <span class="kn">import</span> <span class="n">notebook2html</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cd</span> /content/fastai_xla_extensions
+<span class="kn">from</span> <span class="nn">nbdev.export2html</span> <span class="kn">import</span> <span class="n">notebook2html</span>
 <span class="n">notebook2html</span><span class="p">()</span>
 </pre></div>
 
@@ -2960,19 +2948,35 @@ xla 5: end train partial batches
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>converting: /content/drive/MyDrive/fastai_xla_extensions/nbs/03_multi_core.base.ipynb
+<pre>/content/drive/MyDrive/fastai_xla_extensions
+converting: /content/drive/My Drive/fastai_xla_extensions/nbs/03_multi_core.base.ipynb
 An error occurred while executing the following cell:
 ------------------
-show_doc(pl.PerDeviceLoader.close, default_cls_level=2)
+#export
+
+from fastcore.basics import patch
+# uncomment for notebook2html
+# import torch_xla.distributed.parallel_loader as pl
+# from fastai_xla_extensions.utils import xla_imported
+
+if xla_imported():
+    @patch
+    def close(self:pl.PerDeviceLoader):
+        &#39;close data loader queues on xla parallel loader&#39;
+        self._loader.close() #
 ------------------
 
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-28-d15283c8f7af&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>show_doc<span class="ansi-blue-fg">(</span>pl<span class="ansi-blue-fg">.</span>PerDeviceLoader<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">,</span> default_cls_level<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">&lt;ipython-input-28-f1eceffd127c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-red-fg"># from fastai_xla_extensions.utils import xla_imported</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span> 
+<span class="ansi-green-fg">----&gt; 8</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">if</span> xla_imported<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span>     <span class="ansi-blue-fg">@</span>patch
+<span class="ansi-green-intense-fg ansi-bold">     10</span>     <span class="ansi-green-fg">def</span> close<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">:</span>pl<span class="ansi-blue-fg">.</span>PerDeviceLoader<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-red-fg">NameError</span>: name &#39;pl&#39; is not defined
-NameError: name &#39;pl&#39; is not defined
+<span class="ansi-red-fg">NameError</span>: name &#39;xla_imported&#39; is not defined
+NameError: name &#39;xla_imported&#39; is not defined
 
 Conversion failed on the following:
 03_multi_core.base.ipynb
@@ -2988,8 +2992,4 @@ Conversion failed on the following:
 
 </div>
  
-
-<script type="application/vnd.jupyter.widget-state+json">
-{"6215223c7911466a836554f6987cc29f": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_e1d30596d6474b629513454a82a20f0b", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_060b93acb9594d4ab4469df75180d66c", "IPY_MODEL_180551b735a548678a962de71a0ea9bb"]}}, "e1d30596d6474b629513454a82a20f0b": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "060b93acb9594d4ab4469df75180d66c": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_71912b0859594d6aa30312e4aaa1c2a1", "_dom_classes": [], "description": "100%", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 87306240, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 87306240, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_ce44facd9dc0497eb105a63fc736fd5b"}}, "180551b735a548678a962de71a0ea9bb": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_949192dde3bd4fbf9a7f3ab673f56592", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 83.3M/83.3M [31:30&lt;00:00, 46.2kB/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_fa7321026af54d2289cf2e62622cb4a5"}}, "71912b0859594d6aa30312e4aaa1c2a1": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "ce44facd9dc0497eb105a63fc736fd5b": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "949192dde3bd4fbf9a7f3ab673f56592": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "fa7321026af54d2289cf2e62622cb4a5": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "8d556346bff64deab0279ba364434600": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_4e6c7b00f09e4a9ca99bfa14da13c000", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_6966d754f7a241f7ab8dff273973dd62", "IPY_MODEL_688e74b3b33c45a8aeb13bec9b97554a"]}}, "4e6c7b00f09e4a9ca99bfa14da13c000": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "6966d754f7a241f7ab8dff273973dd62": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_732274a8867c4b83a5a69fdf1ef2484f", "_dom_classes": [], "description": "100%", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 46827520, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 46827520, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_51ac9dfcb22249e5984b9283675e4de7"}}, "688e74b3b33c45a8aeb13bec9b97554a": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_373933c296744f47b9928fb7148be5a0", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 44.7M/44.7M [19:22&lt;00:00, 40.3kB/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_37257da3c5ae430ca0f01b19b46289c7"}}, "732274a8867c4b83a5a69fdf1ef2484f": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "51ac9dfcb22249e5984b9283675e4de7": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "373933c296744f47b9928fb7148be5a0": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "37257da3c5ae430ca0f01b19b46289c7": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "9e0b5433290047c9b1f5ed3e8d554a0d": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_e01bc8e5dc5440589b101ae811c71ecf", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_558d0689d48847d9baa194bf7dbf9705", "IPY_MODEL_a79e1f7abcd44255a0140bfc5a751c68"]}}, "e01bc8e5dc5440589b101ae811c71ecf": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "558d0689d48847d9baa194bf7dbf9705": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_703cd7df431e4eecbe0fc448ad917112", "_dom_classes": [], "description": "", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 1, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 1, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_a0a74ea06ca146208432e93d89831b51"}}, "a79e1f7abcd44255a0140bfc5a751c68": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_abc3afdd1e5c4572a48257b403298a27", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 170500096/? [00:05&lt;00:00, 29390647.37it/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_52d30d40dfec4864930f34ffc8880190"}}, "703cd7df431e4eecbe0fc448ad917112": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "a0a74ea06ca146208432e93d89831b51": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "abc3afdd1e5c4572a48257b403298a27": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "52d30d40dfec4864930f34ffc8880190": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
-</script>
 
