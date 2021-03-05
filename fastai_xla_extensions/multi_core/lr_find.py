@@ -88,6 +88,7 @@ class XLALRFinder(ParamScheduler):
             # print(f'xla {xm.get_ordinal()}: stop stats collection due to loss')
             self.skip_batch = True
             self.copy_losses_and_lrs()
+            self.synced_cancel.trigger_cancel_fit()
             return
 
 
@@ -96,6 +97,7 @@ class XLALRFinder(ParamScheduler):
             # return and stop updating losses
             self.skip_batch = True
             self.copy_losses_and_lrs()
+            self.synced_cancel.trigger_cancel_fit()
             return
 
     def copy_losses_and_lrs(self):
