@@ -3,7 +3,7 @@
 __all__ = ['revert_tensor', 'recast2tensor', 'round_to_multiple', 'TPUDistributedDL', 'after_batch', 'bs', 'device',
            'build_distributed_dataloaders', 'make_fastai_dataloaders', 'wrap_parallel_loader', 'XLATrainingCallback',
            'pack_metric', 'make_tensor', 'pack_metrics', 'restore_metrics', 'SyncedAvgSmoothLoss',
-           'SyncRecorderCallback', 'xm_save', 'do_one_loop']
+           'SyncRecorderCallback', 'SyncedCancelCallback', 'xm_save', 'do_one_loop']
 
 # Internal Cell
 
@@ -21,6 +21,7 @@ except ImportError:
 # Internal Cell
 
 if xla_imported():
+    pass
     import torch_xla.core.xla_model as xm
     import torch_xla.distributed.parallel_loader as pl
 
@@ -452,6 +453,49 @@ class SyncRecorderCallback(Callback):
             self.learn.logger = noop # write to logger disabled so calling recorder.logger(log) wont print
 
 # Cell
+
+from fastcore.basics import patch
+# uncomment for notebook2html
+# import torch_xla.distributed.parallel_loader as pl
+
+@patch
+def close(self:pl.PerDeviceLoader):
+    'close data loader queues on xla parallel loader'
+    self._loader.close() #
+
+# Cell
+
+import torch
+from fastai.callback.core import Callback
+from fastai.learner import CancelFitException
+
+class SyncedCancelCallback(Callback):
+    """A Callback to cancel training in sync
+       (closing data loaders queues across all ranks)"""
+    order = 199 # after all other callbacks
+
+    def before_fit(self):
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
+        self.zero = torch.zeros(1).to(self.xla_training.pdevice)
+        self.one = torch.ones(1).to(self.xla_training.pdevice)
+        self.sync_cancel_fit = self.zero
+
+    def after_batch(self):
+        if not getattr(self.learn,'inner_xla',False):
+            return # skip if not spawned
+
+        cancel_fit = xm.all_reduce(xm.REDUCE_SUM, self.sync_cancel_fit)
+
+        if cancel_fit > self.zero: # a rank triggered a cancel
+            self.dl.close() # close per device loader
+            raise CancelFitException()
+
+    def trigger_cancel_fit(self):
+        self.sync_cancel_fit = self.one
+
+# Cell
 from fastcore.imports import noop
 #from fastcore.basics import patch
 from fastai.learner import Learner
@@ -553,6 +597,9 @@ def to_multi_xla(self:Learner,device, rank, sync_valid=False):
         self.add_cbs(SyncRecorderCallback)
     elif not sync_valid:
         self.remove_cbs(SyncRecorderCallback)
+
+    if 'synced_cancel' not in self.cbs.attrgot('name'):
+        self.add_cbs(SyncedCancelCallback)
 
     if rank != 0: # progress bar only for rank 0
         self.remove_cbs(ProgressCallback)
