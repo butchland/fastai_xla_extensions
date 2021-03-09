@@ -11,7 +11,7 @@ except ImportError:
 
 # Cell
 
-#from fastai.vision.all import *
+from fastai.vision.all import *
 from ..utils import xla_imported
 from ..misc_utils import *
 from ..core import XLAOptCallback
@@ -102,40 +102,6 @@ def inner_get_preds(self:Learner, ds_idx=1, dl=None, with_input=False, with_deco
         return tuple(res)
     self._end_cleanup()
 
-
-# Cell
-
-from fastai.learner import CancelValidException
-
-@patch
-def before_validate(self:XLATrainingCallback):
-    "Set the model in validation mode"
-    if not getattr(self.learn,'inner_xla',False):
-        return # skip if not spawned
-
-    if self.rank != 0 and not self.sync_valid:
-    # no need to compute valid loss/ metric if not master if not sync valid
-        raise CancelValidException()
-
-    if not isinstance(self.learn.dl, pl.PerDeviceLoader):
-        self.learn.dl = wrap_parallel_loader(self.learn.dl, self.pdevice)
-
-
-
-# Cell
-@patch
-def new(self:TPUDistributedDL, dataset=None, cls=None, **kwargs):
-    new_dl = self.dl.new(dataset=dataset, cls=cls, **kwargs)
-    use_rank = self.rank
-    use_size = self.world_size
-    seed = self.seed
-
-    new_dl = TPUDistributedDL(new_dl,
-                        rank=use_rank,
-                        world_size=use_size,
-                        seed=seed)
-
-    return new_dl
 
 # Cell
 

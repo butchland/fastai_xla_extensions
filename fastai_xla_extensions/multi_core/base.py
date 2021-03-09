@@ -5,9 +5,9 @@ __all__ = ['revert_tensor', 'recast2tensor', 'round_to_multiple', 'TPUDistribute
            'pack_metric', 'make_tensor', 'pack_metrics', 'restore_metrics', 'SyncedAvgSmoothLoss',
            'SyncRecorderCallback', 'SyncedCancelCallback', 'xm_save', 'do_one_loop']
 
-# Internal Cell
+# Cell
 
-#from fastai.vision.all import *
+from fastai.vision.all import *
 from ..utils import xla_imported
 from ..misc_utils import *
 from ..core import XLAOptCallback
@@ -146,6 +146,19 @@ class TPUDistributedDL(TfmdDL):
 
     def one_batch(self):
         return self.dl.one_batch()
+
+    def new(self, dataset=None, cls=None, **kwargs):
+        new_dl = self.dl.new(dataset=dataset, cls=cls, **kwargs)
+        use_rank = self.rank
+        use_size = self.world_size
+        seed = self.seed
+
+        new_dl = TPUDistributedDL(new_dl,
+                            rank=use_rank,
+                            world_size=use_size,
+                            seed=seed)
+
+        return new_dl
 
 # Cell
 
@@ -309,7 +322,10 @@ class XLATrainingCallback(Callback):
         if self.rank != 0 and not self.sync_valid:
         # no need to compute valid loss/ metric if not master if not sync valid
             raise CancelValidException()
-        self.learn.dl = wrap_parallel_loader(self.dls.valid, self.pdevice)
+
+        if not isinstance(self.learn.dl, pl.PerDeviceLoader):
+            self.learn.dl = wrap_parallel_loader(self.learn.dl, self.pdevice)
+
 
 # Internal Cell
 

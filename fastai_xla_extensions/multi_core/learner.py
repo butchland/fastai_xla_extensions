@@ -4,9 +4,15 @@ __all__ = ['master_cbs', 'make_xla_child_learner', 'setup_fit_cbs', 'xla_run_met
            'prep_fit_sgdr_args', 'prep_finetune_args']
 
 # Internal Cell
+try:
+    import torch_xla
+except ImportError:
+    pass
+
+# Cell
 from ..utils import xla_imported
 
-# Internal Cell
+# Cell
 from .base import *
 from ..misc_utils import *
 from .callback import *
@@ -15,12 +21,6 @@ from .callback import *
 # import sys
 # def xla_imported():
 #     return 'torch_xla' in sys.modules
-
-# Internal Cell
-try:
-    import torch_xla
-except ImportError:
-    pass
 
 # Internal Cell
 if xla_imported():
