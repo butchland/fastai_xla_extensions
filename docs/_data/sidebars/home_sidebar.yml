@@ -37,6 +37,9 @@ entries:
       title: Multi Core LR Find XLA Extensions
       url: multi_core.lr_find
     - output: web,pdf
+      title: 'Multi Core XLA Inference '
+      url: multi_core.inference
+    - output: web,pdf
       title: Development Setup
       url: dev_setup
     output: web

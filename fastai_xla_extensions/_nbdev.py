@@ -104,7 +104,18 @@ index = {"XLAOptimProxy": "00_core.ipynb",
          "Learner.get_suggested_lrs": "03d_multi_core.lr_find.ipynb",
          "Recorder.reload_lr_find_attrs": "03d_multi_core.lr_find.ipynb",
          "xla_run_lr_find": "03d_multi_core.lr_find.ipynb",
-         "Learner.xla_lr_find": "03d_multi_core.lr_find.ipynb"}
+         "Learner.xla_lr_find": "03d_multi_core.lr_find.ipynb",
+         "Learner.inner_get_preds": "03e_multi_core.inference.ipynb",
+         "XLATrainingCallback.before_validate": "03e_multi_core.inference.ipynb",
+         "TPUDistributedDL.new": "03e_multi_core.inference.ipynb",
+         "setup_inference_args": "03e_multi_core.inference.ipynb",
+         "save_pred_results": "03e_multi_core.inference.ipynb",
+         "xla_run_inference": "03e_multi_core.inference.ipynb",
+         "reload_pred_results": "03e_multi_core.inference.ipynb",
+         "Learner.pre_xla_inference": "03e_multi_core.inference.ipynb",
+         "Learner.post_xla_inference": "03e_multi_core.inference.ipynb",
+         "prep_inference_args": "03e_multi_core.inference.ipynb",
+         "Learner.xla_get_preds": "03e_multi_core.inference.ipynb"}
 
 modules = ["core.py",
            "utils.py",
@@ -114,7 +125,8 @@ modules = ["core.py",
            "multi_core/torch_compat.py",
            "multi_core/learner.py",
            "multi_core/callback.py",
-           "multi_core/lr_find.py"]
+           "multi_core/lr_find.py",
+           "multi_core/inference.py"]
 
 doc_url = "https://butchland.github.io/fastai_xla_extensions/"
 

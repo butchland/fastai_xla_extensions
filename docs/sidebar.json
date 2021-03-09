@@ -10,6 +10,7 @@
     "Multi Core XLA Learner extensions": "multi_core.learner",
     "Multi Core Callback XLA Extensions": "multi_core.callback",
     "Multi Core LR Find XLA Extensions": "multi_core.lr_find",
+    "Multi Core XLA Inference ": "multi_core.inference",
     "Development Setup": "dev_setup"
   }
 }
