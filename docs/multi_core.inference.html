@@ -123,7 +123,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="XLATrainingCallback.before_validate" class="doc_header"><code>XLATrainingCallback.before_validate</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L102" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>XLATrainingCallback.before_validate</code>()</p>
+<h4 id="XLATrainingCallback.before_validate" class="doc_header"><code>XLATrainingCallback.before_validate</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>XLATrainingCallback.before_validate</code>()</p>
 </blockquote>
 <p>Set the model in validation mode</p>
 
@@ -155,7 +155,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="TPUDistributedDL.new" class="doc_header"><code>TPUDistributedDL.new</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>TPUDistributedDL.new</code>(<strong><code>dataset</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="TPUDistributedDL.new" class="doc_header"><code>TPUDistributedDL.new</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L126" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>TPUDistributedDL.new</code>(<strong><code>dataset</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Create a new version of self with a few changed attributes</p>
 
@@ -187,7 +187,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="setup_inference_args" class="doc_header"><code>setup_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L134" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>setup_inference_args</code>(<strong><code>rank</code></strong>, <strong><code>inference_args</code></strong>)</p>
+<h4 id="setup_inference_args" class="doc_header"><code>setup_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L142" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>setup_inference_args</code>(<strong><code>rank</code></strong>, <strong><code>inference_args</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -218,7 +218,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="save_pred_results" class="doc_header"><code>save_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L142" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>save_pred_results</code>(<strong><code>rank</code></strong>, <strong><code>results</code></strong>)</p>
+<h4 id="save_pred_results" class="doc_header"><code>save_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L150" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>save_pred_results</code>(<strong><code>rank</code></strong>, <strong><code>results</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -249,7 +249,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="xla_run_inference" class="doc_header"><code>xla_run_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L150" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xla_run_inference</code>(<strong><code>rank</code></strong>, <strong><code>learner_args</code></strong>, <strong><code>add_args</code></strong>, <strong><code>inference_args</code></strong>, <strong><code>ctrl_args</code></strong>)</p>
+<h4 id="xla_run_inference" class="doc_header"><code>xla_run_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L158" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xla_run_inference</code>(<strong><code>rank</code></strong>, <strong><code>learner_args</code></strong>, <strong><code>add_args</code></strong>, <strong><code>inference_args</code></strong>, <strong><code>ctrl_args</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -280,7 +280,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="reload_pred_results" class="doc_header"><code>reload_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L173" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>reload_pred_results</code>(<strong><code>num_files</code></strong>, <strong><code>n_samples</code></strong>)</p>
+<h4 id="reload_pred_results" class="doc_header"><code>reload_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L181" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>reload_pred_results</code>(<strong><code>num_files</code></strong>, <strong><code>n_samples</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -311,7 +311,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.pre_xla_inference" class="doc_header"><code>Learner.pre_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L214" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pre_xla_inference</code>()</p>
+<h4 id="Learner.pre_xla_inference" class="doc_header"><code>Learner.pre_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pre_xla_inference</code>()</p>
 </blockquote>
 
 </div>
@@ -342,7 +342,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.post_xla_inference" class="doc_header"><code>Learner.post_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L226" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.post_xla_inference</code>(<strong><code>ctrl_args</code></strong>)</p>
+<h4 id="Learner.post_xla_inference" class="doc_header"><code>Learner.post_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L234" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.post_xla_inference</code>(<strong><code>ctrl_args</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -373,7 +373,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prep_inference_args" class="doc_header"><code>prep_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L234" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prep_inference_args</code>(<strong>**<code>kwargs</code></strong>)</p>
+<h4 id="prep_inference_args" class="doc_header"><code>prep_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L242" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prep_inference_args</code>(<strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -404,7 +404,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.xla_get_preds" class="doc_header"><code>Learner.xla_get_preds</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L241" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_get_preds</code>(<strong><code>ds_idx</code></strong>=<em><code>1</code></em>, <strong><code>dl</code></strong>=<em><code>None</code></em>, <strong><code>with_input</code></strong>=<em><code>False</code></em>, <strong><code>with_decoded</code></strong>=<em><code>False</code></em>, <strong><code>with_loss</code></strong>=<em><code>False</code></em>, <strong><code>act</code></strong>=<em><code>None</code></em>, <strong><code>inner</code></strong>=<em><code>False</code></em>, <strong><code>reorder</code></strong>=<em><code>True</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>master_cbs</code></strong>=<em><code>None</code></em>, <strong><code>save_preds</code></strong>=<em><code>None</code></em>, <strong><code>save_targs</code></strong>=<em><code>None</code></em>, <strong><code>concat_dim</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="Learner.xla_get_preds" class="doc_header"><code>Learner.xla_get_preds</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L249" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_get_preds</code>(<strong><code>ds_idx</code></strong>=<em><code>1</code></em>, <strong><code>dl</code></strong>=<em><code>None</code></em>, <strong><code>with_input</code></strong>=<em><code>False</code></em>, <strong><code>with_decoded</code></strong>=<em><code>False</code></em>, <strong><code>with_loss</code></strong>=<em><code>False</code></em>, <strong><code>act</code></strong>=<em><code>None</code></em>, <strong><code>inner</code></strong>=<em><code>False</code></em>, <strong><code>reorder</code></strong>=<em><code>True</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>master_cbs</code></strong>=<em><code>None</code></em>, <strong><code>save_preds</code></strong>=<em><code>None</code></em>, <strong><code>save_targs</code></strong>=<em><code>None</code></em>, <strong><code>concat_dim</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 
 </div>

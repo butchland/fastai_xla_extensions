@@ -60,6 +60,14 @@ def inner_get_preds(self:Learner, ds_idx=1, dl=None, with_input=False, with_deco
         rank_idxs = dl.get_idxs()
         rank_idxs_len = len(rank_idxs)
 
+    #handle save_preds and save_targs across ranks
+    save_preds = kwargs.pop('save_preds',None)
+    if save_preds is not None:
+        kwargs['save_preds'] = save_preds + str(xla_rank) # add rank to filename
+    save_targs = kwargs.pop('save_targs',None)
+    if save_targs is not None:
+        kwargs['save_targs'] = save_targs + str(xla_rank) # add rank to filename
+
     cb = GatherPredsCallback(with_input=with_input, with_loss=with_loss, **kwargs)
     ctx_mgrs = self.validation_context(cbs=L(cbs)+[cb], inner=inner)
     if with_loss:
