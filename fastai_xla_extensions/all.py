@@ -5,5 +5,6 @@ from .multi_core.torch_compat import *
 from .multi_core.learner import *
 from .multi_core.callback import *
 from .multi_core.lr_find import *
+from .multi_core.inference import *
 
 
