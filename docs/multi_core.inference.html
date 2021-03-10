@@ -51,6 +51,22 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>WARNING:root:Waiting for TPU to be start up with version pytorch-1.7...
+WARNING:root:Waiting for TPU to be start up with version pytorch-1.7...
+WARNING:root:TPU has started up successfully with version pytorch-1.7
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -123,71 +139,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="XLATrainingCallback.before_validate" class="doc_header"><code>XLATrainingCallback.before_validate</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>XLATrainingCallback.before_validate</code>()</p>
-</blockquote>
-<p>Set the model in validation mode</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="TPUDistributedDL.new" class="doc_header"><code>TPUDistributedDL.new</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L126" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>TPUDistributedDL.new</code>(<strong><code>dataset</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
-</blockquote>
-<p>Create a new version of self with a few changed attributes</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="setup_inference_args" class="doc_header"><code>setup_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L142" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>setup_inference_args</code>(<strong><code>rank</code></strong>, <strong><code>inference_args</code></strong>)</p>
+<h4 id="setup_inference_args" class="doc_header"><code>setup_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>setup_inference_args</code>(<strong><code>rank</code></strong>, <strong><code>inference_args</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -218,7 +170,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="save_pred_results" class="doc_header"><code>save_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L150" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>save_pred_results</code>(<strong><code>rank</code></strong>, <strong><code>results</code></strong>)</p>
+<h4 id="save_pred_results" class="doc_header"><code>save_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>save_pred_results</code>(<strong><code>rank</code></strong>, <strong><code>results</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -249,7 +201,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="xla_run_inference" class="doc_header"><code>xla_run_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L158" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xla_run_inference</code>(<strong><code>rank</code></strong>, <strong><code>learner_args</code></strong>, <strong><code>add_args</code></strong>, <strong><code>inference_args</code></strong>, <strong><code>ctrl_args</code></strong>)</p>
+<h4 id="xla_run_inference" class="doc_header"><code>xla_run_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L132" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>xla_run_inference</code>(<strong><code>rank</code></strong>, <strong><code>learner_args</code></strong>, <strong><code>add_args</code></strong>, <strong><code>inference_args</code></strong>, <strong><code>ctrl_args</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -280,7 +232,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="reload_pred_results" class="doc_header"><code>reload_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L181" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>reload_pred_results</code>(<strong><code>num_files</code></strong>, <strong><code>n_samples</code></strong>)</p>
+<h4 id="reload_pred_results" class="doc_header"><code>reload_pred_results</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L155" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>reload_pred_results</code>(<strong><code>num_files</code></strong>, <strong><code>n_samples</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -311,7 +263,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.pre_xla_inference" class="doc_header"><code>Learner.pre_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pre_xla_inference</code>()</p>
+<h4 id="Learner.pre_xla_inference" class="doc_header"><code>Learner.pre_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L196" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.pre_xla_inference</code>()</p>
 </blockquote>
 
 </div>
@@ -342,7 +294,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.post_xla_inference" class="doc_header"><code>Learner.post_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L234" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.post_xla_inference</code>(<strong><code>ctrl_args</code></strong>)</p>
+<h4 id="Learner.post_xla_inference" class="doc_header"><code>Learner.post_xla_inference</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L208" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.post_xla_inference</code>(<strong><code>ctrl_args</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -373,7 +325,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prep_inference_args" class="doc_header"><code>prep_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L242" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prep_inference_args</code>(<strong>**<code>kwargs</code></strong>)</p>
+<h4 id="prep_inference_args" class="doc_header"><code>prep_inference_args</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L216" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prep_inference_args</code>(<strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -404,7 +356,7 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Learner.xla_get_preds" class="doc_header"><code>Learner.xla_get_preds</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L249" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_get_preds</code>(<strong><code>ds_idx</code></strong>=<em><code>1</code></em>, <strong><code>dl</code></strong>=<em><code>None</code></em>, <strong><code>with_input</code></strong>=<em><code>False</code></em>, <strong><code>with_decoded</code></strong>=<em><code>False</code></em>, <strong><code>with_loss</code></strong>=<em><code>False</code></em>, <strong><code>act</code></strong>=<em><code>None</code></em>, <strong><code>inner</code></strong>=<em><code>False</code></em>, <strong><code>reorder</code></strong>=<em><code>True</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>master_cbs</code></strong>=<em><code>None</code></em>, <strong><code>save_preds</code></strong>=<em><code>None</code></em>, <strong><code>save_targs</code></strong>=<em><code>None</code></em>, <strong><code>concat_dim</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="Learner.xla_get_preds" class="doc_header"><code>Learner.xla_get_preds</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/inference.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Learner.xla_get_preds</code>(<strong><code>ds_idx</code></strong>=<em><code>1</code></em>, <strong><code>dl</code></strong>=<em><code>None</code></em>, <strong><code>with_input</code></strong>=<em><code>False</code></em>, <strong><code>with_decoded</code></strong>=<em><code>False</code></em>, <strong><code>with_loss</code></strong>=<em><code>False</code></em>, <strong><code>act</code></strong>=<em><code>None</code></em>, <strong><code>inner</code></strong>=<em><code>False</code></em>, <strong><code>reorder</code></strong>=<em><code>True</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>num_cores</code></strong>=<em><code>8</code></em>, <strong><code>start_method</code></strong>=<em><code>'fork'</code></em>, <strong><code>master_cbs</code></strong>=<em><code>None</code></em>, <strong><code>save_preds</code></strong>=<em><code>None</code></em>, <strong><code>save_targs</code></strong>=<em><code>None</code></em>, <strong><code>concat_dim</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 
 </div>
@@ -613,24 +565,24 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.557177</td>
-      <td>0.198589</td>
-      <td>0.940100</td>
-      <td>02:26</td>
+      <td>0.561700</td>
+      <td>0.177223</td>
+      <td>0.944400</td>
+      <td>02:33</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.229188</td>
-      <td>0.099969</td>
-      <td>0.968500</td>
-      <td>02:14</td>
+      <td>0.224954</td>
+      <td>0.091147</td>
+      <td>0.972200</td>
+      <td>02:23</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.141549</td>
-      <td>0.079136</td>
-      <td>0.974500</td>
-      <td>02:20</td>
+      <td>0.144529</td>
+      <td>0.077342</td>
+      <td>0.976500</td>
+      <td>02:35</td>
     </tr>
   </tbody>
 </table>
@@ -737,38 +689,38 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.087690</td>
-      <td>0.068158</td>
-      <td>0.977000</td>
-      <td>02:28</td>
+      <td>0.091381</td>
+      <td>0.066814</td>
+      <td>0.978300</td>
+      <td>02:45</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.058692</td>
-      <td>0.069429</td>
-      <td>0.977200</td>
-      <td>02:48</td>
+      <td>0.055593</td>
+      <td>0.067667</td>
+      <td>0.978500</td>
+      <td>02:38</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.080852</td>
-      <td>0.059883</td>
-      <td>0.980700</td>
-      <td>03:07</td>
+      <td>0.083875</td>
+      <td>0.060253</td>
+      <td>0.981000</td>
+      <td>02:37</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.086271</td>
-      <td>0.059273</td>
-      <td>0.981700</td>
-      <td>03:24</td>
+      <td>0.083661</td>
+      <td>0.059680</td>
+      <td>0.979900</td>
+      <td>02:41</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.077349</td>
-      <td>0.055652</td>
-      <td>0.981700</td>
-      <td>03:08</td>
+      <td>0.078803</td>
+      <td>0.058656</td>
+      <td>0.980800</td>
+      <td>02:35</td>
     </tr>
   </tbody>
 </table>
@@ -846,8 +798,8 @@ nb_path: "nbs/03e_multi_core.inference.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 38.2 s, sys: 1.09 s, total: 39.3 s
-Wall time: 41.7 s
+<pre>CPU times: user 35.7 s, sys: 1.77 s, total: 37.5 s
+Wall time: 39.2 s
 </pre>
 </div>
 </div>
@@ -911,7 +863,7 @@ torch.Size([10000, 10]) torch.Size([10000])
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>TensorBase(0.9813)
+<pre>TensorBase(0.9816)
 </pre>
 </div>
 </div>
@@ -944,7 +896,7 @@ torch.Size([10000, 10]) torch.Size([10000])
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>TensorCategory([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])</pre>
+<pre>TensorCategory([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</pre>
 </div>
 
 </div>
@@ -985,8 +937,8 @@ torch.Size([10000, 10]) torch.Size([10000])
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 37.8 s, sys: 1.02 s, total: 38.8 s
-Wall time: 40.6 s
+<pre>CPU times: user 35.9 s, sys: 2.02 s, total: 37.9 s
+Wall time: 39.4 s
 </pre>
 </div>
 </div>
@@ -1052,7 +1004,7 @@ torch.Size([10000, 10]) torch.Size([10000])
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>TensorCategory([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])</pre>
+<pre>TensorCategory([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</pre>
 </div>
 
 </div>
@@ -1083,7 +1035,7 @@ torch.Size([10000, 10]) torch.Size([10000])
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>TensorBase(0.9813)
+<pre>TensorBase(0.9816)
 </pre>
 </div>
 </div>
@@ -1116,8 +1068,24 @@ torch.Size([10000, 10]) torch.Size([10000])
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>start fit
-CPU times: user 187 ms, sys: 153 ms, total: 340 ms
-Wall time: 42.6 s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 48.8 ms, sys: 117 ms, total: 166 ms
+Wall time: 28.6 s
 </pre>
 </div>
 </div>
@@ -1214,7 +1182,7 @@ Wall time: 42.6 s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])</pre>
+<pre>tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</pre>
 </div>
 
 </div>
@@ -1247,26 +1215,26 @@ Wall time: 42.6 s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([[7.3227e-05, 9.9777e-01, 1.8993e-05, 1.4147e-05, 4.4221e-04, 4.3196e-04,
-         1.2528e-04, 1.8559e-04, 7.8385e-04, 1.5749e-04],
-        [3.7930e-06, 9.9990e-01, 1.0723e-06, 1.7454e-06, 1.3211e-05, 9.3661e-06,
-         2.8669e-06, 2.6495e-05, 4.4178e-05, 1.5767e-06],
-        [1.5091e-04, 9.9920e-01, 1.1045e-04, 5.1943e-05, 4.7102e-05, 1.9531e-05,
-         2.2440e-04, 1.1227e-04, 5.6824e-05, 2.4695e-05],
-        [1.0292e-05, 9.9979e-01, 1.9649e-05, 1.1793e-06, 1.8352e-05, 3.1917e-06,
-         7.2904e-06, 1.9972e-05, 1.1706e-04, 8.7981e-06],
-        [7.8981e-06, 9.9990e-01, 9.7631e-06, 2.2887e-06, 1.3191e-05, 2.5938e-06,
-         2.3175e-05, 2.3824e-05, 1.0166e-05, 2.3397e-06],
-        [3.0717e-05, 9.9962e-01, 4.3642e-05, 1.5713e-05, 3.4024e-05, 3.8474e-05,
-         1.2209e-04, 6.3268e-05, 1.3420e-05, 1.9892e-05],
-        [1.3539e-04, 9.9956e-01, 4.1930e-06, 1.8683e-06, 1.1204e-05, 2.9642e-06,
-         2.3243e-04, 1.3482e-05, 3.8045e-05, 3.7877e-06],
-        [1.4129e-06, 9.9996e-01, 8.9221e-08, 9.7131e-08, 1.0073e-05, 1.2251e-06,
-         1.9130e-05, 5.8627e-07, 4.2511e-06, 1.2738e-06],
-        [3.5239e-06, 9.9956e-01, 9.9273e-05, 1.3171e-05, 1.1879e-04, 2.2539e-05,
-         6.6234e-05, 4.8836e-05, 2.5220e-05, 4.6666e-05],
-        [1.2536e-05, 9.9991e-01, 2.0382e-07, 4.0083e-07, 1.1834e-05, 7.1591e-06,
-         4.6859e-06, 4.6123e-05, 7.2919e-06, 1.8044e-06]])</pre>
+<pre>tensor([[9.9997e-01, 1.2037e-06, 2.2819e-07, 9.6082e-08, 5.1155e-08, 2.5031e-07,
+         2.1356e-05, 7.4675e-07, 1.8351e-07, 4.7405e-06],
+        [9.9949e-01, 9.3674e-07, 9.9061e-07, 2.3419e-07, 4.0992e-07, 6.5995e-07,
+         5.0583e-04, 8.3670e-08, 7.9095e-07, 2.8556e-06],
+        [8.7443e-01, 1.1864e-03, 1.4634e-05, 5.5702e-05, 3.1255e-03, 3.9448e-02,
+         8.0691e-02, 1.3605e-04, 2.0612e-04, 7.0657e-04],
+        [9.9999e-01, 9.1822e-07, 7.4076e-08, 1.3242e-07, 3.8235e-08, 9.4999e-08,
+         5.3028e-06, 8.0097e-07, 3.6222e-08, 9.3102e-07],
+        [9.9996e-01, 6.0875e-07, 9.9508e-08, 1.6203e-06, 2.5617e-07, 1.3026e-06,
+         2.4092e-05, 1.4711e-06, 3.8553e-06, 3.5397e-06],
+        [9.9967e-01, 2.5601e-06, 7.9427e-06, 7.0779e-07, 2.9737e-05, 6.6313e-07,
+         2.7755e-04, 8.1741e-07, 1.5646e-06, 5.0701e-06],
+        [9.9988e-01, 4.0136e-06, 4.6879e-06, 1.0828e-06, 1.6936e-06, 2.4147e-06,
+         7.2721e-05, 3.8035e-06, 1.4383e-06, 3.1155e-05],
+        [9.9994e-01, 5.1368e-07, 1.0097e-06, 1.6207e-07, 4.7854e-07, 1.5919e-07,
+         1.1031e-05, 8.6520e-06, 3.0814e-07, 3.5142e-05],
+        [9.9932e-01, 9.1196e-06, 2.2332e-06, 5.8100e-06, 1.6907e-05, 4.3462e-05,
+         5.6675e-04, 1.5917e-05, 5.3773e-06, 1.0780e-05],
+        [9.9997e-01, 4.1387e-06, 1.7671e-07, 6.1776e-08, 6.7920e-08, 9.2069e-08,
+         1.2195e-05, 3.7874e-07, 1.7996e-07, 8.4062e-06]])</pre>
 </div>
 
 </div>
@@ -1297,7 +1265,7 @@ Wall time: 42.6 s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>TensorBase(0.9825)
+<pre>TensorBase(0.9812)
 </pre>
 </div>
 </div>
@@ -1330,8 +1298,24 @@ Wall time: 42.6 s
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>start fit
-CPU times: user 160 ms, sys: 272 ms, total: 431 ms
-Wall time: 31.8 s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 70.6 ms, sys: 118 ms, total: 189 ms
+Wall time: 46.3 s
 </pre>
 </div>
 </div>
@@ -1428,7 +1412,7 @@ Wall time: 31.8 s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])</pre>
+<pre>tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</pre>
 </div>
 
 </div>
@@ -1461,26 +1445,26 @@ Wall time: 31.8 s
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([[7.3227e-05, 9.9777e-01, 1.8993e-05, 1.4147e-05, 4.4221e-04, 4.3196e-04,
-         1.2528e-04, 1.8559e-04, 7.8385e-04, 1.5749e-04],
-        [3.7930e-06, 9.9990e-01, 1.0723e-06, 1.7454e-06, 1.3211e-05, 9.3661e-06,
-         2.8669e-06, 2.6495e-05, 4.4178e-05, 1.5767e-06],
-        [1.5091e-04, 9.9920e-01, 1.1045e-04, 5.1943e-05, 4.7102e-05, 1.9531e-05,
-         2.2440e-04, 1.1227e-04, 5.6824e-05, 2.4695e-05],
-        [1.0292e-05, 9.9979e-01, 1.9649e-05, 1.1793e-06, 1.8352e-05, 3.1917e-06,
-         7.2904e-06, 1.9972e-05, 1.1706e-04, 8.7981e-06],
-        [7.8981e-06, 9.9990e-01, 9.7631e-06, 2.2887e-06, 1.3191e-05, 2.5938e-06,
-         2.3175e-05, 2.3824e-05, 1.0166e-05, 2.3397e-06],
-        [3.0717e-05, 9.9962e-01, 4.3642e-05, 1.5713e-05, 3.4024e-05, 3.8474e-05,
-         1.2209e-04, 6.3268e-05, 1.3420e-05, 1.9892e-05],
-        [1.3539e-04, 9.9956e-01, 4.1930e-06, 1.8683e-06, 1.1204e-05, 2.9642e-06,
-         2.3243e-04, 1.3482e-05, 3.8045e-05, 3.7877e-06],
-        [1.4129e-06, 9.9996e-01, 8.9221e-08, 9.7131e-08, 1.0073e-05, 1.2251e-06,
-         1.9130e-05, 5.8627e-07, 4.2511e-06, 1.2738e-06],
-        [3.5239e-06, 9.9956e-01, 9.9273e-05, 1.3171e-05, 1.1879e-04, 2.2539e-05,
-         6.6234e-05, 4.8836e-05, 2.5220e-05, 4.6666e-05],
-        [1.2536e-05, 9.9991e-01, 2.0382e-07, 4.0083e-07, 1.1834e-05, 7.1591e-06,
-         4.6859e-06, 4.6123e-05, 7.2919e-06, 1.8044e-06]])</pre>
+<pre>tensor([[9.9997e-01, 1.2037e-06, 2.2819e-07, 9.6082e-08, 5.1155e-08, 2.5031e-07,
+         2.1356e-05, 7.4675e-07, 1.8351e-07, 4.7405e-06],
+        [9.9949e-01, 9.3674e-07, 9.9061e-07, 2.3419e-07, 4.0992e-07, 6.5995e-07,
+         5.0583e-04, 8.3670e-08, 7.9095e-07, 2.8556e-06],
+        [8.7443e-01, 1.1864e-03, 1.4634e-05, 5.5702e-05, 3.1255e-03, 3.9448e-02,
+         8.0691e-02, 1.3605e-04, 2.0612e-04, 7.0657e-04],
+        [9.9999e-01, 9.1822e-07, 7.4076e-08, 1.3242e-07, 3.8235e-08, 9.4999e-08,
+         5.3028e-06, 8.0097e-07, 3.6222e-08, 9.3102e-07],
+        [9.9996e-01, 6.0875e-07, 9.9508e-08, 1.6203e-06, 2.5617e-07, 1.3026e-06,
+         2.4092e-05, 1.4711e-06, 3.8553e-06, 3.5397e-06],
+        [9.9967e-01, 2.5601e-06, 7.9427e-06, 7.0779e-07, 2.9737e-05, 6.6313e-07,
+         2.7755e-04, 8.1741e-07, 1.5646e-06, 5.0701e-06],
+        [9.9988e-01, 4.0136e-06, 4.6879e-06, 1.0828e-06, 1.6936e-06, 2.4147e-06,
+         7.2721e-05, 3.8035e-06, 1.4383e-06, 3.1155e-05],
+        [9.9994e-01, 5.1368e-07, 1.0097e-06, 1.6207e-07, 4.7854e-07, 1.5919e-07,
+         1.1031e-05, 8.6520e-06, 3.0814e-07, 3.5142e-05],
+        [9.9932e-01, 9.1196e-06, 2.2332e-06, 5.8100e-06, 1.6907e-05, 4.3462e-05,
+         5.6675e-04, 1.5917e-05, 5.3773e-06, 1.0780e-05],
+        [9.9997e-01, 4.1387e-06, 1.7671e-07, 6.1776e-08, 6.7920e-08, 9.2069e-08,
+         1.2195e-05, 3.7874e-07, 1.7996e-07, 8.4062e-06]])</pre>
 </div>
 
 </div>
@@ -1511,7 +1495,228 @@ Wall time: 31.8 s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>TensorBase(0.9825)
+<pre>TensorBase(0.9812)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cd</span> /content
+<span class="c1">#test save preds and save targs to files per iter</span>
+<span class="n">xla_res3</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">xla_get_preds</span><span class="p">(</span><span class="n">save_preds</span><span class="o">=</span><span class="s1">&#39;my_preds&#39;</span><span class="p">,</span> <span class="n">save_targs</span><span class="o">=</span><span class="s1">&#39;my_targs&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/content
+start fit
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">xla_res3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(#8) [None,None,None,None,None,None,None,None],
+ (#8) [None,None,None,None,None,None,None,None]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls -ald /content/my_preds*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>drwxr-xr-x 2 root root 4096 Mar 10 18:53 /content/my_preds0
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_preds1
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_preds2
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_preds3
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_preds4
+drwxr-xr-x 2 root root 4096 Mar 10 18:53 /content/my_preds5
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_preds6
+drwxr-xr-x 2 root root 4096 Mar 10 18:53 /content/my_preds7
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls -ald /content/my_targs*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>drwxr-xr-x 2 root root 4096 Mar 10 18:53 /content/my_targs0
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_targs1
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_targs2
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_targs3
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_targs4
+drwxr-xr-x 2 root root 4096 Mar 10 18:53 /content/my_targs5
+drwxr-xr-x 2 root root 4096 Mar 10 18:54 /content/my_targs6
+drwxr-xr-x 2 root root 4096 Mar 10 18:53 /content/my_targs7
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>rm -rf /content/my_preds*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>rm -rf /content/my_targs*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls -ald *
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>lrwxrwxrwx 1 root root   18 Mar 10 17:35 data -&gt; /root/.fastai/data
+drwx------ 5 root root 4096 Mar 10 17:32 drive
+lrwxrwxrwx 1 root root   44 Mar 10 17:35 fastai_xla_extensions -&gt; /content/drive/MyDrive/fastai_xla_extensions
+lrwxrwxrwx 1 root root   19 Mar 10 17:35 models -&gt; /root/.torch/models
 </pre>
 </div>
 </div>
@@ -1524,4 +1729,8 @@ Wall time: 31.8 s
 
 </div>
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"76a80e40740a4c23a3d79a2e662e25a9": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_fc87417592fa4aa2adbc14525b066e0e", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_ca3033369b1544079f96363fde4710ad", "IPY_MODEL_307c0bfc72b24ce8828b6e0e280f9e59"]}}, "fc87417592fa4aa2adbc14525b066e0e": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "ca3033369b1544079f96363fde4710ad": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_ceef388a39074e7fb9899c5904e455ee", "_dom_classes": [], "description": "100%", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 46827520, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 46827520, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_17d671866adf40e1b5ef2cd1258c2ae2"}}, "307c0bfc72b24ce8828b6e0e280f9e59": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_4088a861bc854cada58dbbdecd864633", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 44.7M/44.7M [21:19&lt;00:00, 36.6kB/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_a3ac6c0487314ea089b2823ee5de675d"}}, "ceef388a39074e7fb9899c5904e455ee": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "17d671866adf40e1b5ef2cd1258c2ae2": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "4088a861bc854cada58dbbdecd864633": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "a3ac6c0487314ea089b2823ee5de675d": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
+</script>
 

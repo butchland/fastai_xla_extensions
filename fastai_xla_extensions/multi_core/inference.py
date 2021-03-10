@@ -63,10 +63,18 @@ def inner_get_preds(self:Learner, ds_idx=1, dl=None, with_input=False, with_deco
     #handle save_preds and save_targs across ranks
     save_preds = kwargs.pop('save_preds',None)
     if save_preds is not None:
-        kwargs['save_preds'] = save_preds + str(xla_rank) # add rank to filename
+        if isinstance(save_preds, str):
+            kwargs['save_preds'] = Path(save_preds + str(xla_rank)) # add rank to filename
+        elif isinstance(save_preds, Path):
+            kwargs['save_preds'] = Path(str(save_preds) + str(xla_rank))
+        kwargs['save_preds'].mkdir(parents=True,exist_ok=True)
     save_targs = kwargs.pop('save_targs',None)
     if save_targs is not None:
-        kwargs['save_targs'] = save_targs + str(xla_rank) # add rank to filename
+        if isinstance(save_targs, str):
+            kwargs['save_targs'] = Path(save_targs + str(xla_rank)) # add rank to filename
+        elif isinstance(save_preds, Path):
+            kwargs['save_targs'] = Path(str(save_targs) + str(xla_rank))
+        kwargs['save_targs'].mkdir(parents=True,exist_ok=True)
 
     cb = GatherPredsCallback(with_input=with_input, with_loss=with_loss, **kwargs)
     ctx_mgrs = self.validation_context(cbs=L(cbs)+[cb], inner=inner)
@@ -129,7 +137,7 @@ def xla_run_inference(rank, learner_args, add_args, inference_args, ctrl_args):
     if rank == 0 and len(master_cbs) > 0:
         learner.add_cbs(master_cbs)
 
-    learner.synced_cancel.before_fit()
+    # learner.synced_cancel.before_fit()
 
     if rank == 0:
         learner.sync_recorder.orig_logger = learner.logger
