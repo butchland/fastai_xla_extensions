@@ -42,8 +42,8 @@ class SkipValidationCallback(Callback):
 
 from fastcore.basics import patch
 # uncomment for notebook2html
-import torch_xla.distributed.parallel_loader as pl
-from ..utils import xla_imported
+# import torch_xla.distributed.parallel_loader as pl
+# from fastai_xla_extensions.utils import xla_imported
 
 if xla_imported():
     @patch
