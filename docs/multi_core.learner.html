@@ -45,6 +45,20 @@ nb_path: "nbs/03b_multi_core.learner.ipynb"
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Add-master_cbs-property-to-Learner">Add master_cbs property to Learner<a class="anchor-link" href="#Add-master_cbs-property-to-Learner"> </a></h2><blockquote><p>Master callbacks are callbacks that will be executed on the master ordinal (rank 0 thread) only.</p>
@@ -895,6 +909,28 @@ potentially recreating them</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://download.pytorch.org/models/resnet18-5c106cde.pth&#34; to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1016,37 +1052,37 @@ potentially recreating them</p>
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.248156</td>
-      <td>0.515241</td>
-      <td>0.813920</td>
-      <td>00:18</td>
+      <td>0.230687</td>
+      <td>0.693944</td>
+      <td>0.602273</td>
+      <td>00:21</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.200013</td>
-      <td>0.743561</td>
-      <td>0.538352</td>
+      <td>0.201443</td>
+      <td>0.468439</td>
+      <td>0.839489</td>
       <td>00:03</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.246930</td>
-      <td>0.687081</td>
-      <td>0.596591</td>
-      <td>00:04</td>
+      <td>0.215106</td>
+      <td>0.533784</td>
+      <td>0.754261</td>
+      <td>00:03</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.261705</td>
-      <td>0.880469</td>
-      <td>0.538352</td>
+      <td>0.234269</td>
+      <td>0.617997</td>
+      <td>0.671875</td>
       <td>00:04</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.295985</td>
-      <td>1.625116</td>
-      <td>0.511364</td>
+      <td>0.256085</td>
+      <td>0.771770</td>
+      <td>0.555398</td>
       <td>00:04</td>
     </tr>
   </tbody>
@@ -1058,7 +1094,8 @@ potentially recreating them</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Better model found at epoch 0 with valid_loss value: 0.5152414441108704.
+<pre>Better model found at epoch 0 with valid_loss value: 0.6939442753791809.
+Better model found at epoch 1 with valid_loss value: 0.4684391915798187.
 </pre>
 </div>
 </div>
@@ -1099,7 +1136,7 @@ potentially recreating them</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>TensorBase(0.7568)
+<pre>TensorBase(0.8426)
 </pre>
 </div>
 </div>
@@ -1141,7 +1178,7 @@ potentially recreating them</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;fastai.learner.Learner at 0x7f70b9c63e50&gt;</pre>
+<pre>&lt;fastai.learner.Learner at 0x7f5e8fa13810&gt;</pre>
 </div>
 
 </div>
@@ -1182,7 +1219,7 @@ potentially recreating them</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>TensorBase(0.7568)
+<pre>TensorBase(0.8426)
 </pre>
 </div>
 </div>
@@ -1285,37 +1322,37 @@ potentially recreating them</p>
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.050473</td>
-      <td>10.583854</td>
-      <td>0.492898</td>
-      <td>00:21</td>
+      <td>0.079039</td>
+      <td>0.057682</td>
+      <td>0.981534</td>
+      <td>00:20</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.047812</td>
-      <td>2.253268</td>
-      <td>0.720170</td>
+      <td>0.070004</td>
+      <td>0.602258</td>
+      <td>0.867898</td>
       <td>00:03</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.056125</td>
-      <td>0.019719</td>
-      <td>0.991477</td>
-      <td>00:03</td>
+      <td>0.078288</td>
+      <td>1.280675</td>
+      <td>0.713068</td>
+      <td>00:04</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.051844</td>
-      <td>0.034788</td>
-      <td>0.990057</td>
-      <td>00:03</td>
+      <td>0.080101</td>
+      <td>1.281230</td>
+      <td>0.857955</td>
+      <td>00:04</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.047623</td>
-      <td>0.010792</td>
-      <td>0.997159</td>
+      <td>0.081996</td>
+      <td>0.056090</td>
+      <td>0.984375</td>
       <td>00:04</td>
     </tr>
   </tbody>
@@ -1327,10 +1364,8 @@ potentially recreating them</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Better model found at epoch 0 with valid_loss value: 10.583853721618652.
-Better model found at epoch 1 with valid_loss value: 2.253268003463745.
-Better model found at epoch 2 with valid_loss value: 0.01971946842968464.
-Better model found at epoch 4 with valid_loss value: 0.010792052373290062.
+<pre>Better model found at epoch 0 with valid_loss value: 0.05768230929970741.
+Better model found at epoch 4 with valid_loss value: 0.056089673191308975.
 </pre>
 </div>
 </div>
@@ -1372,7 +1407,7 @@ Better model found at epoch 4 with valid_loss value: 0.010792052373290062.
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(#2) [0.012101042084395885,0.9942775368690491]</pre>
+<pre>(#2) [0.06356370449066162,0.9856938719749451]</pre>
 </div>
 
 </div>
@@ -1527,20 +1562,6 @@ Files already downloaded and verified
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1577,6 +1598,20 @@ Files already downloaded and verified
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1625,38 +1660,38 @@ Files already downloaded and verified
   <tbody>
     <tr>
       <td>0</td>
-      <td>1.275580</td>
-      <td>1.169747</td>
-      <td>0.596968</td>
-      <td>01:30</td>
+      <td>1.280729</td>
+      <td>1.212466</td>
+      <td>0.571477</td>
+      <td>01:28</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>1.121143</td>
-      <td>0.998941</td>
-      <td>0.652231</td>
-      <td>01:17</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>1.024472</td>
-      <td>1.067758</td>
-      <td>0.639523</td>
+      <td>1.139668</td>
+      <td>1.096565</td>
+      <td>0.610852</td>
       <td>01:16</td>
     </tr>
     <tr>
+      <td>2</td>
+      <td>1.053340</td>
+      <td>1.212897</td>
+      <td>0.596054</td>
+      <td>01:17</td>
+    </tr>
+    <tr>
       <td>3</td>
-      <td>0.993983</td>
-      <td>0.907262</td>
-      <td>0.687425</td>
-      <td>01:20</td>
+      <td>1.004425</td>
+      <td>1.009118</td>
+      <td>0.655374</td>
+      <td>01:17</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.973521</td>
-      <td>0.885192</td>
-      <td>0.695187</td>
-      <td>01:23</td>
+      <td>0.979024</td>
+      <td>0.906682</td>
+      <td>0.682767</td>
+      <td>01:13</td>
     </tr>
   </tbody>
 </table>
@@ -1672,4 +1707,8 @@ Files already downloaded and verified
 
 </div>
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"6c7d3210e84e48b6828004f0d544f960": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_fdecc01fee6541f0be8a852bd65272b8", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_9fda392f79e04a1dac1e8a15f7d595d2", "IPY_MODEL_478167ccb99a47b093bf16926e465157"]}}, "fdecc01fee6541f0be8a852bd65272b8": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "9fda392f79e04a1dac1e8a15f7d595d2": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_9a98702b07f44ba39409151a553f848a", "_dom_classes": [], "description": "100%", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 46827520, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 46827520, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_218d41a1ccf04500b27dd39802cea4de"}}, "478167ccb99a47b093bf16926e465157": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_f4245100ab424718878cb5f30f79ed3d", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 44.7M/44.7M [01:09&lt;00:00, 675kB/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_0f64f996abb74585b4ee93892891bb5f"}}, "9a98702b07f44ba39409151a553f848a": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "218d41a1ccf04500b27dd39802cea4de": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "f4245100ab424718878cb5f30f79ed3d": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "0f64f996abb74585b4ee93892891bb5f": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "b059f0c3017f4649b38dec4febf3fab3": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_6ef6c322d15f4f01adce5f35fe59c9bd", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_e93e7c1e2bb4493b973a1522016a4901", "IPY_MODEL_c39be19251af4f7c845b8e3d784af521"]}}, "6ef6c322d15f4f01adce5f35fe59c9bd": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "e93e7c1e2bb4493b973a1522016a4901": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_dbaedba3634c429e9d8a7ef968a44229", "_dom_classes": [], "description": "", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 1, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 1, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_f89ecbcf722a4aaa9efaf5c36cade5ad"}}, "c39be19251af4f7c845b8e3d784af521": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_39cd4ffc94d3453a9ad929691c2f1335", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 170500096/? [00:06&lt;00:00, 28267977.64it/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_653e6e8a6aa74d3f89ef4952fd0fd8ae"}}, "dbaedba3634c429e9d8a7ef968a44229": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "f89ecbcf722a4aaa9efaf5c36cade5ad": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "39cd4ffc94d3453a9ad929691c2f1335": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "653e6e8a6aa74d3f89ef4952fd0fd8ae": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
+</script>
 
