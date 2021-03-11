@@ -69,6 +69,8 @@ except ImportError as e:
     
 ```
 
+    WARNING:root:Waiting for TPU to be start up with version pytorch-1.7...
+    WARNING:root:Waiting for TPU to be start up with version pytorch-1.7...
     WARNING:root:TPU has started up successfully with version pytorch-1.7
 
 
@@ -145,6 +147,10 @@ Load MNIST dataset
 path = untar_data(URLs.MNIST_TINY)
 ```
 
+
+
+
+
 Create Fastai DataBlock
 
 
@@ -176,12 +182,12 @@ datablock.summary(path)
     Building one sample
       Pipeline: PILBase.create
         starting from
-          /root/.fastai/data/mnist_tiny/train/7/7770.png
+          /root/.fastai/data/mnist_tiny/train/7/8791.png
         applying PILBase.create gives
           PILImage mode=RGB size=28x28
       Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
         starting from
-          /root/.fastai/data/mnist_tiny/train/7/7770.png
+          /root/.fastai/data/mnist_tiny/train/7/8791.png
         applying parent_label gives
           7
         applying Categorize -- {'vocab': None, 'sort': True, 'add_na': False} gives
@@ -197,7 +203,15 @@ datablock.summary(path)
     Setting up Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
     Setting up after_item: Pipeline: Resize -- {'size': (28, 28), 'method': 'crop', 'pad_mode': 'reflection', 'resamples': (2, 0), 'p': 1.0} -> ToTensor
     Setting up before_batch: Pipeline: 
-    Setting up after_batch: Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} -> Warp -- {'magnitude': 0.2, 'p': 1.0, 'draw_x': None, 'draw_y': None, 'size': None, 'mode': 'bilinear', 'pad_mode': 'reflection', 'batch': False, 'align_corners': True, 'mode_mask': 'nearest'} -> RandomResizedCropGPU -- {'size': None, 'min_scale': 0.8, 'ratio': (1, 1), 'mode': 'bilinear', 'valid_scale': 1.0, 'p': 1.0} -> Brightness -- {'max_lighting': 0.2, 'p': 1.0, 'draw': None, 'batch': False}
+    Setting up after_batch: Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} -> Normalize -- {'mean': tensor([[[[0.4850]],
+    
+             [[0.4560]],
+    
+             [[0.4060]]]]), 'std': tensor([[[[0.2290]],
+    
+             [[0.2240]],
+    
+             [[0.2250]]]]), 'axes': (0, 2, 3)}
     
     Building one batch
     Applying item_tfms to the first sample:
@@ -216,17 +230,29 @@ datablock.summary(path)
     Collating items in a batch
     
     Applying batch_tfms to the batch built
-      Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} -> Warp -- {'magnitude': 0.2, 'p': 1.0, 'draw_x': None, 'draw_y': None, 'size': None, 'mode': 'bilinear', 'pad_mode': 'reflection', 'batch': False, 'align_corners': True, 'mode_mask': 'nearest'} -> RandomResizedCropGPU -- {'size': None, 'min_scale': 0.8, 'ratio': (1, 1), 'mode': 'bilinear', 'valid_scale': 1.0, 'p': 1.0} -> Brightness -- {'max_lighting': 0.2, 'p': 1.0, 'draw': None, 'batch': False}
+      Pipeline: IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} -> Normalize -- {'mean': tensor([[[[0.4850]],
+    
+             [[0.4560]],
+    
+             [[0.4060]]]]), 'std': tensor([[[[0.2290]],
+    
+             [[0.2240]],
+    
+             [[0.2250]]]]), 'axes': (0, 2, 3)}
         starting from
           (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
         applying IntToFloatTensor -- {'div': 255.0, 'div_mask': 1} gives
           (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
-        applying Warp -- {'magnitude': 0.2, 'p': 1.0, 'draw_x': None, 'draw_y': None, 'size': None, 'mode': 'bilinear', 'pad_mode': 'reflection', 'batch': False, 'align_corners': True, 'mode_mask': 'nearest'} gives
+        applying Normalize -- {'mean': tensor([[[[0.4850]],
+    
+             [[0.4560]],
+    
+             [[0.4060]]]]), 'std': tensor([[[[0.2290]],
+    
+             [[0.2240]],
+    
+             [[0.2250]]]]), 'axes': (0, 2, 3)} gives
           (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
-        applying RandomResizedCropGPU -- {'size': None, 'min_scale': 0.8, 'ratio': (1, 1), 'mode': 'bilinear', 'valid_scale': 1.0, 'p': 1.0} gives
-          (TensorImage of size 4x3x27x27, TensorCategory([1, 1, 1, 1]))
-        applying Brightness -- {'max_lighting': 0.2, 'p': 1.0, 'draw': None, 'batch': False} gives
-          (TensorImage of size 4x3x27x27, TensorCategory([1, 1, 1, 1]))
 
 
 Create the dataloader
@@ -252,175 +278,16 @@ learner = cnn_learner(dls, resnet18, metrics=accuracy, concat_pool=False) # fast
                       
 ```
 
+    Downloading: "https://download.pytorch.org/models/resnet18-5c106cde.pth" to /root/.cache/torch/hub/checkpoints/resnet18-5c106cde.pth
+
+
+    
+
+
 ```python
 #colab
 learner.summary()
 ```
-
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>accuracy</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>None</td>
-      <td>None</td>
-      <td>00:00</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-
-    Sequential (Input shape: ['64 x 3 x 28 x 28'])
-    ================================================================
-    Layer (type)         Output Shape         Param #    Trainable 
-    ================================================================
-    Conv2d               64 x 64 x 14 x 14    9,408      True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 14 x 14    128        True      
-    ________________________________________________________________
-    ReLU                 64 x 64 x 14 x 14    0          False     
-    ________________________________________________________________
-    MaxPool2d            64 x 64 x 7 x 7      0          False     
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    ReLU                 64 x 64 x 7 x 7      0          False     
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    ReLU                 64 x 64 x 7 x 7      0          False     
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     73,728     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    ReLU                 64 x 128 x 4 x 4     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     147,456    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     8,192      True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     147,456    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    ReLU                 64 x 128 x 4 x 4     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     147,456    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     294,912    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    ReLU                 64 x 256 x 2 x 2     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     589,824    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     32,768     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     589,824    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    ReLU                 64 x 256 x 2 x 2     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     589,824    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     1,179,648  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    ReLU                 64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     2,359,296  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     131,072    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     2,359,296  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    ReLU                 64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     2,359,296  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    AdaptiveAvgPool2d    64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    AdaptiveMaxPool2d    64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    Flatten              64 x 1024            0          False     
-    ________________________________________________________________
-    BatchNorm1d          64 x 1024            2,048      True      
-    ________________________________________________________________
-    Dropout              64 x 1024            0          False     
-    ________________________________________________________________
-    Linear               64 x 512             524,288    True      
-    ________________________________________________________________
-    ReLU                 64 x 512             0          False     
-    ________________________________________________________________
-    BatchNorm1d          64 x 512             1,024      True      
-    ________________________________________________________________
-    Dropout              64 x 512             0          False     
-    ________________________________________________________________
-    Linear               64 x 2               1,024      True      
-    ________________________________________________________________
-    
-    Total params: 11,704,896
-    Total trainable params: 11,704,896
-    Total non-trainable params: 0
-    
-    Optimizer used: <function Adam at 0x7f1399bb1730>
-    Loss function: FlattenedLoss of CrossEntropyLoss()
-    
-    Callbacks:
-      - TrainEvalCallback
-      - XLAOptCallback
-      - Recorder
-      - ProgressCallback
-
-
 
 Using the `lr_find` works 
 
@@ -429,6 +296,7 @@ Using the `lr_find` works
 learner.xla_lr_find()
 ```
 
+    start fit
 
 
 
@@ -436,12 +304,14 @@ learner.xla_lr_find()
 
 
 
-    SuggestedLRs(lr_min=0.02089296132326126, lr_steep=0.0010000000474974513)
+
+
+    SuggestedLRs(lr_min=7.585775847473997e-08, lr_steep=6.309573450380412e-07)
 
 
 
 
-![png](docs/images/output_32_2.png)
+![png](docs/images/output_32_3.png)
 
 
 Run one cycle training.
@@ -452,6 +322,9 @@ Run one cycle training.
 learner.xla_fit_one_cycle(5,lr_max=slice(1e-4,0.02))
 ```
 
+    start fit
+
+
 
 <table border="1" class="dataframe">
   <thead>
@@ -466,38 +339,38 @@ learner.xla_fit_one_cycle(5,lr_max=slice(1e-4,0.02))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.749318</td>
-      <td>0.348496</td>
-      <td>0.861230</td>
-      <td>00:12</td>
+      <td>0.190064</td>
+      <td>0.391755</td>
+      <td>0.848011</td>
+      <td>00:17</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.634834</td>
-      <td>0.676399</td>
-      <td>0.791130</td>
-      <td>00:03</td>
+      <td>0.273210</td>
+      <td>0.288629</td>
+      <td>0.882102</td>
+      <td>00:06</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.621724</td>
-      <td>0.506193</td>
-      <td>0.834049</td>
-      <td>00:03</td>
+      <td>0.322163</td>
+      <td>0.430995</td>
+      <td>0.875000</td>
+      <td>00:06</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.553649</td>
-      <td>0.503763</td>
-      <td>0.824034</td>
-      <td>00:03</td>
+      <td>0.354422</td>
+      <td>0.534526</td>
+      <td>0.830966</td>
+      <td>00:06</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.500875</td>
-      <td>0.435466</td>
-      <td>0.846924</td>
-      <td>00:03</td>
+      <td>0.372328</td>
+      <td>0.517053</td>
+      <td>0.833807</td>
+      <td>00:06</td>
     </tr>
   </tbody>
 </table>
@@ -507,8 +380,11 @@ Further fine-tuning
 
 ```python
 #colab
-learner.xla_fit_one_cycle(5,slice(7e-4, 1e-3))
+learner.xla_fit_one_cycle(5,lr_max=slice(7e-4, 1e-3))
 ```
+
+    start fit
+
 
 
 <table border="1" class="dataframe">
@@ -524,38 +400,38 @@ learner.xla_fit_one_cycle(5,slice(7e-4, 1e-3))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.355362</td>
-      <td>0.312893</td>
-      <td>0.889843</td>
-      <td>00:07</td>
+      <td>0.046700</td>
+      <td>0.451159</td>
+      <td>0.867898</td>
+      <td>00:14</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.361367</td>
-      <td>0.271736</td>
-      <td>0.895565</td>
-      <td>00:03</td>
+      <td>0.056459</td>
+      <td>0.340751</td>
+      <td>0.896307</td>
+      <td>00:07</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.324752</td>
-      <td>0.205274</td>
-      <td>0.932761</td>
-      <td>00:03</td>
+      <td>0.061811</td>
+      <td>0.376011</td>
+      <td>0.892045</td>
+      <td>00:06</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.282965</td>
-      <td>0.197236</td>
-      <td>0.925608</td>
-      <td>00:03</td>
+      <td>0.071214</td>
+      <td>0.394541</td>
+      <td>0.879261</td>
+      <td>00:06</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.246091</td>
-      <td>0.187480</td>
-      <td>0.939914</td>
-      <td>00:03</td>
+      <td>0.137522</td>
+      <td>0.407396</td>
+      <td>0.899148</td>
+      <td>00:06</td>
     </tr>
   </tbody>
 </table>
@@ -571,7 +447,7 @@ one_param(learner.model).device
 
 
 
-    device(type='xla', index=1)
+    device(type='cpu')
 
 
 
@@ -626,12 +502,12 @@ datablock.summary(path)
     Building one sample
       Pipeline: PILBase.create
         starting from
-          /root/.fastai/data/mnist_tiny/train/7/7770.png
+          /root/.fastai/data/mnist_tiny/train/7/8791.png
         applying PILBase.create gives
           PILImage mode=RGB size=28x28
       Pipeline: parent_label -> Categorize -- {'vocab': None, 'sort': True, 'add_na': False}
         starting from
-          /root/.fastai/data/mnist_tiny/train/7/7770.png
+          /root/.fastai/data/mnist_tiny/train/7/8791.png
         applying parent_label gives
           7
         applying Categorize -- {'vocab': None, 'sort': True, 'add_na': False} gives
@@ -674,9 +550,9 @@ datablock.summary(path)
         applying Warp -- {'magnitude': 0.2, 'p': 1.0, 'draw_x': None, 'draw_y': None, 'size': None, 'mode': 'bilinear', 'pad_mode': 'reflection', 'batch': False, 'align_corners': True, 'mode_mask': 'nearest'} gives
           (TensorImage of size 4x3x28x28, TensorCategory([1, 1, 1, 1]))
         applying RandomResizedCropGPU -- {'size': None, 'min_scale': 0.8, 'ratio': (1, 1), 'mode': 'bilinear', 'valid_scale': 1.0, 'p': 1.0} gives
-          (TensorImage of size 4x3x27x27, TensorCategory([1, 1, 1, 1]))
+          (TensorImage of size 4x3x26x26, TensorCategory([1, 1, 1, 1]))
         applying Brightness -- {'max_lighting': 0.2, 'p': 1.0, 'draw': None, 'batch': False} gives
-          (TensorImage of size 4x3x27x27, TensorCategory([1, 1, 1, 1]))
+          (TensorImage of size 4x3x26x26, TensorCategory([1, 1, 1, 1]))
 
 
 Create the dataloader
@@ -707,171 +583,6 @@ learner = cnn_learner(dls, resnet18, metrics=accuracy)
 learner.summary()
 ```
 
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>accuracy</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>None</td>
-      <td>None</td>
-      <td>00:00</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-
-    Sequential (Input shape: ['64 x 3 x 28 x 28'])
-    ================================================================
-    Layer (type)         Output Shape         Param #    Trainable 
-    ================================================================
-    Conv2d               64 x 64 x 14 x 14    9,408      True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 14 x 14    128        True      
-    ________________________________________________________________
-    ReLU                 64 x 64 x 14 x 14    0          False     
-    ________________________________________________________________
-    MaxPool2d            64 x 64 x 7 x 7      0          False     
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    ReLU                 64 x 64 x 7 x 7      0          False     
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    ReLU                 64 x 64 x 7 x 7      0          False     
-    ________________________________________________________________
-    Conv2d               64 x 64 x 7 x 7      36,864     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 64 x 7 x 7      128        True      
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     73,728     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    ReLU                 64 x 128 x 4 x 4     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     147,456    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     8,192      True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     147,456    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    ReLU                 64 x 128 x 4 x 4     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 128 x 4 x 4     147,456    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 128 x 4 x 4     256        True      
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     294,912    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    ReLU                 64 x 256 x 2 x 2     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     589,824    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     32,768     True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     589,824    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    ReLU                 64 x 256 x 2 x 2     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 256 x 2 x 2     589,824    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 256 x 2 x 2     512        True      
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     1,179,648  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    ReLU                 64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     2,359,296  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     131,072    True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     2,359,296  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    ReLU                 64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    Conv2d               64 x 512 x 1 x 1     2,359,296  True      
-    ________________________________________________________________
-    BatchNorm2d          64 x 512 x 1 x 1     1,024      True      
-    ________________________________________________________________
-    AdaptiveAvgPool2d    64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    AdaptiveMaxPool2d    64 x 512 x 1 x 1     0          False     
-    ________________________________________________________________
-    Flatten              64 x 1024            0          False     
-    ________________________________________________________________
-    BatchNorm1d          64 x 1024            2,048      True      
-    ________________________________________________________________
-    Dropout              64 x 1024            0          False     
-    ________________________________________________________________
-    Linear               64 x 512             524,288    True      
-    ________________________________________________________________
-    ReLU                 64 x 512             0          False     
-    ________________________________________________________________
-    BatchNorm1d          64 x 512             1,024      True      
-    ________________________________________________________________
-    Dropout              64 x 512             0          False     
-    ________________________________________________________________
-    Linear               64 x 2               1,024      True      
-    ________________________________________________________________
-    
-    Total params: 11,704,896
-    Total trainable params: 11,704,896
-    Total non-trainable params: 0
-    
-    Optimizer used: <function Adam at 0x7f1399bb1730>
-    Loss function: FlattenedLoss of CrossEntropyLoss()
-    
-    Callbacks:
-      - TrainEvalCallback
-      - XLAOptCallback
-      - Recorder
-      - ProgressCallback
-
-
-
 Set Learner to XLA mode
 This will setup the learner to use the XLA Device
 
@@ -883,7 +594,7 @@ learner.to_xla()
 
 
 
-    <fastai.learner.Learner at 0x7fb6809e7f28>
+    <fastai.learner.Learner at 0x7fc75a5a8090>
 
 
 
@@ -901,7 +612,7 @@ learner.lr_find()
 
 
 
-    SuggestedLRs(lr_min=0.02089296132326126, lr_steep=0.0010000000474974513)
+    SuggestedLRs(lr_min=0.02089296132326126, lr_steep=0.0030199517495930195)
 
 
 
@@ -931,37 +642,37 @@ learner.fit_one_cycle(5,lr_max=slice(1e-4,0.02))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.749318</td>
-      <td>0.348496</td>
-      <td>0.861230</td>
-      <td>00:12</td>
+      <td>0.896238</td>
+      <td>1.876374</td>
+      <td>0.505007</td>
+      <td>00:51</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.634834</td>
-      <td>0.676399</td>
-      <td>0.791130</td>
-      <td>00:03</td>
+      <td>0.725275</td>
+      <td>1.018629</td>
+      <td>0.532189</td>
+      <td>00:13</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.621724</td>
-      <td>0.506193</td>
-      <td>0.834049</td>
+      <td>0.614300</td>
+      <td>3.292356</td>
+      <td>0.513591</td>
       <td>00:03</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.553649</td>
-      <td>0.503763</td>
-      <td>0.824034</td>
+      <td>0.549166</td>
+      <td>2.262487</td>
+      <td>0.580830</td>
       <td>00:03</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.500875</td>
-      <td>0.435466</td>
-      <td>0.846924</td>
+      <td>0.535161</td>
+      <td>1.760773</td>
+      <td>0.660944</td>
       <td>00:03</td>
     </tr>
   </tbody>
@@ -989,37 +700,37 @@ learner.fit_one_cycle(5,slice(7e-4, 1e-3))
   <tbody>
     <tr>
       <td>0</td>
-      <td>0.355362</td>
-      <td>0.312893</td>
-      <td>0.889843</td>
-      <td>00:07</td>
+      <td>0.280359</td>
+      <td>0.992468</td>
+      <td>0.688126</td>
+      <td>00:12</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.361367</td>
-      <td>0.271736</td>
-      <td>0.895565</td>
+      <td>0.315132</td>
+      <td>1.013533</td>
+      <td>0.712446</td>
       <td>00:03</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.324752</td>
-      <td>0.205274</td>
-      <td>0.932761</td>
+      <td>0.306187</td>
+      <td>0.745202</td>
+      <td>0.711016</td>
       <td>00:03</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.282965</td>
-      <td>0.197236</td>
-      <td>0.925608</td>
+      <td>0.282278</td>
+      <td>0.701246</td>
+      <td>0.736767</td>
       <td>00:03</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.246091</td>
-      <td>0.187480</td>
-      <td>0.939914</td>
+      <td>0.288474</td>
+      <td>0.854370</td>
+      <td>0.711016</td>
       <td>00:03</td>
     </tr>
   </tbody>
@@ -1040,6 +751,19 @@ one_param(learner.model).device
 
 
 
+Dataloader device is set to None (as it is the device mover transform that moves the input to the TPU)
+
+```python
+learner.dls.device is None
+```
+
+
+
+
+    True
+
+
+
 Plot loss seems to be working fine.
 
 ```python
@@ -1048,7 +772,7 @@ learner.recorder.plot_loss()
 ```
 
 
-![png](docs/images/output_64_0.png)
+![png](docs/images/output_66_0.png)
 
 
 ## Performance troubleshooting
@@ -1062,23 +786,38 @@ from fastai_xla_extensions.utils import print_aten_ops
 print_aten_ops()
 ```
 
+    needs lowering: Counter: aten::adaptive_max_pool2d
+      Value: 311
+    needs lowering: Counter: aten::adaptive_max_pool2d_backward
+      Value: 201
+
+
 ## Samples
 
 Other examples of fastai notebooks using the fastai_xla_extensions package are also available here: 
 
-* [Vision](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/MNIST_TPU_demo.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/MNIST_TPU_demo.ipynb)
+* [Vision (Multiple TPU Core) - CIFAR](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/fastai-multi-core-tpu-training-sample.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/fastai-multi-core-tpu-training-sample.ipynb)
+* [Vision (Multiple TPU Core) - Multi Label](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/fastai-multi-core-tpu-training-sample2.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/fastai-multi-core-tpu-training-sample2.ipynb)
 
-* [Collaborative Filtering](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/MovieLensCollaborativeFilteringTPU.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/MovieLensCollaborativeFilteringTPU.ipynb)
+* [Vision (Multiple TPU Core) - Pets](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/test_fast_tpu_pets.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/test_fast_tpu_pets.ipynb)
 
-* [Tabular](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/TabularTrainingTPUdemo.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/TabularTrainingTPUdemo.ipynb)
+* [Vision (Single Core TPU)](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/MNIST_TPU_demo.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/MNIST_TPU_demo.ipynb)
+
+* [Collaborative Filtering (Single Core TPU)](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/MovieLensCollaborativeFilteringTPU.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/MovieLensCollaborativeFilteringTPU.ipynb)
+
+* [Tabular (Single Core TPU)](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/TabularTrainingTPUdemo.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/TabularTrainingTPUdemo.ipynb)
 
 More samples will be added in the future as we fix issues and implement more capabilities.
 
 
 ## Status
-The fastai XLA extensions library is still in very early development phase (not even alpha) which means there's still a lot of things not working. 
+The fastai XLA extensions library is still in early development phase but is getting close to a 1.0 release.
 
-Use it at your own risk.
+The Multi Core TPU mode has been well tested on vision tasks (Classification) but the other modules (Tabular, Collab Filtering, and Text) have not.
+
+If you use the package and encounter issues, please file bugs and issues encountered in the project's issue tracker.
+
+Feel free to suggest enhancements or feature requests. (Though they might not necessarily be addressed any time soon).
 
 If you wish to contribute to the project, fork it and make pull request. 
 
