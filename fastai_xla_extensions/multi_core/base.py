@@ -209,7 +209,8 @@ def device(self:th_data.DataLoader):
 @patch
 def to(self:th_data.DataLoader, device):
     'add impl for to(device)'
-    self._device = device
+    # self._device = device
+    setattr(self,'_device',device) # fix 'can't set attrib error'
     return self
 
 @patch
