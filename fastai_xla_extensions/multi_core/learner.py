@@ -206,6 +206,8 @@ def pre_xla_fit(self:Learner, ctrl_args={}):
         self.remove_cbs(ProgressCallback)
         progress_removed = True
     ctrl_args['use_progress'] = progress_removed
+    if self.opt is None:
+        self.create_opt() # create opt for main proc
     self.delete_tmp_files()
     return ctrl_args
 
