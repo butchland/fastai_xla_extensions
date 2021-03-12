@@ -299,28 +299,21 @@ nb_path: "nbs/03a_multi_core.torch_compat.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-<div class="output_wrapper">
-<div class="output">
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import torch.utils.data as th_data</span>
+<span class="c1"># from fastcore.basics import patch_to</span>
+<span class="c1"># @patch_to(th_data.DataLoader)</span>
+<span class="c1"># def to(self, device):</span>
+<span class="c1">#     &quot;move torch dataloader to device (for compatibility with fastai dataloader)&quot;</span>
+<span class="c1">#     self.device = device</span>
+</pre></div>
 
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="None" class="doc_header"><code>None</code><a href="" class="source_link" style="float:right">[source]</a></h4>
+    </div>
 </div>
-
 </div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -328,24 +321,6 @@ nb_path: "nbs/03a_multi_core.torch_compat.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataLoader.to" class="doc_header"><code>DataLoader.to</code><a href="__main__.py#L4" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.to</code>(<strong><code>device</code></strong>)</p>
-</blockquote>
-<p>move torch dataloader to device (for compatibility with fastai dataloader)</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -361,7 +336,7 @@ nb_path: "nbs/03a_multi_core.torch_compat.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_torch_dataloaders" class="doc_header"><code>make_torch_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/torch_compat.py#L156" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_torch_dataloaders</code>(<strong><code>train_dataset</code></strong>, <strong><code>test_dataset</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>bs</code></strong>, <strong><code>num_workers</code></strong>=<em><code>4</code></em>, <strong><code>distrib</code></strong>=<em><code>True</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="make_torch_dataloaders" class="doc_header"><code>make_torch_dataloaders</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/torch_compat.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_torch_dataloaders</code>(<strong><code>train_dataset</code></strong>, <strong><code>test_dataset</code></strong>, <strong><code>rank</code></strong>, <strong><code>world_size</code></strong>, <strong><code>bs</code></strong>, <strong><code>num_workers</code></strong>=<em><code>4</code></em>, <strong><code>distrib</code></strong>=<em><code>True</code></em>, <strong><code>sync_valid</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>make torch-based distributed dataloaders from torch compatible datasets</p>
 
@@ -393,7 +368,7 @@ nb_path: "nbs/03a_multi_core.torch_compat.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FileNamePatternLabeller" class="doc_header"><code>class</code> <code>FileNamePatternLabeller</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/torch_compat.py#L222" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FileNamePatternLabeller</code>(<strong><code>pat_str</code></strong>, <strong><code>match</code></strong>=<em><code>False</code></em>)</p>
+<h2 id="FileNamePatternLabeller" class="doc_header"><code>class</code> <code>FileNamePatternLabeller</code><a href="https://github.com/butchland/fastai_xla_extensions/tree/master/fastai_xla_extensions/multi_core/torch_compat.py#L214" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FileNamePatternLabeller</code>(<strong><code>pat_str</code></strong>, <strong><code>match</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Delayed action version of fastai RegexLabeller with file name selection</p>
 
