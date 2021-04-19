@@ -811,6 +811,9 @@ Other examples of fastai notebooks using the fastai_xla_extensions package are a
 
 * [Kaggle Notebook version of Vision (Multiple TPU Core) - Pets](https://www.kaggle.com/butchland/fastai-multi-core-tpu-pets-sample) 
 
+* **NEW** ** [Vision (Multi Core) using Pytorch Image Models (timm models) with Albumentations](https://github.com/butchland/fastai_xla_extensions/blob/master/samples/timm-albumentations-fastai-multi-tpu-sample.ipynb) [![](https://camo.githubusercontent.com/52feade06f2fecbf006889a904d221e6a730c194/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667)](https://colab.research.google.com/github/butchland/fastai_xla_extensions/blob/master/samples/timm-albumentations-fastai-multi-tpu-sample.ipynb)
+
+
 More samples will be added in the future as we fix issues and implement more capabilities.
 
 
