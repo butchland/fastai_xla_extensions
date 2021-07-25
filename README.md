@@ -37,13 +37,13 @@ Use pytorch 1.7.1 as this is latest version of pytorch supported by the fastai p
 
 ### Install fastai
 
-Use the latest fastai and fastcore versions
+Use the latest fastai and fastcore versions (_note: due to a compatibility issue, we are using fastai==2.3.0 for now_)
 
 ```python
 #hide_output
 #colab
 !pip install -Uqq fastcore --upgrade
-!pip install -Uqq fastai --upgrade
+!pip install -Uqq fastai==2.3.0 
 ```
 
 ### Install Pytorch XLA
@@ -815,6 +815,7 @@ Other examples of fastai notebooks using the fastai_xla_extensions package are a
 
 
 More samples will be added in the future as we fix issues and implement more capabilities.
+
 
 
 ## Status
